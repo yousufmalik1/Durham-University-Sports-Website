@@ -1,0 +1,524 @@
+
+
+/*  General CSS*/
+
+
+html, body, div, span iframe,
+h1, h2, h3, h4, h5, h6, p, img,
+ol, ul, li, form, label,
+header, hgroup, menu, nav, section {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+
+body {
+    line-height:1;
+    background: #fff;
+}
+
+img{
+    max-width: 100%;
+}
+
+
+.wrapper{
+    width: 96.72727272727273%;
+    margin: 0 auto;
+}
+
+header ul.social li a,
+.main .work a .caption,
+header nav ul li a{
+    transition:all .1s linear;
+    -webkit-transition:all .1s linear;
+    -moz-transition:all .1s linear;
+    -o-transition:all .1s linear;
+}
+
+h1, h2, h3, h4, h5 ,h6{
+    color: #4b4848;
+    font-family: Arial;
+    letter-spacing: 1px;
+}
+
+h1              { font-size: 2em; margin: .67em 0 }
+h2              { font-size: 1.5em; margin: .75em 0 }
+h3              { font-size: 1.17em; margin: .83em 0 }
+h5              { font-size: .83em; margin: 1.5em 0 }
+h6              { font-size: .75em; margin: 1.67em 0 }
+h1, h2, h3, h4,
+h5, h6          { font-weight: bolder }
+
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+
+/*  Header  */
+@media (min-width:1099px){
+    header{
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 250px;
+        min-height: 100%;
+        padding: 0 0 0 0px;
+        background: #ffffff;
+        float: left;
+        overflow: hidden;
+        z-index: 9999;
+        background:#454545;
+    }
+
+    header .logo{
+        padding-top: 40px;
+        padding-bottom: 25px;
+        text-align:center;
+        background-color: #742E68;
+    }
+
+    header nav ul{
+        display: block;
+        overflow: hidden;
+        margin-top: 40px;
+        list-style: none;
+
+    }
+
+
+    header nav ul li{
+        display: block;
+        margin-bottom: 0px;
+
+    }
+
+    header nav ul li a{
+        color: #ffffff;
+        font-family: arial;
+        font-size: 14px;
+        text-decoration: none;
+        letter-spacing: 1px;
+        line-height: 60px;
+        padding-right: 40px;
+        padding-left: 40px;
+
+    }
+    /* on hover */
+    header nav ul li:hover,
+    header nav ul li.selected{
+        color: #969595;
+        background:rgba(255, 255, 255, 0.2);
+    }
+
+    #menu_icon,
+    .close_menu{
+        display: none;
+    }
+
+}
+
+
+#menu_icon,
+.close_menu{
+    float: right;
+    margin-right: 40px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    background: url('../images/men_icons.png') no-repeat;
+}
+
+#menu_icon{
+    background-position: 0 0;
+}
+.close_menu{
+    background-position: -41px 0!important;
+}
+
+
+
+
+/*use jQuery for menu function*/
+#leftNavigation {
+    margin: 2rem 0;
+}
+#leftNavigation, #leftNavigation li ul {
+    list-style: none;
+    padding: 0;
+}
+#leftNavigation li a {
+
+    display: block;
+    padding: 0.8rem 1rem 0.8rem 3rem;
+    color: #adadad;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    position: relative;
+    transition: color 0.2s ease;
+}
+#leftNavigation li a, #leftNavigation li a .leftNavIcon {
+    line-height: 120%;
+}
+#leftNavigation li a .leftNavIcon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3rem;
+    text-align: center;
+}
+#leftNavigation li a:hover {
+    color: white;
+}
+#leftNavigation li ul {
+    display: none;
+    margin: 0;
+    background-color: #3e4145;
+
+}
+#leftNavigation li ul a {
+    margin-left: 20px;
+}
+
+#leftNavigation li ul li.active a {
+    color: white;
+}
+#leftNavigation li.active > a {
+    color: white;
+}
+#leftNavigation li.active ul {
+    display: block;
+}
+#leftNavigation > li.active {
+    background-color:rgba(255, 255, 255, 0.2);
+}
+
+
+
+/*  Main  */
+.main{
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding-left: 250px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 55;
+    background: #f6f6f6;
+    clear: both;
+    background: url('../images/Sports.png') ;
+    background-attachment: fixed;
+}
+
+
+/*  Home/portfolio  */
+.main .work{
+
+    display: block;
+    width: 33.33333333333333%;
+    height: auto;
+    float: left;
+    position: relative;
+    overflow: hidden;
+}
+
+.main .work .media{
+    width: 100%;
+    vertical-align: middle;
+}
+
+.main .work .caption{
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: #ffffff;
+    opacity: 0;
+}
+
+.main .work a:hover .caption{
+    opacity: 1;
+}
+
+.work .caption .work_title{
+    display: block;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    margin-top: -40px;
+}
+
+.main .work .caption h1{
+    position: relative;
+    display: inline-block;
+    max-width: 90%;
+    padding: 20px 0;
+    z-index: 77;
+    color: #454545;
+    font-family: Arial;
+    font-size: 16px;
+    letter-spacing: .5px;
+    border-bottom: 1px solid #bfbbbb;
+    border-top: 1px solid #bfbbbb;
+}
+
+
+/*  Inner Page  */
+
+#loginsection{
+    width: 100%;
+    overflow: hidden;
+    display: block;
+    position: relative;
+    background: #742e68;
+
+
+}
+
+.top{
+    width: 100%;
+    height: 130px;
+    overflow: hidden;
+    display: block;
+    position: relative;
+    background: #742e68;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-position: 50% 50%;
+}
+
+.top .title{
+    display: block;
+    width: 100%;
+    color: #4b4848;
+    font-family: Arial;
+    font-size: 16px;
+    background:#4b4848;
+    /*background: rgba(255, 255, 255, .7);*/
+    padding: 10px;
+    /*text-transform: uppercase;*/
+    line-height: 20px;
+    margin: 0!important;
+    overflow: hidden;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+
+}
+
+.top .title > a{
+    margin: 0;
+    color: #fff;
+}
+
+.top .title > a:hover {
+    background-color: #adadad;
+}
+
+.top .title > a.active {
+    background-color:rgba(255, 255, 255, 0.2);
+}
+
+.duslogan{
+    color: #fff;
+
+}
+
+
+.logoDU{
+    text-align:right;
+}
+
+.logincs{
+    text-align:right;
+    color:rgba(255, 255, 255, .7);
+}
+
+.logincs > a{
+    margin: 0;
+    color: #ffffff;
+}
+
+.logincs > a:hover {
+    color: #e0861a;
+}
+
+.mainmenucs{
+    text-align:left;
+    color:rgba(255, 255, 255, .7);
+}
+/*
+a:link {
+    color:#fdb933;
+    text-decoration:underline;
+}
+a:visited {
+    color:#e0861a;
+    text-decoration:none;
+}
+a:hover,
+a:active {
+    color:rgba(255, 255, 255, .5);
+    text-decoration:none;
+}*/
+
+
+.content_header{
+    position: absolute;
+    bottom: 0;
+    margin: 0 auto;
+    /*left: 50%;
+    margin-left: -46.36363636363637%;*/
+}
+
+.content{
+    flex: 1;
+    color: #4b4848;
+    font-family: Arial;
+    font-size: 15px;
+    line-height: 22px;
+    padding: 10px 30px;
+    background: rgba(255, 255, 255, .8);
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.content p{
+    color: #4b4848;
+    font-family: Arial;
+    font-size: 15px;
+    line-height: 24px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+
+#addstu{
+    margin-top: 40px;
+    padding-bottom: 40px;
+    padding-top: 20px;
+    line-height: 24px;
+    font-size: 15px;
+    background: rgba(255, 255, 255, .8);
+}
+#addingtable{
+    margin: 0 auto;
+    width: 200px;
+}
+
+#filter{
+    margin: 0 auto;
+    margin-top: 40px;
+}
+
+#showinfo{
+    margin: 0 auto;
+    text-align: center;
+}
+
+#showbutton{
+    margin-top: 40px;
+}
+
+/*  Responsive code  */
+@media (max-width:700px){
+
+    header{
+        display: block;
+        width: 100%;
+        min-height: 100px;
+        padding: 0;
+        position: relative;
+    }
+    header .logo{
+        margin: 40px 0 0 30px;
+        float: left;
+    }
+
+    header #menu_icon,
+    header .close_menu{
+        float: right;
+        margin: 30px 30px 0 0;
+    }
+
+    header nav{
+        width: 100%;
+        position: absolute;
+        top: 100px;
+        left: 0;
+        z-index: 9999;
+    }
+
+    header nav ul{
+        list-style: none;
+        display: none;
+        position: relative;
+    }
+    header nav ul li a{
+        display: block;
+        width: 100%;
+        padding: 30px 0;
+        text-align: center;
+        color: #454545;
+        font-family: Arial;
+        font-size: 14px;
+        text-decoration: none;
+        border-top: 1px solid #f7f5f5;
+        background: #fff;
+    }
+    header nav ul li a:active{
+        background: #f7f5f5;
+    }
+    #menu_icon,
+    .close_menu,
+    .show_menu{
+        display: block;
+    }
+    .show_menu{
+        display: block;
+    }
+
+    .main .work{
+        width: 50%;
+    }
+    .main{
+        width: 100%;
+        position: relative;
+        padding-left: 0;
+    }
+}
+
+@media (max-width:550px){
+    .main .work{
+        width: 100%;
+    }
+}
+
+
