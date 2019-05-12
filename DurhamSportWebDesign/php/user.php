@@ -1,28 +1,61 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: FEI
+ * Date: 2019-05-10
+ * Time: 19:27
+ */
+
+
 header("Content-Type:text/html;charset=utf-8");
 require('database.php');
 session_start();
-if(isset($_GET['operate'])&&$_GET['operate']=="logout"){
-    session_start();
-    session_unset();//free all session variable
-    session_destroy();//free all session variable
-    setcookie(session_name(),'',time()-3600);
-    header('location:index.php');
-}
+if(isset($_SESSION['User']) && $_SESSION['User'] != null){
+    
+if (isset($_POST["submit"]) && $_POST["submit"] == "update") {
+    $userID=$_SESSION['User']['userID'];
+    $username = $_SESSION['User']['username'];
+    $firstname = filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_STRING);
+    $lastname = filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_STRING);
+    $Email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
+    $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+    $pattern = '/^[a-z0-9]+([._-][a-z0-9]+)*@([0-9a-z]+\.[a-z]{2,14}(\.[a-z]{2})?)$/i';
+    if (preg_match($pattern,$Email)) {
+    } else {
+        echo "<script>alert('email format error！');history.go(-1);</script>";
+        die();
+    }
+    $checkemail = update_email($userID,$Email);
+    if ($checkemail) {
+        echo "<script>alert('email already register！');history.go(-1);</script>";
+        die();
+    } else {
+        $salt = "some_made_up_string";
+        $password_hash = $password . $username . $salt;
+        $password_hash = password_hash($password_hash, PASSWORD_DEFAULT);
 
-if (isset($_SESSION['User']) && $_SESSION['User'] != null) {
+            $update = update_user($username,$password_hash,$Email,$firstname,$lastname);
+            if ($update) {
+                echo "<script>alert('update success！'); window.location.href='userhome.php'</script>";
+            } else {
+                echo "<script>alert('update no success！');
+            history.go(-1);</script>";
+            }
+        }
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>User</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="../css/manager.css">
-    <script type="text/javascript" src="../js/manager.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/user.css">
     <script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="../js/jquery.ssd-vertical-navigation.min.js"></script>
     <script type="text/javascript" src="../js/jquery.js"></script>
     <script type="text/javascript" src="../js/main.js"></script>
+    <script type="text/javascript" src="../js/validate.js"></script>
 
 </head>
 <body>
@@ -40,7 +73,9 @@ if (isset($_SESSION['User']) && $_SESSION['User'] != null) {
 </header><!-- end header -->
 <section class="main clearfix">
     <div id="loginsection">
-        <p class="logincs"><button class="logoutbtn"><a href="OperateUser.php?operate=logout">logout</a></button></p>
+        <p class="logincs"><button class="logoutbtn"><a href="index.php?operate=logout">logout</a></button></p>
+        <?php }else{
+            header('location:index.php');} ?>
     </div>
     <section class="top">
         <div class="wrapper content_header clearfix">
@@ -51,7 +86,7 @@ if (isset($_SESSION['User']) && $_SESSION['User'] != null) {
                 <a href="https://www.teamdurham.com"><img src="../images/dulogowhite.png"  /></a>
             </div>
             <p class="title">
-                <a href="#">Facilities</a> |||| <a href="#">Calendar</a> |||| <a href="#">How to use</a></p>
+                <a href="userhome.php">Facilities</a> |||| <a href="#">Calendar</a> |||| <a href="#">How to use</a></p>
         </div>
     </section><!-- end top -->
 
@@ -60,50 +95,32 @@ if (isset($_SESSION['User']) && $_SESSION['User'] != null) {
 
     <!-- ----------------------Start your content from here-------------------------------------------------- -->
 
-
     <section class="wrapper">
         <div class="content">
-            <p class="title">Welcome, user <?php echo" ".$username;?> </p>
+            <p class="title">Welcome, user <?php echo $_SESSION['User']['username']; ?> </p>
 
-            <div align="right">
-                <h4>Search the facility</h4>
-                <form name="search" method="post" action="">
-                    <button type="button">
-                        <input type="text" name="facilityName" placeholder="input facility name"/>
-                        <input type="submit" name="searchbtn" VALUE="Search">
-                    </button>
-                </form>
+            <center><h1> Detail </h1></center>
+
+            <form name='form' class="form" action='' method='post'  onsubmit="return validate_userform(this)">
+
+                <p><label class="label_input">First Name</label>
+                    <input type="text" class="text_field" name='firstname' value='<?php echo $_SESSION['User']['firstname'] ?>' required="required"/>
+                </p>
+                <p><label class="label_input">Last Name</label>
+                    <input type="text" class="text_field" name='lastname' value='<?php echo $_SESSION['User']['lastname'] ?>'required="required"/>
+                </p>
+                <p><label class="label_input">Email</label>
+                    <input type="text"  class="text_field" name='email' value='<?php echo $_SESSION['User']['email'] ?>'/>
+                </p>
+                <p><label class="label_input">Password</label>
+                    <input type="password" id="password" class="text_field" name='password' required="required" />
+                </p>
+
+                <input type="submit" id="update" class="login-button" value='update' name='submit' >
+                <button type="submit" id="login-button" ><a href="userhome.php" class="cc">Back</a></button>
+            </form>
             </div>
-
-            <center><h1> Manager Dashboard </h1></center>
-            <div id="showinfo">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                    eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.</p>
-
-            </div>
-
-            <H2><center>Lorem IpsumLorem IpsumLorem Ipsum</center></H2>
-            <table id="showinfo" width="800" border="1">
-                <tr bgcolor="#dddddd">
-                    <th>Date</th>
-                    <th>Lorem Ipsum per day</th>
-                </tr>
-
-            </table>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                deserunt mollit anim id est laborum.</p>
-
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                deserunt mollit anim id est laborum.</p>
+        </div>
 
         </div><!-- end content -->
     </section>
@@ -120,7 +137,7 @@ if (isset($_SESSION['User']) && $_SESSION['User'] != null) {
         $('#leftNavigation').ssdVerticalNavigation();
     });
 </script>
-<?php
-} ?>
+
+
 </body>
 </html>

@@ -43,6 +43,19 @@ function check_email($Email)
     return false;
 }
 
+function update_email($userID,$Email)
+{
+    $pdo = make_database_connection();
+    $sql = "SELECT * FROM user WHERE userID!='$userID' AND email='$Email'";
+    $result = $pdo->query($sql);
+    $row = $result->fetch(PDO::FETCH_NUM);
+    if ($row != 0) {
+        return true;
+    }
+    return false;
+}
+
+
 //insert new user into database
 function insert_user($username, $password, $Email, $firstname, $lastname)
 {
@@ -54,6 +67,17 @@ function insert_user($username, $password, $Email, $firstname, $lastname)
    }else{
        return false;
    }
+}
+//update user into database
+function update_user($username,$password_hash, $Email, $firstname, $lastname){
+    $pdo = make_database_connection();
+    $sql = "UPDATE user SET `password`='$password_hash',`email`='$Email',`firstname`='$firstname',`lastname`='$lastname' WHERE `username`='$username'";
+    $result = $pdo->query($sql);
+    if($result){
+     return true;
+ }else{
+     return false;
+ }
 }
 
 //select all user information from database
