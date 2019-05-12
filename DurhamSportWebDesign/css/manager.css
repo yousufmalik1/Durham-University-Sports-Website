@@ -349,7 +349,6 @@ h5, h6          { font-weight: bolder }
 
 }
 
-
 .logoDU{
     text-align:right;
 }
@@ -448,7 +447,7 @@ a:active {
 }
 
 /*  Responsive code  */
-@media (max-width:700px){
+@media (max-width:1099px){
 
     header{
         display: block;
@@ -520,5 +519,6 @@ a:active {
         width: 100%;
     }
 }
+
 
 
