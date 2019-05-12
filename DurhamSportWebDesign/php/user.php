@@ -1,4 +1,17 @@
+<?php
+header("Content-Type:text/html;charset=utf-8");
+require('database.php');
+session_start();
+if(isset($_GET['operate'])&&$_GET['operate']=="logout"){
+    session_start();
+    session_unset();//free all session variable
+    session_destroy();//free all session variable
+    setcookie(session_name(),'',time()-3600);
+    header('location:index.php');
+}
 
+if (isset($_SESSION['User']) && $_SESSION['User'] != null) {
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +40,7 @@
 </header><!-- end header -->
 <section class="main clearfix">
     <div id="loginsection">
-        <p class="logincs"><a href="../html/login.html">Login</a> || <a href="../html/registry.html">Registry</a></p>
+        <p class="logincs"><button class="logoutbtn"><a href="OperateUser.php?operate=logout">logout</a></button></p>
     </div>
     <section class="top">
         <div class="wrapper content_header clearfix">
@@ -107,5 +120,7 @@
         $('#leftNavigation').ssdVerticalNavigation();
     });
 </script>
+<?php
+} ?>
 </body>
 </html>

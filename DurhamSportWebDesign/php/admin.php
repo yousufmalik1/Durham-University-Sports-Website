@@ -55,7 +55,7 @@
 
     <section class="wrapper">
         <div class="content">
-            <p class="title">Welcome, admin <?php echo" ".$username;?> </p>
+            <p class="title">Welcome, admin  </p>
 
             <div align="right">
                 <h4>Search the facility</h4>

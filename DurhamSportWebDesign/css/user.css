@@ -522,3 +522,13 @@ a:active {
 }
 
 
+.cell{
+    width: 50%;
+    display: inline-block;
+    text-align: center;
+}
+.show{
+    width: 100%;
+    height: 100%;
+}
+
