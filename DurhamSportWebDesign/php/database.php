@@ -10,10 +10,10 @@
 //make database connect
 function make_database_connection()
 {
-    $db_host = 'mysql:host=localhost';
+    $db_host = 'mysql:host=localhost:8889';
     $db_name = 'dbname=XDurhamSports';
     $db_user = 'root';
-    $db_pass = '';
+    $db_pass = 'root';
     $pdo = new PDO($db_host . ';' . $db_name, $db_user, $db_pass, array(PDO::ATTR_PERSISTENT => true));
     return $pdo;
 }
@@ -30,15 +30,30 @@ function check_user($username)
     return false;
 }
 
+//check email whether is exist
+function check_email($Email)
+{
+    $pdo = make_database_connection();
+    $sql = "Select * from user where email = '$Email'";
+    $result = $pdo->query($sql);
+    $row = $result->fetch(PDO::FETCH_NUM);
+    if ($row != 0) {
+        return true;
+    }
+    return false;
+}
+
 //insert new user into database
 function insert_user($username, $password, $Email, $firstname, $lastname)
 {
     $pdo = make_database_connection();
-    $sql = "INSERT INTO user(username,password,email,firstname,lastname) VALUES ('$username','$password','$Email','$firstname','$lastname')";
+    $sql = "INSERT INTO `user`(`username`, `password`, `email`, `firstname`, `lastname`, `role`) VALUES ('$username','$password','$Email','$firstname','$lastname','0')";
     $result = $pdo->query($sql);
-   if($pdo->lastInsertId()!=0){
-       return true;}
-   return false;
+   if($pdo->lastInsertId()!=null){
+       return true;
+   }else{
+       return false;
+   }
 }
 
 //select all user information from database
