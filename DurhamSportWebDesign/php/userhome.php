@@ -15,7 +15,7 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>User</title>
+    <title>Userhome</title>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="../css/user.css">
     <script type="text/javascript" src="../js/manager.js"></script>
