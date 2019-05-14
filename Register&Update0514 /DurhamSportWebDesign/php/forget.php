@@ -1,0 +1,81 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: FEI
+ * Date: 2019-05-12
+ * Time: 00:04
+ */
+
+header('Content-type:text/html;charset=utf-8');
+require_once('database.php');
+if (isset($_POST["submit"]) && $_POST["submit"] == "btn_login") {
+
+    $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+    $password = filter_input(INPUT_POST,'password',FILTER_SANITIZE_STRING);
+    $salt = "some_made_up_string";
+    $password_hash = $password . $username . $salt;
+    if ($username == "" || $password == "") {
+    } else {
+        $user = select_user_alldetail($username);
+        $flag=password_verify($password_hash,$user['password']);
+        if(!empty($_POST['username'])) {
+            //login form sent, check the database
+            //if you get a row, start session
+            //redirect them if it was wrong
+            if($flag==false){
+                echo "<script>alert('username or password error！');
+                       history.go(-1)</script>";
+                die();
+            }else {
+                echo "<script>alert('login success！');</script>";
+                session_start();
+                $_SESSION["User"] =$user;
+                echo "<meta http-equiv='Refresh' content='0;URL=userhome.php'>";
+            }
+        } else if(isset($_SESSION['User'])) {
+            //maybe they logged in already and we stored a session?
+            session_start();
+            if (empty($_SESSION['User'])) {
+                //nope, redirect them...
+                header('Location: index.php');
+                die();
+            }
+        }
+    }
+}
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>login page</title>
+
+    <link rel="stylesheet" type="text/css" href="../css/login.css"/>
+    <script type="text/javascript" src="../js/login.js"></script>
+    <script type="text/javascript" src="../js/validate.js"></script>
+</head>
+
+<body>
+<div id="login_frame">
+
+    <p id="image_logo"><img src="../images/Durhamlogo.png" height="65" width="140"></p>
+
+    <form name='login' class="form" method='post' action='forget.php' method='post' onSubmit="return validate_form(this);">
+
+        <p><label class="label_input">Email</label>
+            <input type="text" name="email" id="email" class="text_field" required="required"/>
+        </p>
+
+        <div id="login_control">
+            <button type="submit" id="btn_login" name='submit' value='btn_login'> <a href="forget.php" class="cc">Reset</button>
+            <button type="submit" id="btn_registry" ><a href="index.php" class="cc">Back</a></button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
+
