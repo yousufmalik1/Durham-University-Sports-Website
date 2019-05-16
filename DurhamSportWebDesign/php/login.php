@@ -14,6 +14,7 @@ if (isset($_POST["submit"]) && $_POST["submit"] == "btn_login") {
     $salt = "some_made_up_string";
     $password_hash = $password . $username . $salt;
     if ($username == "" || $password == "") {
+        echo "<script>alert('Please fill all the information!'); history.go(-1);</script>";
     } else {
         $user = select_user_alldetail($username);
         $flag=password_verify($password_hash,$user['password']);
@@ -26,10 +27,32 @@ if (isset($_POST["submit"]) && $_POST["submit"] == "btn_login") {
                        history.go(-1)</script>";
                 die();
             }else {
-                echo "<script>alert('login success！');</script>";
-                session_start();
-                $_SESSION["User"] =$user;
-                echo "<meta http-equiv='Refresh' content='0;URL=userhome.php'>";
+                $pdo = make_database_connection();
+                $sql = "select username,password,role from user where username = '$_POST[username]'";
+                $result  = $pdo->query("$sql");
+                $row = $result->fetch(PDO::FETCH_NUM);
+                if($row)
+                {
+                    $is_admin = (string)$row[2];
+                    session_start();
+                    if((integer)$is_admin == 0)
+                    {
+                        $_SESSION['username'] = $row[0];
+                        echo "<script>alert('".$is_admin."');</script>";
+                        echo "<script>alert('login success！');</script>";
+                        session_start();
+                        $_SESSION["User"] =$user;
+                        header('location:userhome.php');
+                    }
+                    else if($is_admin == 1)
+                    {
+                        $_SESSION['username']=$row[0];
+                        echo "<script>alert('login success！');</script>";
+                        session_start();
+                        $_SESSION["User"] =$user;
+                        header('location:admin.php');
+                    }
+                }
             }
         } else if(isset($_SESSION['User'])) {
             //maybe they logged in already and we stored a session?
@@ -78,7 +101,7 @@ if (isset($_POST["submit"]) && $_POST["submit"] == "btn_login") {
         </div>
         <br>
         <br>
-        No account? <a href="registry.php" class="cc">Register</a> / <a href="">forget password</a>?
+        No account? <a href="registry.php" class="cc">Register</a> / <a href="forget.php">forget password</a>?
     </form>
 </div>
 </body>
