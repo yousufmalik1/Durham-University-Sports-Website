@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 17, 2019 at 08:51 AM
+-- Generation Time: May 17, 2019 at 09:23 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -59,8 +59,8 @@ CREATE TABLE `event` (
 --
 
 INSERT INTO `event` (`eventID`, `eventName`, `eventTimeFrom`, `eventTimeTo`) VALUES
-(3000, 'exercise class', '14:00:00', '16:00:00'),
-(3001, 'exams', '09:00:00', '12:00:00');
+(3000, 'Exercise class', '14:00:00', '16:00:00'),
+(3001, 'Exams', '09:00:00', '12:00:00');
 
 -- --------------------------------------------------------
 
@@ -87,7 +87,7 @@ INSERT INTO `facility` (`facilityID`, `facilityName`, `price`, `priceStu`, `capa
 (2000, 'Squash Courts', 6, 4.8, 10, 'Good choice!', '09:00:00', '17:30:00'),
 (2001, 'Tennis', 10, 8, 6, 'Tennis (Tarmac) - £10.00 per court per hour', '09:00:00', '17:00:00'),
 (2002, 'Aerobics Room', 20, 16, 15, 'A mirrored studio is available for group classes such as dance, yoga and Pilates. This space can also be used for presentations and functions.', '09:00:00', '18:00:00'),
-(2003, 'Track', 2, 1.6, 20, 'Track - £2.00 per person', '09:00:00', '17:00:00'),
+(2003, 'Athletics Track', 2, 1.6, 20, 'Track - £2.00 per person', '09:00:00', '17:00:00'),
 (2004, 'Track sole use', 30, 24, 1, 'Track (sole use) - £30.00 per hour', '09:00:00', '17:00:00');
 
 -- --------------------------------------------------------
