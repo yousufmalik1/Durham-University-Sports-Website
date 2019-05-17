@@ -11,9 +11,9 @@
 function make_database_connection()
 {
     $db_host = 'mysql:host=localhost:8889';
-    $db_name = 'dbname=XDurhamSports';
+    $db_name = 'dbname=xdurhamsports';
     $db_user = 'root';
-    $db_pass = 'root';
+    $db_pass = '';
     $pdo = new PDO($db_host . ';' . $db_name, $db_user, $db_pass, array(PDO::ATTR_PERSISTENT => true));
     return $pdo;
 }
