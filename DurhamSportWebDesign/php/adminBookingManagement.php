@@ -6,7 +6,7 @@ if(isset($_SESSION['User']) && $_SESSION['User'] == null){
 }
 
 try{
-    $pdo = new PDO('mysql:host=localhost;dbname=XDurhamSports', 'root', '');
+    $pdo = new PDO('mysql:host=localhost;dbname=xdurhamsports', 'root', '');
     
     // set the PDO error mode to exception
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -99,9 +99,11 @@ try{
         <th>Booking ID</th>
         <th>User ID</th>
         <th>Facility ID</th>
-        <th>Event Name</th>
+        <th>Event ID</th>
+        <th>Booking Date</th>
         <th>Start Time</th>
         <th>End Time</th>
+        <th>People</th>
         <th>Booking Title</th>
         <th>Notes</th>
         <th colspan="2">Action</th>
@@ -118,8 +120,10 @@ try{
         echo "<td>" . $row['userID'] ."</td>";
         echo "<td>" . $row['facilityID'] ."</td>";
         echo "<td>" . $row['eventID'] ."</td>";
-        echo "<td>" . $row['start'] ."</td>";
-        echo "<td>" . $row['end'] ."</td>";
+        echo "<td>" . $row['bookingDate'] ."</td>";
+        echo "<td>" . $row['startTime'] ."</td>";
+        echo "<td>" . $row['endTime'] ."</td>";
+        echo "<td>" . $row['people'] ."</td>";
         echo "<td>" . $row['bookingTitle'] ."</td>";
         echo "<td>" . $row['notes'] ."</td>";
         ?>
