@@ -33,7 +33,7 @@ $sql2 = "select * from user where username = '$username'";
 $result2 = $pdo->query($sql2);
 $row2 = $result2->fetch(PDO::FETCH_ASSOC);
 $userID = $row2['userID'];
-$email = $row2['email']
+$email = $row2['email'];
 
 //eventID
 $sql3 = "select eventID from event where eventName = '$eventName'";
