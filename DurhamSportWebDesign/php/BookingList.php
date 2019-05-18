@@ -163,7 +163,7 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
                 function del($ID){
                     $pdo = make_database_connection();
                     $sql = "DELETE FROM booking WHERE bookingID='$ID'";
-                    $sql1 = "Select bookingID FROM booking WHERE bookingID='$ID'";
+                    $sql1 = "SELECT bookingID FROM booking WHERE bookingID='$ID'";
                     $result = $pdo->query($sql);
                     $result1 = $pdo->query($sql1);
                     if ($result1) {
@@ -171,13 +171,13 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
                     } else {
                         return false;
                     }
-
                 }
                 if (isset($_POST["submit"]) && $_POST["submit"] == "Cancel") {
                     $ID= $row['bookingID'];
                     $del = del($ID);
                     if ($del) {
-                        echo "<script>alert('cancel successfully!');window.location.href='BookingList.php'</script>";
+                        echo "<script>alert('cancel successfully!');
+                        window.location.href='BookingList.php'</script>";
                     }else{
                         echo "<script>alert('cancel failed'); history.go(-1);</script>";
                     } }
@@ -186,7 +186,6 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
 
             </table>
             </form>
-
             <div align="center" style="position:relative;top:10px">
                 <button class="button">Booking Now</button>
             </div>
