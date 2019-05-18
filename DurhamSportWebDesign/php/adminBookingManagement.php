@@ -1,3 +1,24 @@
+<?php
+session_start();
+require 'database.php';
+if(isset($_SESSION['User']) && $_SESSION['User'] == null){
+    echo "<script>alert('Login please！'); window.location.href='login.php'</script>";
+}
+
+try{
+    $pdo = new PDO('mysql:host=localhost;dbname=xdurhamsports', 'root', '');
+    
+    // set the PDO error mode to exception
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
+    //echo "Connected successfully";
+}   
+        catch(PDOException $e)
+        {
+        echo "Connection failed: " . $e->getMessage();
+        }
+ ?>       
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,10 +41,10 @@
     <nav>
 
         <ul>
-            <li><a href="#.php">Admin Dashboard</a></li>
+            <li><a href="admin.php">Admin Dashboard</a></li>
             <li><a href="#.php">Personal Profile</a></li>
-            <li><a href="#.php">Facility Management</a></li>
-            <li><a href="#.php">Booking Management</a></li>
+            <li><a href="adminFacilityManagement.php">Facility Management</a></li>
+            <li><a href="adminBookingManagement.php">Booking Management</a></li>
         </ul>
 
 
@@ -67,35 +88,51 @@
                 </form>
             </div>
 
-            <center><h1> Manager Dashboard </h1></center>
+            <center><h1> Booking Management </h1></center>
             <div id="showinfo">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                    eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.</p>
+            <a href="pages-booking.php"> Add a Booking</a>
 
             </div>
 
-            <H2><center>Lorem IpsumLorem IpsumLorem Ipsum</center></H2>
-            <table id="showinfo" width="800" border="1">
-                <tr bgcolor="#dddddd">
-                    <th>Date</th>
-                    <th>Lorem Ipsum per day</th>
-                </tr>
+        <table id="showinfo" width="800" border="1">
+        <tr bgcolor="#dddddd">
+        <th>Booking ID</th>
+        <th>User ID</th>
+        <th>Facility ID</th>
+        <th>Event ID</th>
+        <th>Booking Date</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>People</th>
+        <th>Booking Title</th>
+        <th>Notes</th>
+        <th colspan="2">Action</th>
+        </tr>
 
-            </table>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                deserunt mollit anim id est laborum.</p>
+        <?php
+        $select = $pdo->prepare("SELECT * FROM booking");
+        $select->setFetchMode(PDO::FETCH_ASSOC);
+        $select->execute();
 
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                deserunt mollit anim id est laborum.</p>
+        while ($row = $select->fetch()) {
+        echo "<tr>";
+        echo "<td>" . $row['bookingID'] ."</td>";
+        echo "<td>" . $row['userID'] ."</td>";
+        echo "<td>" . $row['facilityID'] ."</td>";
+        echo "<td>" . $row['eventID'] ."</td>";
+        echo "<td>" . $row['bookingDate'] ."</td>";
+        echo "<td>" . $row['startTime'] ."</td>";
+        echo "<td>" . $row['endTime'] ."</td>";
+        echo "<td>" . $row['people'] ."</td>";
+        echo "<td>" . $row['bookingTitle'] ."</td>";
+        echo "<td>" . $row['notes'] ."</td>";
+        ?>
+        <td><a href="admindeletebooking.php?del_id=<?php echo $row['bookingID']; ?>" onclick="return confirm('Are you sure you want to delete the Facility?')">Delete</a></td>
+        <?php echo "</tr>"; }?>
+
+        </table>
+
+
 
         </div><!-- end content -->
     </section>
@@ -112,5 +149,6 @@
         $('#leftNavigation').ssdVerticalNavigation();
     });
 </script>
+
 </body>
 </html>

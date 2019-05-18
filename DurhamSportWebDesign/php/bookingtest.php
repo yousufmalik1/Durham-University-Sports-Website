@@ -20,7 +20,7 @@ if(isset($_GET['operate'])&&$_GET['operate']=="logout"){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>User</title>
+    <title>bookinglisttest</title>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="../css/index.css">
     <script type="text/javascript" src="../js/manager.js"></script>
@@ -63,7 +63,6 @@ if(isset($_GET['operate'])&&$_GET['operate']=="logout"){
 
 
 
-
     <!-- ----------------------Start your content from here-------------------------------------------------- -->
 
 
@@ -80,53 +79,69 @@ if(isset($_GET['operate'])&&$_GET['operate']=="logout"){
                 </form>
             </div>
 
-            <center><h1> Facility </h1></center>
+            <center><h1> Booking List test</h1></center>
 
-            <?php
-            $facilityname = filter_input(INPUT_POST, 'searchname', FILTER_SANITIZE_STRING);
-            if (isset($_POST["searchbtn"]) && $_POST["searchbtn"] == "Search" && $facilityname!="") {
-                $pdo = make_database_connection();
-    $sql = "SELECT * FROM facility WHERE facilityName LIKE '%$facilityname%'";
-    $statement = $pdo->query($sql);
-    $row = $statement->fetchAll(PDO::FETCH_ASSOC);
-    if ($row) {
-        foreach ($row as $r) {
-            echo '<div class="cell">';
-            echo '<div class="image"><img src="../images/' . $r['facilityName'] . '.jpg"></a></div>';
-            echo '<div align="center"><table style="width: 220px;text-align: center"><tr>
-                    <th style="font-size: 1.8em">' . $r['facilityName'] . '</th>
-                    </tr>
-                    <tr>
-                    <td style="font-size: 1.2em">' . $r['info'] . '</td>
-                    </tr></table></div>';
-            echo '</div>';
-        }
-    } else {
-        echo 'This facility is no exist!';
-    }
-}else{ ?>
-            <div id="showinfo">
-                <div class="show">
-                    <p> <?php showfacilities() ?></p>
-                    <div class="cell">
-                        <div class="image"><img src="../images/other facility.jpg" width="200" height="200"></a></div>
-                        <div align="center">
-                            <table style="width: 220px;text-align: center"><tr>
-                                    <th style="font-size: 1.8em">Other facility</th>
-                                </tr>
-                                <tr>
-                                    <td style="font-size: 1.2em">We have more other facility</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-            <?php  } ?>
-
-                </div>
-
+            <div align="center" style="position:relative;top:10px">
+                <button class="button">Booking Now</button>
             </div>
+
+            <style>
+                .button {
+                    display: inline-block;
+                    padding: 15px 25px;
+                    font-size: 24px;
+                    cursor: pointer;
+                    text-align: center;
+                    text-decoration: none;
+                    outline: none;
+                    color: #fff;
+                    background-color: #9b2daf;
+                    border: none;
+                    border-radius: 15px;
+                    box-shadow: 0 9px #999;
+                }
+
+                .button:hover {background-color: #9b2daf
+                }
+
+                .button:active {
+                    background-color: #9b2daf;
+                    box-shadow: 0 5px #666;
+                    transform: translateY(4px);
+                }
+            </style>
+
+            <table id="showinfo" width="800" border="1">
+                <tr>
+                    <th>Booking ID</th>
+                    <th>Facility ID</th>
+                    <th>Event Name</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Booking Title</th>
+                    <th>Cancel</th>
+                </tr>
+
+                <?php
+                require_once('database.php');//链接数据库
+                $sql = "SELECT * FROM booking,event WHERE bookingID = '$bookingID' and event.eventID='$eventID'";
+                foreach ($pdo->query($sql) as $row) {
+                    echo "<tr>";
+                    echo "<td>{$row['bookingID']}</td>";
+                    echo "<td>{$row['facilityID']}</td>";
+                    echo "<td>{$row['eventName']}</td>";
+                    echo "<td>{$row['start']}</td>";
+                    echo "<td>{$row['end']}</td>";
+                    echo "<td>{$row['bookingTitle']}</td>";
+                    echo "<td>
+                            <a href='javascript:doDel({$row['bookingID']})'>Cancel</a >
+                        
+                            </td>";
+                    echo "</tr>";
+                }
+                ?>
+            </table>
+
 
         </div><!-- end content -->
     </section>

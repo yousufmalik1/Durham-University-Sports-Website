@@ -10,14 +10,13 @@
 //make database connect
 function make_database_connection()
 {
-    $db_host = 'mysql:host=localhost';
-    $db_name = 'dbname=XDurhamSports';
+    $db_host = 'mysql:host=localhost:8889';
+    $db_name = 'dbname=xdurhamsports';
     $db_user = 'root';
     $db_pass = '';
     $pdo = new PDO($db_host . ';' . $db_name, $db_user, $db_pass, array(PDO::ATTR_PERSISTENT => true));
     return $pdo;
 }
-
 //check user whether is exist
 function check_user($username)
 {
@@ -81,18 +80,6 @@ function update_user($username,$password_hash, $Email, $firstname, $lastname){
  }
 }
 
-//update user into database
-function update_password($username,$password_hash){
-    $pdo = make_database_connection();
-    $sql = "UPDATE user SET `password`='$password_hash' WHERE `username`='$username'";
-    $result = $pdo->query($sql);
-    if($result){
-        return true;
-    }else{
-        return false;
-    }
-}
-
 //select all user information from database
 function select_user_alldetail($username)
 {
@@ -112,7 +99,7 @@ function showfacilities()
     $facility = $pdo->query($sql);
     while ($row = $facility->fetch(PDO::FETCH_ASSOC)) {
         echo '<div class="cell">';
-        echo '<a href="pages-booking.php"><div class="image"><img src="../images/' . $row['facilityName'] . '.jpg"></a></div>';
+        echo '<div class="image"><img src="../images/' . $row['facilityName'] . '.jpg"></a></div>';
         echo '<div align="center"><table style="width: 220px;text-align: center"><tr>
                     <th style="font-size: 1.8em">' . $row['facilityName'] . '</th>
                     </tr>

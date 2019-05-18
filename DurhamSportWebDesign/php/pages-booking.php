@@ -60,11 +60,11 @@ if(isset($_SESSION['User']) && $_SESSION['User'] == null){
                                     <div class="form-group">
                                         <label for="select">Facility</label>
                                         <select class="form-control" id="facilityName">
-                                            <option value="Squash court">Squash court</option>
-                                            <option value="Aerobics room">Aerobics room</option>
+                                            <option value="Squash Courts">Squash Courts</option>
+                                            <option value="Aerobics Room">Aerobics Room</option>
                                             <option value="Tennis">Tennis</option>
-                                            <option value="Athletics track_sole use">Athletics track_sole use</option>
-                                            <option value="Athletics track">Athletics track</option>
+                                            <option value="Athletics Track sole use">Athletics Track sole use</option>
+                                            <option value="Athletics Track">Athletics Track</option>
                                         </select>
                                     </div>
                             
@@ -74,7 +74,7 @@ if(isset($_SESSION['User']) && $_SESSION['User'] == null){
                                     </div>
                             
                                     <button class="btn btn-outline-secondary" id="submit1" >Check avaliable</button>
-                                        <p><div id="txtHint"><b>Check available time.</b></div></p>
+                                        <p><div id="txtHint"><b>Available time.</b></div></p>
                                 </form>
                                 <!-- end form1 -->
                             
@@ -88,11 +88,11 @@ if(isset($_SESSION['User']) && $_SESSION['User'] == null){
                                     <div class="form-group">
                                         <label for="select">Facility</label>
                                         <select class="form-control" id="facilityName">
-                                            <option value="Squash court">Squash court</option>
-                                            <option value="Aerobics room">Aerobics room</option>
+                                            <option value="Squash Courts">Squash Courts</option>
+                                            <option value="Aerobics Room">Aerobics Room</option>
                                             <option value="Tennis">Tennis</option>
-                                            <option value="Athletics track_sole use">Athletics track_sole use</option>
-                                            <option value="Athletics track">Athletics track</option>
+                                            <option value="Athletics Track sole use">Athletics Track sole use</option>
+                                            <option value="Athletics Track">Athletics Track</option>
                                         </select>
                                     </div>
                                 
@@ -116,10 +116,8 @@ if(isset($_SESSION['User']) && $_SESSION['User'] == null){
                                     <div class="form-group">
                                         <label for="select">Event</label>
                                         <select class="form-control" id="eventName">
-                                            <option value="Course 1">Course 1</option>
-                                            <option value="Course 2">Course 2</option>
-                                            <option value="Course 3">Course 3</option>
-                                            <option value="Course 4">Course 4</option>
+                                            <option value="Exercise class">Exercise class</option>
+                                            <option value="Exams">Exams</option>
                                             <option value="Others">Others</option>
                                         </select>
                                     </div>
