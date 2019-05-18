@@ -5,7 +5,6 @@
  * Date: 2019-05-10
  * Time: 17:49
  */
-header('Content-type:text/html;charset=utf-8');
 require_once('database.php');
 if (isset($_POST["submit"]) && $_POST["submit"] == "btn_login") {
 
