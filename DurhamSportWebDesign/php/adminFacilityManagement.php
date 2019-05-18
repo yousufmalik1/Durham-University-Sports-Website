@@ -92,7 +92,7 @@ try{
     <script type="text/javascript" src="../js/main.js"></script>
 
     <style>
-        img {
+       img {
         margin-right: 1em;
         object-fit: none;
         }
@@ -100,7 +100,7 @@ try{
         #object-position-1 {
         width:200px;
         height:200px;
-        float:right;
+        margin-left: 65px;
         }
 
         table{
@@ -210,7 +210,7 @@ try{
                         <img id="object-position-1" src="../images/other facility.jpg"></a></div>
                         <br><br>
                         <h3 style="font-size:25px;">Other Facility</h3>
-                        <p> We have more other facility</p>
+                        <p> We have more facilities</p>
                     </div>
                 </div>
 
