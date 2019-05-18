@@ -9,39 +9,68 @@
 header('Content-type:text/html;charset=utf-8');
 require_once('database.php');
 if (isset($_POST["submit"]) && $_POST["submit"] == "btn_login") {
-
-    $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
-    $password = filter_input(INPUT_POST,'password',FILTER_SANITIZE_STRING);
-    $salt = "some_made_up_string";
-    $password_hash = $password . $username . $salt;
-    if ($username == "" || $password == "") {
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
+    $pdo = make_database_connection();
+    $sql = "Select * from user where Email = '$email'";
+    $result = $pdo->query($sql);
+    $row = $result->fetch(PDO::FETCH_ASSOC);
+    if ($row == null) {
+        echo 'noregistry';
+        exit;
     } else {
-        $user = select_user_alldetail($username);
-        $flag=password_verify($password_hash,$user['password']);
-        if(!empty($_POST['username'])) {
-            //login form sent, check the database
-            //if you get a row, start session
-            //redirect them if it was wrong
-            if($flag==false){
-                echo "<script>alert('username or password error！');
-                       history.go(-1)</script>";
-                die();
-            }else {
-                echo "<script>alert('login success！');</script>";
-                session_start();
-                $_SESSION["User"] =$user;
-                echo "<meta http-equiv='Refresh' content='0;URL=userhome.php'>";
-            }
-        } else if(isset($_SESSION['User'])) {
-            //maybe they logged in already and we stored a session?
-            session_start();
-            if (empty($_SESSION['User'])) {
-                //nope, redirect them...
-                header('Location: index.php');
-                die();
-            }
+        $getpasstime = time();
+        $userid = $row['userID'];
+        $firstname = $row['firstname'];
+        $token = md5($userid . $row['email'] . $row['password']);
+        $localhost = $_SERVER['HTTP_HOST'];
+        $url = "http://" . $localhost . "/team1-master/DurhamSportWebDesign/php/reset.php?token=" . $token . "&email=" . $email;
+        $time = date('Y-m-d H:i');
+        $content = "Dear " . $firstname . "：you are in " . $time . " submit a request of reseting password. Please click the link to reset password（valid for 24 hours)." .$url." If you cannot click this link, please copy it enter your website address. If you do not submit this request,ignore this email please.";
+        $result = sendMail($email, 'Reset password', $content);
+        if ($result == 1) {//send email successfully
+            echo '<script>alert("reset email already send successfully");</script>';
+            $sql="Update user SET resetpasswordtime='$getpasstime' WHERE userID='$userid'";
+            $resul= $pdo->query($sql);
+            //update reset password time
+//        $sql = "UPDATE user SET resetpasswordtime='$getpasstime' WHERE userID='$userid'";
+//        $pdo->query($sql);
+        } else {
+            echo '<script>alert("reset email send fail");</script>';;
         }
     }
+}
+
+
+function sendMail($to, $title, $content)
+{
+//    require_once("PHPMailer/class.phpmailer.php");
+//    require_once("PHPMailer/class.smtp.php");
+    require 'recovery/PHPMailer.php';
+    $mail = new PHPMailer;
+    $mail->SMTPDebug = 0;
+    $mail->isSMTP();
+    $mail->SMTPAuth = true;
+    $mail->Host = 'tls://smtp.gmail.com';
+    $mail->SMTPSecure = 'tls';
+    $mail->Port = 587;
+    $mail->CharSet = 'UTF-8';
+
+    $mail->FromName = 'DUS-Team1';
+
+    $mail->Username = 'iris.ibabeee@gmail.com';
+    $mail->Password = 'zhwpyxhlefcmvznc';
+    $mail->From = 'iris.ibabeee@gmail.com';
+
+    $mail->isHTML(true);
+    $mail->addAddress($to, 'Your Booking');
+
+    $mail->Subject = $title;
+    $mail->Body = $content;
+    // $mail->addAttachment('./d.jpg','mm.jpg');
+
+    $status = $mail->send();
+        return $status;
+
 }
 
 ?>
@@ -71,7 +100,7 @@ if (isset($_POST["submit"]) && $_POST["submit"] == "btn_login") {
         </p>
 
         <div id="login_control">
-            <button type="submit" id="btn_login" name='submit' value='btn_login'> <a href="forget.php" class="cc">Reset</button>
+            <button type="submit" id="btn_login" name='submit' value='btn_login'>Reset</button>
             <button type="submit" id="btn_registry" ><a href="index.php" class="cc">Back</a></button>
         </div>
     </form>
