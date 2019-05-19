@@ -1,12 +1,12 @@
 <?php
 session_start();
 require 'database.php';
-if(isset($_SESSION['User']) && $_SESSION['User'] == null){
+if(isset($_SESSION['User']) && $_SESSION['User'] == null && $_SESSION ['User']['role'] == '1'){
     echo "<script>alert('Login please！'); window.location.href='login.php'</script>";
 }
 
 try{
-    $pdo = new PDO('mysql:host=localhost;dbname=xdurhamsports', 'root', '');
+    $pdo = new PDO('mysql:host=localhost;dbname=xdurhamsports','root','');
     
     // set the PDO error mode to exception
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -92,7 +92,7 @@ try{
     <script type="text/javascript" src="../js/main.js"></script>
 
     <style>
-       img {
+        img {
         margin-right: 1em;
         object-fit: none;
         }
@@ -157,7 +157,6 @@ try{
 
     <section class="wrapper">
         <div class="content">
-            <p class="title">Welcome, admin  </p>
 
             
 
@@ -182,7 +181,7 @@ try{
 
             <!--showfacilities()-->
 
-            <?php $select = $pdo->prepare("select * from facility ");
+            <?php $select = $pdo->query("select * from facility ");
             $select->setFetchMode(PDO::FETCH_ASSOC);
             $select->execute();
 
@@ -202,17 +201,7 @@ try{
             }?>
 
 
-            <div id="showinfo">
             
-                <div class="row">
-                    <div class="column">
-                    <div style="text-align:left" >
-                        <img id="object-position-1" src="../images/other facility.jpg"></a></div>
-                        <br><br>
-                        <h3 style="font-size:25px;">Other Facility</h3>
-                        <p> We have more facilities</p>
-                    </div>
-                </div>
 
                 
 
