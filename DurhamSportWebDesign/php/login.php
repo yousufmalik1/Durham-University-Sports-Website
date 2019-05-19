@@ -37,19 +37,18 @@ if (isset($_POST["submit"]) && $_POST["submit"] == "btn_login") {
                     if((integer)$is_admin == 0)
                     {
                         $_SESSION['username'] = $row[0];
-                        echo "<script>alert('".$is_admin."');</script>";
-                        echo "<script>alert('login success！');</script>";
-                        session_start();
+
                         $_SESSION["User"] =$user;
-                        header('location:userhome.php');
+                        echo "<script>alert('login success！');window.location.href='userhome.php'</script>";
+
+
+
                     }
                     else if($is_admin == 1)
                     {
-                        $_SESSION['username']=$row[0];
-                        echo "<script>alert('login success！');</script>";
-                        session_start();
+                        $_SESSION['username'] = $row[0];
                         $_SESSION["User"] =$user;
-                        header('location:admin.php');
+                        echo "<script>alert('login success！');window.location.href='admin.php'</script>";
                     }
                 }
             }
