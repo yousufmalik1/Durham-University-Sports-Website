@@ -45,8 +45,8 @@ if(! $_SESSION['User']){
                         <div class="card">                            
                             <!-- Logo-->
                             <div class="card-header pt-4 pb-4 text-center bg-primary">
-                                <a href="../index.html">
-                                    <span><img src="../images/dulogowhite.png" alt="" height="18"></span>
+                                <a href="../php/BookingList.php">
+                                    <span><img src="../images/dulogowhite.png" alt="" height="40"></span>
                                 </a>
                             </div>
 
