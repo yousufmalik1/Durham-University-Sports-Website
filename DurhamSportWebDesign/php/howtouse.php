@@ -85,7 +85,9 @@
 
                 <h3>Calendar page</h3>
 
-                <p>The calendar can show all existing booking on each day，according to the day,the week,the month.</p>
+                <p>The calendar shows all existing bookings and classes on each day，according to the day,the week,the month.</p>
+
+                <p>The calendar shows the time which is blocked by exams, which means they are not bookable by anyone.</p>
 
                 <h3>Personal Profile</h3>
 
@@ -96,6 +98,8 @@
                 <p>Allow user to view and cancel their all bookings ,and there is a booking button to enter the booking page.</p>
 
                 <h3>Booking Page</h3>
+
+                <p>Users can check the availability of facilities before booking. Then choose the booking date, time and people number.</p>
 
 
 
