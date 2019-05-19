@@ -21,7 +21,7 @@ if(isset($_GET['operate'])&&$_GET['operate']=="logout"){
 <head>
     <title>Index</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="../css/index.css">
+    <link rel="stylesheet" type="text/css" href="../css/user.css">
     <script type="text/javascript" src="../js/manager.js"></script>
     <script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="../js/jquery.ssd-vertical-navigation.min.js"></script>

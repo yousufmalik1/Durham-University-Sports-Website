@@ -12,7 +12,6 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
 
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -198,8 +197,8 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
 
             </table>
             </form>
-            <div align="center" style="position:relative;top:10px">
-                <button class="button">Booking Now</button>
+            <div align="center" style="position:relative;top:20px">
+                <button class="button"><a href="pages-booking.php">Booking Now</button>
             </div>
 
         </div><!-- end content -->
