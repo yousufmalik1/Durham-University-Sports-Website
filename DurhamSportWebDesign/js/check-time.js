@@ -10,10 +10,10 @@ document.getElementById("submit1").onclick=function(){
         type: "POST",
         url: "../php/get-time.php" ,
         data: $('#form1').serialize(),
-        success: function () {
+        success: function (data) {
          var result=document.getElementById('txtHint').innerHTML=data.msg;
         },
-        error : function() {
+        error : function(data) {
          var result=document.getElementById('txtHint').innerHTML="error:"+data.msg;
         }
        });
