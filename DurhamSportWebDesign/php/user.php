@@ -48,7 +48,7 @@ if (isset($_POST["submit"]) && $_POST["submit"] == "update") {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>User</title>
+    <title>UserUpdateDetail</title>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="../css/user.css">
     <script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
@@ -66,8 +66,8 @@ if (isset($_POST["submit"]) && $_POST["submit"] == "update") {
     <div id="menu_icon"></div>
     <nav>
         <ul>
-            <li><a href="#.php">Personal Profile</a></li>
-            <li><a href="#.php">Booking List</a></li>
+            <li><a href="user.php">Personal Profile</a></li>
+            <li><a href="BookingList.php">Booking List</a></li>
         </ul>
     </nav><!-- end navigation menu -->
 </header><!-- end header -->
@@ -86,11 +86,9 @@ if (isset($_POST["submit"]) && $_POST["submit"] == "update") {
                 <a href="https://www.teamdurham.com"><img src="../images/dulogowhite.png"  /></a>
             </div>
             <p class="title">
-                <a href="userhome.php">Facilities</a> |||| <a href="#">Calendar</a> |||| <a href="#">How to use</a></p>
+                <a href="userhome.php">Facilities</a> |||| <a href="calendar.php">Calendar</a> |||| <a href="contactpage.php">Contact us</a> |||| <a href="#">How to use</a></p>
         </div>
     </section><!-- end top -->
-
-
 
 
     <!-- ----------------------Start your content from here-------------------------------------------------- -->
@@ -98,29 +96,28 @@ if (isset($_POST["submit"]) && $_POST["submit"] == "update") {
     <section class="wrapper">
         <div class="content">
             <p class="title">Welcome, user <?php echo $_SESSION['User']['username']; ?> </p>
+            <center><h1> Personal Detail </h1></center>
 
-            <center><h1> Detail </h1></center>
+            <center><div>
+                <p>Update your personal details here.</p>
+                <form name='form' class="form" action='' method='post'  onsubmit="return validate_userform(this)">
 
-            <form name='form' class="form" action='' method='post'  onsubmit="return validate_userform(this)">
-
-                <p><label class="label_input">First Name</label>
-                    <input type="text" class="text_field" name='firstname' value='<?php echo $_SESSION['User']['firstname'] ?>' required="required"/>
-                </p>
-                <p><label class="label_input">Last Name</label>
-                    <input type="text" class="text_field" name='lastname' value='<?php echo $_SESSION['User']['lastname'] ?>'required="required"/>
-                </p>
-                <p><label class="label_input">Email</label>
-                    <input type="text"  class="text_field" name='email' value='<?php echo $_SESSION['User']['email'] ?>'/>
-                </p>
-                <p><label class="label_input">Password</label>
-                    <input type="password" id="password" class="text_field" name='password' required="required" />
-                </p>
-
-                <input type="submit" id="update" class="login-button" value='update' name='submit' >
-                <button type="submit" id="login-button" ><a href="userhome.php" class="cc">Back</a></button>
-            </form>
-            </div>
-        </div>
+                    <p><label class="label_input">First Name</label>
+                        <input type="text" class="text_field" name='firstname' value='<?php echo $_SESSION['User']['firstname'] ?>' required="required"/>
+                    </p>
+                    <p><label class="label_input">Last Name</label>
+                        <input type="text" class="text_field" name='lastname' value='<?php echo $_SESSION['User']['lastname'] ?>'required="required"/>
+                    </p>
+                    <p><label class="label_input">Email</label>
+                        <input type="text"  class="text_field" name='email' value='<?php echo $_SESSION['User']['email'] ?>'/>
+                    </p>
+                    <p><label class="label_input">Password</label>
+                        <input type="password" id="password" class="text_field" name='password' required="required" />
+                    </p>
+                    <input type="submit" id="update" class="login-button" value='update' name='submit' >
+                    <button type="submit" id="login-button" ><a href="userhome.php" class="cc">Back</a></button>
+                </form>
+            </div></center>
 
         </div><!-- end content -->
     </section>

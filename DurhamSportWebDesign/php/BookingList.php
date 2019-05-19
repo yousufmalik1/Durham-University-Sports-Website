@@ -57,8 +57,8 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
         }
         .button {
             display: inline-block;
-            padding: 15px 25px;
-            font-size: 24px;
+            padding: 10px 20px;
+            font-size: 20px;
             cursor: pointer;
             text-align: center;
             text-decoration: none;
@@ -67,7 +67,7 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
             background-color: #9b2daf;
             border: none;
             border-radius: 15px;
-            box-shadow: 0 9px #999;
+            box-shadow: 0 8px #999;
         }
 
         .button:hover {background-color: #9b2daf
@@ -117,11 +117,9 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
                 <a href="https://www.teamdurham.com"><img src="../images/dulogowhite.png"  /></a>
             </div>
             <p class="title">
-                <a href="userhome.php">Facilities</a> |||| <a href="#">Calendar</a> |||| <a href="#">How to use</a></p>
+                <a href="userhome.php">Facilities</a> |||| <a href="calendar.php">Calendar</a> |||| <a href="contactpage.php">Contact us</a> |||| <a href="#">How to use</a></p>
         </div>
     </section><!-- end top -->
-
-
 
 
     <!-- ----------------------Start your content from here-------------------------------------------------- -->
@@ -132,7 +130,7 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
             <p class="title">Welcome, user <?php echo $_SESSION['User']['username']; ?> </p>
             <div align="right">
                 <h4>Search the facility</h4>
-                <form name="search" method="post" action="userhome.php">
+                <form name="search" method="post" action="BookingList.php">
                     <button type="button">
                         <input type="text" name="searchname" placeholder="input facility name"/>
                         <input type="submit" name="searchbtn" VALUE="Search">

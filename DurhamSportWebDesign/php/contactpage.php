@@ -28,7 +28,13 @@
 
 <section class="main clearfix">
     <div id="loginsection">
-        <p class="logincs"><a href="login.php">Login</a> || <a href="registry.php">Registry</a></p>
+        <?php
+        require('database.php');
+        session_start();
+if(isset($_SESSION['User']) && $_SESSION['User'] != null){
+}
+else{
+    echo  "<p class='logincs'><a href='login.php'>Login</a> || <a href='registry.php'>Registry</a></p> ";}?>
     </div>
     <section class="top">
         <div class="wrapper content_header clearfix">
@@ -48,7 +54,12 @@
 
     <section class="wrapper">
         <div class="content">
-            <p class="title">Welcome, Please <a href="login.php">login</a>  </p>
+
+            <?php
+            if(isset($_SESSION['User']) && $_SESSION['User'] != null){
+            }
+            else{
+                echo  " <p class='title'>Welcome, Please <a href='login.php'>login</a> </p> ";}?>
 
             <center><h1> Contact Us </h1></center>
 

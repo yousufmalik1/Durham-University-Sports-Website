@@ -16,11 +16,10 @@ if(isset($_GET['operate'])&&$_GET['operate']=="logout"){
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>User</title>
+    <title>Index</title>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="../css/index.css">
     <script type="text/javascript" src="../js/manager.js"></script>
@@ -38,16 +37,15 @@ if(isset($_GET['operate'])&&$_GET['operate']=="logout"){
     <div id="menu_icon"></div>
     <nav>
         <ul>
-            <li><a href="#.php">Weclome</a></li>
             <li> <p><a href="login.php">Login</a></p></li>
             <li><p><a href="registry.php">Registry</a></p></li>
         </ul>
     </nav><!-- end navigation menu -->
 </header><!-- end header -->
 <section class="main clearfix">
-<!--    <div id="loginsection">-->
-<!--        <p class="logincs"><a href="login.php">Login</a> || <a href="registry.php">Registry</a></p>-->
-<!--    </div>-->
+    <div id="loginsection">
+        <p class="logincs"><a href="login.php">Login</a> || <a href="registry.php">Registry</a></p>
+    </div>
     <section class="top">
         <div class="wrapper content_header clearfix">
             <div class="duslogan">
@@ -57,15 +55,11 @@ if(isset($_GET['operate'])&&$_GET['operate']=="logout"){
                 <a href="https://www.teamdurham.com"><img src="../images/dulogowhite.png"  /></a>
             </div>
             <p class="title">
-                <a href="index.php">Facilities</a> |||| <a href="#">Calendar</a> |||| <a href="#">How to use</a></p>
+                <a href="userhome.php">Facilities</a> |||| <a href="calendar.php">Calendar</a> |||| <a href="contactpage.php">Contact us</a> |||| <a href="#">How to use</a></p>
         </div>
     </section><!-- end top -->
 
-
-
-
     <!-- ----------------------Start your content from here-------------------------------------------------- -->
-
 
     <section class="wrapper">
         <div class="content">
@@ -80,7 +74,7 @@ if(isset($_GET['operate'])&&$_GET['operate']=="logout"){
                 </form>
             </div>
 
-            <center><h1> Facility </h1></center>
+            <center><h1> Our Facilities </h1></center>
 
             <?php
             $facilityname = filter_input(INPUT_POST, 'searchname', FILTER_SANITIZE_STRING);
@@ -112,10 +106,10 @@ if(isset($_GET['operate'])&&$_GET['operate']=="logout"){
                         <div class="image"><img src="../images/other facility.jpg" width="200" height="200"></a></div>
                         <div align="center">
                             <table style="width: 220px;text-align: center"><tr>
-                                    <th style="font-size: 1.8em">Other facility</th>
+                                    <th style="font-size: 1.8em">Other facilities</th>
                                 </tr>
                                 <tr>
-                                    <td style="font-size: 1.2em">We have more other facility</td>
+                                    <td style="font-size: 1.2em">We have more other facilities</td>
                                 </tr>
                             </table>
                         </div>
@@ -125,16 +119,12 @@ if(isset($_GET['operate'])&&$_GET['operate']=="logout"){
             <?php  } ?>
 
                 </div>
-
             </div>
-
         </div><!-- end content -->
     </section>
 
 
-
     <!-- ----------------------End your content to here-------------------------------------------------- -->
-
 
 
 </section><!-- end main -->

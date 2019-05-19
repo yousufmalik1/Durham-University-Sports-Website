@@ -34,7 +34,7 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
     <nav>
         <ul>
             <li><a href="user.php">Personal Profile</a></li>
-            <li><a href="#.php">Booking List</a></li>
+            <li><a href="BookingList.php">Booking List</a></li>
         </ul>
     </nav><!-- end navigation menu -->
 </header><!-- end header -->
@@ -53,10 +53,9 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
                 <a href="https://www.teamdurham.com"><img src="../images/dulogowhite.png"  /></a>
             </div>
             <p class="title">
-                <a href="userhome.php">Facilities</a> |||| <a href="#">Calendar</a> |||| <a href="#">How to use</a></p>
+                <a href="userhome.php">Facilities</a> |||| <a href="calendar.php">Calendar</a> |||| <a href="contactpage.php">Contact us</a> |||| <a href="#">How to use</a></p>
         </div>
     </section><!-- end top -->
-
 
 
 
@@ -75,7 +74,7 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
                         </form>
                     </div>
 
-                    <center><h1> Facility </h1></center>
+                    <center><h1> Our Facilities </h1></center>
 
                     <?php
                     $facilityname = filter_input(INPUT_POST, 'searchname', FILTER_SANITIZE_STRING);
