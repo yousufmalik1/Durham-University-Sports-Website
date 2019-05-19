@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 17, 2019 at 09:23 AM
+-- Generation Time: May 19, 2019 at 01:07 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -40,6 +40,34 @@ CREATE TABLE `booking` (
   `bookingTitle` text NOT NULL,
   `notes` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `booking`
+--
+
+INSERT INTO `booking` (`bookingID`, `userID`, `facilityID`, `eventID`, `bookingDate`, `startTime`, `endTime`, `people`, `bookingTitle`, `notes`) VALUES
+(8, 1007, 2000, 3000, '2019-05-12', '00:00:00', '00:00:00', 1, 'Durham University', ''),
+(9, 1007, 2000, 3000, '2019-05-12', '00:00:00', '00:00:00', 1, 'Durham University', ''),
+(10, 1007, 2000, 3000, '2019-05-12', '00:00:00', '00:00:00', 1, 'Durham University', ''),
+(11, 1007, 2000, 3000, '2019-05-12', '00:00:00', '00:00:00', 1, 'Durham University', ''),
+(14, 1007, 2000, 3000, '2019-05-12', '00:00:00', '00:00:00', 1, 'Durham University', ''),
+(15, 1007, 2000, 3000, '2019-05-12', '00:00:00', '00:00:00', 1, 'Durham University', ''),
+(16, 1007, 2000, 3000, '2019-05-12', '00:00:00', '00:00:00', 1, 'Durham University', ''),
+(17, 1007, 2000, 3000, '2019-05-12', '00:00:00', '00:00:00', 1, 'Durham University', ''),
+(18, 1007, 2000, 3000, '2019-05-12', '00:00:00', '00:00:00', 1, 'Durham University', ''),
+(19, 1007, 2000, 3000, '2019-05-12', '00:00:00', '00:00:00', 1, 'Durham University', ''),
+(20, 1007, 2000, 3001, '2019-05-12', '00:00:00', '00:00:00', 2, 'Durham University', ''),
+(21, 1007, 2000, 3001, '2019-05-12', '00:00:00', '00:00:00', 4, 'Durham University', ''),
+(22, 1007, 2000, 3000, '2019-05-12', '00:00:00', '00:00:00', 5, 'Durham University', ''),
+(23, 1007, 2000, 3000, '2019-05-12', '00:00:00', '00:00:00', 5, 'Durham University', ''),
+(24, 1007, 2000, 3000, '2019-05-12', '00:00:00', '00:00:00', 6, 'Durham University', ''),
+(25, 1007, 2000, 3000, '2019-05-12', '00:00:00', '00:00:00', 6, 'Durham University', ''),
+(26, 1007, 2000, 3000, '2019-05-12', '00:00:00', '00:00:00', 6, 'Durham University', ''),
+(27, 1007, 2000, 3000, '2019-05-12', '00:00:00', '00:00:00', 6, 'Durham University', ''),
+(28, 1008, 2000, 3000, '2019-05-19', '09:00:00', '10:00:00', 3, 'Durham University123', ''),
+(29, 1009, 2000, 3000, '2019-05-12', '00:00:00', '00:00:00', 3, 'Durham University', ''),
+(30, 1009, 2002, 3001, '2019-05-20', '09:00:00', '13:00:00', 5, 'Durham University', '111'),
+(31, 1008, 2002, 3001, '2019-05-20', '09:00:00', '11:00:00', 5, 'Durham University1111111', '2222');
 
 -- --------------------------------------------------------
 
@@ -103,21 +131,23 @@ CREATE TABLE `user` (
   `email` text NOT NULL,
   `firstname` text NOT NULL,
   `lastname` text NOT NULL,
-  `role` tinyint(1) NOT NULL
+  `role` tinyint(1) NOT NULL,
+  `token` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`userID`, `username`, `password`, `email`, `firstname`, `lastname`, `role`) VALUES
-(1000, 'Corwin', 'corwin', 'chenglong.zheng@durham.ac.uk', 'Chenglong', 'Zheng', 1),
-(1001, 'Iris', 'iris', 'fei.wang2@durham.ac.uk', 'Fei', 'Wang', 1),
-(1002, 'Xuantong', 'xuantong', 'xuantong.guo@durham.ac.uk', 'Xuantong', 'Guo', 1),
-(1003, 'Luwen', 'luwen', 'luwen.zhang@durham.ac.uk', 'Luwen', 'Zhang', 1),
-(1004, 'Philip', 'philip', 'philip.wright@durham.ac.uk', 'Philip', 'Wright', 1),
-(1005, 'Yousuf', 'yousuf', 'yousuf.malik@durham.ac.uk', 'Yousuf', 'Malik', 1),
-(1006, 'Mia', 'mia', '1403823902@qq.com', 'Mia', 'MC', 0);
+INSERT INTO `user` (`userID`, `username`, `password`, `email`, `firstname`, `lastname`, `role`, `token`) VALUES
+(1000, 'Corwin', 'corwin', 'chenglong.zheng@durham.ac.uk', 'Chenglong', 'Zheng', 1, 0),
+(1002, 'Xuantong', 'xuantong', 'xuantong.guo@durham.ac.uk', 'Xuantong', 'Guo', 1, 0),
+(1003, 'Luwen', 'luwen', 'luwen.zhang@durham.ac.uk', 'Luwen', 'Zhang', 1, 0),
+(1004, 'Philip', 'philip', 'philip.wright@durham.ac.uk', 'Philip', 'Wright', 1, 0),
+(1005, 'Yousuf', 'yousuf', 'yousuf.malik@durham.ac.uk', 'Yousuf', 'Malik', 1, 0),
+(1007, '123', '$2y$10$5Ua8ltBElOpbpzHxrl1DHeMlUdMIsXcsfclysbxz0.ai1aUNweG1i', '1234562@qq.com', '123', '123', 0, 0),
+(1008, 'zheng', '$2y$10$Bfs3RZFE.nLzltCA0Cgfue.hNQhCFp54GGCBOJATTD/ASe9ESGP7O', '1403823902@qq.com', 'CHENGLONG', 'ZHENG', 0, 123456789),
+(1009, 'Iris', '$2y$10$UH9B4qhNf72Opj/fjh1xqubcvNWzTdfSB0Wa9v6MPZ4KvSNFpCeXK', 'iris_wangfei@hotmail.com', 'Fei', 'Wang', 0, 123456789);
 
 --
 -- Indexes for dumped tables
@@ -158,7 +188,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `bookingID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `bookingID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `event`
@@ -176,7 +206,7 @@ ALTER TABLE `facility`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1007;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1010;
 
 --
 -- Constraints for dumped tables
