@@ -132,7 +132,9 @@ CREATE TABLE `user` (
   `firstname` text NOT NULL,
   `lastname` text NOT NULL,
   `role` tinyint(1) NOT NULL,
-  `token` int(11) NOT NULL
+  `token` int(11) NOT NULL,
+  `resetpasswordtime` int(11) NOT NULL
+  
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
