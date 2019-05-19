@@ -1,29 +1,16 @@
 <?php
+
+
+header("Content-Type:text/html;charset=utf-8");
+require('database.php');
 session_start();
-require 'database.php';
-if(isset($_SESSION['User']) && $_SESSION['User'] == null){
-    echo "<script>alert('Login please！'); window.location.href='login.php'</script>";
-}
-
-try{
-    $pdo = new PDO('mysql:host=localhost;dbname=xdurhamsports', 'root', '');
-    
-    // set the PDO error mode to exception
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
-    //echo "Connected successfully";
-}   
-        catch(PDOException $e)
-        {
-        echo "Connection failed: " . $e->getMessage();
-        }
- ?>       
-
+if(isset($_SESSION['User']) && $_SESSION['User'] != null){
+?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Admin</title>
+    <title>Adminbooking</title>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="../css/manager.css">
     <script type="text/javascript" src="../js/manager.js"></script>
@@ -39,21 +26,20 @@ try{
     </div><!-- end logo -->
     <div id="menu_icon"></div>
     <nav>
-
         <ul>
             <li><a href="admin.php">Admin Dashboard</a></li>
             <li><a href="#.php">Personal Profile</a></li>
             <li><a href="adminFacilityManagement.php">Facility Management</a></li>
             <li><a href="adminBookingManagement.php">Booking Management</a></li>
         </ul>
-
-
     </nav><!-- end navigation menu -->
 </header><!-- end header -->
 
 <section class="main clearfix">
     <div id="loginsection">
-        <p class="logincs"><a href="../html/login.html">Login</a> || <a href="../html/registry.html">Registry</a></p>
+        <p class="logincs"><button class="logoutbtn"><a href="index.php?operate=logout">logout</a></button></p>
+        <?php }else{
+            header('location:index.php');} ?>
     </div>
     <section class="top">
         <div class="wrapper content_header clearfix">
@@ -70,19 +56,18 @@ try{
 
 
 
-
     <!-- ----------------------Start your content from here-------------------------------------------------- -->
 
 
     <section class="wrapper">
         <div class="content">
-            <p class="title">Welcome, admin  </p>
 
+            <p class="title">Welcome, admin <?php echo $_SESSION['User']['username']; ?> </p>
             <div align="right">
                 <h4>Search the facility</h4>
-                <form name="search" method="post" action="">
+                <form name="search" method="post" action="userhome.php">
                     <button type="button">
-                        <input type="text" name="facilityName" placeholder="input facility name"/>
+                        <input type="text" name="searchname" placeholder="input facility name"/>
                         <input type="submit" name="searchbtn" VALUE="Search">
                     </button>
                 </form>
@@ -131,8 +116,6 @@ try{
         <?php echo "</tr>"; }?>
 
         </table>
-
-
 
         </div><!-- end content -->
     </section>

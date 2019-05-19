@@ -1,50 +1,4 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: FEI
- * Date: 2019-05-10
- * Time: 19:27
- */
 
-
-header("Content-Type:text/html;charset=utf-8");
-require('database.php');
-session_start();
-if(isset($_SESSION['User']) && $_SESSION['User'] != null){
-    
-if (isset($_POST["submit"]) && $_POST["submit"] == "update") {
-    $userID=$_SESSION['User']['userID'];
-    $username = $_SESSION['User']['username'];
-    $firstname = filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_STRING);
-    $lastname = filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_STRING);
-    $Email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
-    $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
-    $pattern = '/^[a-z0-9]+([._-][a-z0-9]+)*@([0-9a-z]+\.[a-z]{2,14}(\.[a-z]{2})?)$/i';
-    if (preg_match($pattern,$Email)) {
-    } else {
-        echo "<script>alert('email format error！');history.go(-1);</script>";
-        die();
-    }
-    $checkemail = update_email($userID,$Email);
-    if ($checkemail) {
-        echo "<script>alert('email already register！');history.go(-1);</script>";
-        die();
-    } else {
-        $salt = "some_made_up_string";
-        $password_hash = $password . $username . $salt;
-        $password_hash = password_hash($password_hash, PASSWORD_DEFAULT);
-
-            $update = update_user($username,$password_hash,$Email,$firstname,$lastname);
-            if ($update) {
-                echo "<script>alert('update success！'); window.location.href='userhome.php'</script>";
-            } else {
-                echo "<script>alert('update no success！');
-            history.go(-1);</script>";
-            }
-        }
-    }
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,9 +28,7 @@ if (isset($_POST["submit"]) && $_POST["submit"] == "update") {
 
 <section class="main clearfix">
     <div id="loginsection">
-        <p class="logincs"><button class="logoutbtn"><a href="index.php?operate=logout">logout</a></button></p>
-        <?php }else{
-            header('location:index.php');} ?>
+        <p class="logincs"><a href="login.php">Login</a> || <a href="registry.php">Registry</a></p>
     </div>
     <section class="top">
         <div class="wrapper content_header clearfix">
@@ -96,7 +48,7 @@ if (isset($_POST["submit"]) && $_POST["submit"] == "update") {
 
     <section class="wrapper">
         <div class="content">
-            <p class="title">Welcome, user <?php echo $_SESSION['User']['username']; ?> </p>
+            <p class="title">Welcome, Please <a href="login.php">login</a>  </p>
 
             <center><h1> Contact Us </h1></center>
 

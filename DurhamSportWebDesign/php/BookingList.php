@@ -16,7 +16,7 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>User</title>
+    <title>BookingList</title>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="../css/user.css">
     <script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
@@ -128,6 +128,20 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
 
     <section class="wrapper">
         <div class="content">
+
+            <p class="title">Welcome, user <?php echo $_SESSION['User']['username']; ?> </p>
+            <div align="right">
+                <h4>Search the facility</h4>
+                <form name="search" method="post" action="userhome.php">
+                    <button type="button">
+                        <input type="text" name="searchname" placeholder="input facility name"/>
+                        <input type="submit" name="searchbtn" VALUE="Search">
+                    </button>
+                </form>
+            </div>
+
+            <center><h1> Booking List </h1></center>
+
             <form name='form' class="form" action='' method='post'>
 
             <table>
