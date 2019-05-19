@@ -44,9 +44,9 @@ for($i=$FOT; $i<$FCT;$i++){
     }
     if($sum<$FC){
         $spaceLeft = $FC-$sum;
-        echo '{"success":true,"msg":"From '. $FOT .' to '. $FOT+1 .' '.$spaceLeft.' space left."}';
+        echo '{"success":true,"msg":"From '.$FOT.' to '.$FOT+1.' '.$spaceLeft.' space left."}';
     }else{
-        echo '{"success":false,"msg":"From '. $FOT .' to '. $FOT+1 .' '.$spaceLeft.' space not avaliable!"}';
+        echo '{"success":false,"msg":"From '.$FOT.' to '.$FOT+1.' '.$spaceLeft.' space not avaliable!"}';
     }
 }
 $pdo = null;

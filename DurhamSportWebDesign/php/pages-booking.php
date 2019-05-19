@@ -8,7 +8,7 @@
 header("Content-Type:text/html;charset=utf-8");
 require('database.php');
 session_start();
-if(isset($_SESSION['User']) && $_SESSION['User'] == null){
+if(! $_SESSION['User']){
     echo "<script>alert('Login please！'); window.location.href='login.php'</script>";
 }
 ?>
@@ -82,12 +82,12 @@ if(isset($_SESSION['User']) && $_SESSION['User'] == null){
                                 <form form id="form2" action="booking-confirm.php" method="post">
                                     <div class="form-group">
                                         <label for="bookingtitle">Booking Title</label>
-                                        <input class="form-control" type="text" id="bookingtitle" placeholder="Enter your title" required>
+                                        <input class="form-control" type="text" name="bookingtitle" id="bookingtitle" placeholder="Enter your title" required>
                                     </div>
                                 
                                     <div class="form-group">
                                         <label for="select">Facility</label>
-                                        <select class="form-control" id="facilityName">
+                                        <select class="form-control" name="facilityName" id="facilityName">
                                             <option value="Squash Courts">Squash Courts</option>
                                             <option value="Aerobics Room">Aerobics Room</option>
                                             <option value="Tennis">Tennis</option>
@@ -110,12 +110,12 @@ if(isset($_SESSION['User']) && $_SESSION['User'] == null){
                                 
                                     <div class="form-group mb-3">
                                         <label>People</label>
-                                        <input data-toggle="touchspin" data-bts-max="20" id="people" value="1" data-btn-vertical="true" type="text">
+                                        <input data-toggle="touchspin" data-bts-max="20" name="people" id="people" value="1" data-btn-vertical="true" type="text">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="select">Event</label>
-                                        <select class="form-control" id="eventName">
+                                        <select class="form-control" name="eventName" id="eventName">
                                             <option value="Exercise class">Exercise class</option>
                                             <option value="Exams">Exams</option>
                                             <option value="Others">Others</option>
@@ -124,7 +124,7 @@ if(isset($_SESSION['User']) && $_SESSION['User'] == null){
                                 
                                     <div class="form-group">
                                         <label>Notes</label>
-                                        <textarea data-toggle="maxlength" class="form-control" id="notes" maxlength="225" rows="3"
+                                        <textarea data-toggle="maxlength" class="form-control" name="notes" id="notes" maxlength="225" rows="3"
                                         placeholder="Any further information."></textarea>
                                     </div>
                                 
