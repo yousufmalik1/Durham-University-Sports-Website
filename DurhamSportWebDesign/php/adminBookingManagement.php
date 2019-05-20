@@ -1,8 +1,16 @@
 <?php
-header("Content-Type:text/html;charset=utf-8");
-require('database.php');
 session_start();
-if(isset($_SESSION['User']) && $_SESSION['User'] != null){
+header ("Content-Type:text/html;charset=utf-8");
+require ('database.php');
+$pdo = new PDO('mysql:host=localhost;dbname=xdurhamsports','root','');
+
+if(isset($_SESSION['user']) && $_SESSION['user'] == null && $_SESSION ['User']['role'] == '0'){
+    echo "<script>alert('Login please！'); window.location.href='login.php'</script>";}
+    else{header('location:index.php');}
+
+
+
+        
 ?>
 
 <!DOCTYPE html>
@@ -37,8 +45,8 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
 <section class="main clearfix">
     <div id="loginsection">
         <p class="logincs"><button class="logoutbtn"><a href="index.php?operate=logout">logout</a></button></p>
-        <?php }else{
-            header('location:index.php');} ?>
+        <?php //}else{
+            //header('location:index.php');} ?>
     </div>
     <section class="top">
         <div class="wrapper content_header clearfix">
@@ -61,7 +69,7 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
     <section class="wrapper">
         <div class="content">
 
-            <p class="title">Welcome, admin <?php echo $_SESSION['User']['username']; ?> </p>
+            <p class="title">Welcome, admin</p>
             <div align="right">
                 <h4>Search the facility</h4>
                 <form name="search" method="post" action="userhome.php">
@@ -91,12 +99,13 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
                     <th>Notes</th>
                     <th colspan="2">Action</th>
                 </tr>
-
-                <?php
-                $select = $pdo->prepare("SELECT * FROM booking");
+        </body>
+    </html>
+        <?php
+                try{
+                $select = $pdo->prepare("SELECT * FROM booking ");
                 $select->setFetchMode(PDO::FETCH_ASSOC);
                 $select->execute();
-
                 while ($row = $select->fetch()) {
                     echo "<tr>";
                     echo "<td>" . $row['bookingID'] ."</td>";
@@ -111,9 +120,20 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
                     echo "<td>" . $row['notes'] ."</td>";
                     ?>
                     <td><a href="admindeletebooking.php?del_id=<?php echo $row['bookingID']; ?>" onclick="return confirm('Are you sure you want to delete the Facility?')">Delete</a></td>
-                    <?php echo "</tr>"; }?>
+                    
+                     <?php echo "</tr>"; 
+                    }?>
 
             </table>
+            <?php
+
+                }
+            catch (PDOException $e)
+            {
+                    echo "error: " . $e->getMessage();
+                }
+            ?>
+        
 
         </div><!-- end content -->
     </section>
@@ -128,5 +148,5 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
     });
 </script>
 
-</body>
+
 </html>
