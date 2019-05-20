@@ -86,7 +86,6 @@
     <p> Filter (Select facility to view)</p>
     <select id="facility_selector">
         <option value="all">All</option>
-        <option value="Fields">Fields</option>
         <option value="Athletics Track">Athletics Track</option>
         <option value="Aerobics Room">Aerobics Room</option>
         <option value="Tennis">Tennis</option>
