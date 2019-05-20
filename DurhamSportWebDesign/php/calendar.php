@@ -31,9 +31,10 @@
              eventRender: function eventRender( event, element, view ) {
                  return ['all', event.facility].indexOf($('#facility_selector').val()) >= 0
              },
-             selectable:true,
-             selectHelper:true,
-             editable:true,
+             eventClick: function(info){
+                 window.alert("Title: "  + info.title + ". Facility: " + info.facility + "\n" 
+                              + "Event: " + info.event);
+             },
          });
 
          $('#facility_selector').on('change',function(){
