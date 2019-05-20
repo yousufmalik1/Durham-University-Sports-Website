@@ -7,7 +7,7 @@ $data = array();
 
 //$pdo = new PDO('mysql:host=mysql.dur.ac.uk;dbname=Iqjhq34_mock-facilities', 'qjhq34', 'memory84');
 $pdo = new PDO('mysql:host=localhost;dbname=xdurhamsports', 'root', '');
-$statement = $pdo->query("SELECT booking.bookingID, booking.bookingTitle, booking.start, booking.end, facility.facilityName
+$statement = $pdo->query("SELECT booking.bookingID, booking.bookingTitle, booking.bookingDate booking.startTime, booking.endTime, facility.facilityName
 FROM booking
 INNER JOIN facility ON booking.facilityID = facility.facilityID");
 
@@ -18,8 +18,8 @@ foreach($result as $row)
  $data[] = array(
   'id'   => $row["bookingID"],
   'title'   => $row["facilityName"].": ".$row["bookingTitle"],
-  'start'   => $row["start"],
-  'end'   => $row["end"],
+  'start'   => $row["bookingDate"]." ".$row["startTime"],
+  'end'   => $row["bookingDate"]." ".$row["endTime"],
   'facility' => $row["facilityName"]
  );
 }
