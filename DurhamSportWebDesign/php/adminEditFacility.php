@@ -1,12 +1,11 @@
 <?php
 session_start();
 require 'database.php';
-if(isset($_SESSION['User']) && $_SESSION['User'] == null){
+if(isset($_SESSION['User']) && $_SESSION['User'] == null && $_SESSION ['User']['role'] == '1'){
     echo "<script>alert('Login please！'); window.location.href='login.php'</script>";
 }
-
 try{
-    $pdo = new PDO('mysql:host=localhost;dbname=xdurhamsports', 'root', '');
+    $pdo = new PDO("mysql:host=localhost;dbname=xdurhamsports","root","");
     
     // set the PDO error mode to exception
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -17,21 +16,21 @@ try{
         {
         echo "Connection failed: " . $e->getMessage();
         }
-
 //Edit Facility
-if(isset($_POST['editFacility'])){
+if(isset($_POST['done']))
+{
     $edit_id = $_GET['edit_id'];
-
+    
     $facilityName = $_POST['facilityName'];
     $price = $_POST['price'];
     $priceStu = $_POST['priceStu'];
     $capacity = $_POST['capacity'];
     $info = $_POST['info'];
-    $timeStart = $_POST['timeOpen'];
-    $timeClosed = $_POST['timeClose'];
+    $timeOpen = $_POST['timeOpen'];
+    $timeClose = $_POST['timeClose'];
 
-    $update = $pdo->prepare("UPDATE facility SET facilityName=:facilityName ,price=:price ,priceSTU=:priceStu, 
-    capacity=:capacity ,info=:info ,timeOpen=:timeOpen ,timeClose=:timeClose WHERE facilityID = '$edit_id'"); 
+    $update = $pdo->prepare("UPDATE facility SET facilityName=:facilityName ,price=:price ,priceStu=:priceStu, 
+    capacity=:capacity ,info=:info ,timeOpen=:timeOpen ,timeClose=:timeClose WHERE facilityID='$edit_id'"); 
     $update->bindParam(':facilityName', $facilityName);
     $update->bindParam(':price', $price);
     $update->bindParam(':priceStu', $priceStu);
@@ -39,15 +38,12 @@ if(isset($_POST['editFacility'])){
     $update->bindParam(':info', $info);
     $update->bindParam(':timeOpen', $timeOpen);
     $update->bindParam(':timeClose', $timeClose);
-
     $update->execute();
     header("location:adminFacilityManagement.php");
-
 if($update){
     echo 'Facility Updated';
 }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -106,7 +102,7 @@ if($update){
 
     <section class="wrapper">
         <div class="content">
-            <p class="title">Welcome, admin <?php echo $_SESSION['User']['username']; ?> </p>
+            <p class="title">Welcome, admin <?php //echo $_SESSION['User']['username']; ?> </p>
 
             <div align="right">
                 <h4>Search the facility</h4>
@@ -122,7 +118,7 @@ if($update){
                 <h2 class="text-dark-50 text-center mt-0 font-weight-bold">Edit Facility Information</h2>
                 <p class="text-muted mb-4">Enter the Facility information to update </p>
 
-                <form enctype="multipart/form-data" action="adminFacilityManagement.php" method="post" >
+                <form action="adminFacilityManagement.php" method="post" >
                     Edit the Facility Name<br><br>
                 <input class="form-control"  type="text" name="facilityName" placeholder="Facility Name"><br><br>
                     Edit the Facility Price<br><br>
@@ -141,7 +137,7 @@ if($update){
                 <input class="form-control" type="file" name="file"><br><br>
                 <button class="btn btn-primary" id="submit" name="uploading">Upload Image</button><br><br>
 
-                <button class="btn btn-primary" id="submit" name="editFacility"> Edit Facility</button>
+                <button class="btn btn-primary" id="submit" name="done"> Edit Facility</button>
                 </form>
 
             </div>
