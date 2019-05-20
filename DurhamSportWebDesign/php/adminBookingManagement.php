@@ -1,6 +1,4 @@
 <?php
-
-
 header("Content-Type:text/html;charset=utf-8");
 require('database.php');
 session_start();
@@ -27,9 +25,10 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
     <div id="menu_icon"></div>
     <nav>
         <ul>
-            <li><a href="admin.php">Admin Dashboard</a></li>
-            <li><a href="#.php">Personal Profile</a></li>
+            <li><a href="adminBookingManagement.php">Admin Dashboard</a></li>
+            <li><a href="user.php">Personal Profile</a></li>
             <li><a href="adminFacilityManagement.php">Facility Management</a></li>
+            <li><a href="adminEditFacility.php">Facility Edit</a></li>
             <li><a href="adminBookingManagement.php">Booking Management</a></li>
         </ul>
     </nav><!-- end navigation menu -->
@@ -50,7 +49,7 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
                 <a href="https://www.teamdurham.com"><img src="../images/dulogowhite.png"  /></a>
             </div>
             <p class="title">
-                <a href="#">Facilities</a> |||| <a href="#">Calendar</a> |||| <a href="#">How to use</a></p>
+                <a href="userhome.php">Facilities</a> |||| <a href="calendar.php">Calendar</a> |||| <a href="contactpage.php">Contact us</a> |||| <a href="howtouse.php">How to use</a></p>
         </div>
     </section><!-- end top -->
 
@@ -75,55 +74,51 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
 
             <center><h1> Booking Management </h1></center>
             <div id="showinfo">
-            <a href="pages-booking.php"> Add a Booking</a>
-
+                <p><a href="pages-booking.php"> Add a Booking</a></p>
             </div>
 
-        <table id="showinfo" width="800" border="1">
-        <tr bgcolor="#dddddd">
-        <th>Booking ID</th>
-        <th>User ID</th>
-        <th>Facility ID</th>
-        <th>Event ID</th>
-        <th>Booking Date</th>
-        <th>Start Time</th>
-        <th>End Time</th>
-        <th>People</th>
-        <th>Booking Title</th>
-        <th>Notes</th>
-        <th colspan="2">Action</th>
-        </tr>
+            <table id="showinfo" border="1">
+                <tr bgcolor="#dddddd">
+                    <th>Booking ID</th>
+                    <th>User ID</th>
+                    <th>Facility ID</th>
+                    <th>Event ID</th>
+                    <th>Booking Date</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>People</th>
+                    <th>Booking Title</th>
+                    <th>Notes</th>
+                    <th colspan="2">Action</th>
+                </tr>
 
-        <?php
-        $select = $pdo->prepare("SELECT * FROM booking");
-        $select->setFetchMode(PDO::FETCH_ASSOC);
-        $select->execute();
+                <?php
+                $select = $pdo->prepare("SELECT * FROM booking");
+                $select->setFetchMode(PDO::FETCH_ASSOC);
+                $select->execute();
 
-        while ($row = $select->fetch()) {
-        echo "<tr>";
-        echo "<td>" . $row['bookingID'] ."</td>";
-        echo "<td>" . $row['userID'] ."</td>";
-        echo "<td>" . $row['facilityID'] ."</td>";
-        echo "<td>" . $row['eventID'] ."</td>";
-        echo "<td>" . $row['bookingDate'] ."</td>";
-        echo "<td>" . $row['startTime'] ."</td>";
-        echo "<td>" . $row['endTime'] ."</td>";
-        echo "<td>" . $row['people'] ."</td>";
-        echo "<td>" . $row['bookingTitle'] ."</td>";
-        echo "<td>" . $row['notes'] ."</td>";
-        ?>
-        <td><a href="admindeletebooking.php?del_id=<?php echo $row['bookingID']; ?>" onclick="return confirm('Are you sure you want to delete the Facility?')">Delete</a></td>
-        <?php echo "</tr>"; }?>
+                while ($row = $select->fetch()) {
+                    echo "<tr>";
+                    echo "<td>" . $row['bookingID'] ."</td>";
+                    echo "<td>" . $row['userID'] ."</td>";
+                    echo "<td>" . $row['facilityID'] ."</td>";
+                    echo "<td>" . $row['eventID'] ."</td>";
+                    echo "<td>" . $row['bookingDate'] ."</td>";
+                    echo "<td>" . $row['startTime'] ."</td>";
+                    echo "<td>" . $row['endTime'] ."</td>";
+                    echo "<td>" . $row['people'] ."</td>";
+                    echo "<td>" . $row['bookingTitle'] ."</td>";
+                    echo "<td>" . $row['notes'] ."</td>";
+                    ?>
+                    <td><a href="admindeletebooking.php?del_id=<?php echo $row['bookingID']; ?>" onclick="return confirm('Are you sure you want to delete the Facility?')">Delete</a></td>
+                    <?php echo "</tr>"; }?>
 
-        </table>
+            </table>
 
         </div><!-- end content -->
     </section>
 
-
-
     <!-- ----------------------End your content to here-------------------------------------------------- -->
-
 
 
 </section><!-- end main -->
