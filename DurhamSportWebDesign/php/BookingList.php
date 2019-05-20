@@ -116,7 +116,7 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
                 <a href="https://www.teamdurham.com"><img src="../images/dulogowhite.png"  /></a>
             </div>
             <p class="title">
-                <a href="userhome.php">Facilities</a> |||| <a href="calendar.php">Calendar</a> |||| <a href="contactpage.php">Contact us</a> |||| <a href="#">How to use</a></p>
+                <a href="userhome.php">Facilities</a> |||| <a href="calendar.php">Calendar</a> |||| <a href="contactpage.php">Contact us</a> |||| <a href="howtouse.php">How to use</a></p>
         </div>
     </section><!-- end top -->
 
@@ -129,7 +129,7 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
             <p class="title">Welcome, user <?php echo $_SESSION['User']['username']; ?> </p>
             <div align="right">
                 <h4>Search the facility</h4>
-                <form name="search" method="post" action="BookingList.php">
+                <form name="search" method="post" action="userhome.php">
                     <button type="button">
                         <input type="text" name="searchname" placeholder="input facility name"/>
                         <input type="submit" name="searchbtn" VALUE="Search">

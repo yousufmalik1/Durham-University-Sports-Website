@@ -17,7 +17,6 @@ try{
         {
         echo "Connection failed: " . $e->getMessage();
         }
-    
 
     $facilityID = "";
     $facilityName = "";
@@ -69,14 +68,10 @@ try{
 ?>
 
 
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Admin Facility Management</title>
+    <title>AdminFacilityManagement</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css/manager.css">
@@ -109,7 +104,6 @@ try{
             padding: 5px;
         }
 
-        
     </style>
 
 </head>
@@ -120,21 +114,24 @@ try{
     </div><!-- end logo -->
     <div id="menu_icon"></div>
     <nav>
-
-    <ul>
-            <li><a href="admin.php">Admin Dashboard</a></li>
-            <li><a href="#.php">Personal Profile</a></li>
+        <ul>
+            <li><a href="adminBookingManagement.php">Admin Dashboard</a></li>
+            <li><a href="user.php">Personal Profile</a></li>
             <li><a href="adminFacilityManagement.php">Facility Management</a></li>
+            <li><a href="adminEditFacility.php">Facility Edit</a></li>
             <li><a href="adminBookingManagement.php">Booking Management</a></li>
         </ul>
-
-
     </nav><!-- end navigation menu -->
 </header><!-- end header -->
 
 <section class="main clearfix">
     <div id="loginsection">
-        <p class="logincs"><a href="../html/login.html">Login</a> || <a href="../html/registry.html">Registry</a></p>
+        <?php
+        if(isset($_SESSION['User']) && $_SESSION['User'] != null){
+            echo  "<p class='logincs'><button class='logoutbtn'><a href='index.php?operate=logout'>logout</a></button></p>";
+        }
+        else{
+            echo  "<p class='logincs'><a href='login.php'>Login</a> || <a href='registry.php'>Registry</a></p> ";}?>
     </div>
     <section class="top">
         <div class="wrapper content_header clearfix">
@@ -145,11 +142,9 @@ try{
                 <a href="https://www.teamdurham.com"><img src="../images/dulogowhite.png"  /></a>
             </div>
             <p class="title">
-                <a href="#">Facilities</a> |||| <a href="#">Calendar</a> |||| <a href="#">How to use</a></p>
+                <a href="userhome.php">Facilities</a> |||| <a href="calendar.php">Calendar</a> |||| <a href="contactpage.php">Contact us</a> |||| <a href="howtouse.php">How to use</a></p>
         </div>
     </section><!-- end top -->
-
-
 
 
     <!-- ----------------------Start your content from here-------------------------------------------------- -->
@@ -157,20 +152,16 @@ try{
 
     <section class="wrapper">
         <div class="content">
-
-            
-
+            <p class="title">Welcome, admin <?php echo $_SESSION['User']['username']; ?> </p>
             <div align="right">
                 <h4>Search the facility</h4>
-                <form name="search" method="post" action="">
+                <form name="search" method="post" action="userhome.php">
                     <button type="button">
-                        <input type="text" name="facilityName" placeholder="input facility name"/>
+                        <input type="text" name="searchname" placeholder="input facility name"/>
                         <input type="submit" name="searchbtn" VALUE="Search">
                     </button>
                 </form>
             </div>
-        
-             
 
             <div class="card-body p-4">
             <div class="text-center w-75 m-auto">
@@ -200,10 +191,6 @@ try{
                 
             }?>
 
-
-            
-
-                
 
                <form action="adminFacilityManagement.php" method = "post">
                     <input class="form-control" type="text" name="facilityName" placeholder="Facility Name" value="<?php echo $facilityName;?>" /><br><br>

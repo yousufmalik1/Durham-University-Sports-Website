@@ -34,6 +34,7 @@
         require('database.php');
         session_start();
         if(isset($_SESSION['User']) && $_SESSION['User'] != null){
+            echo  "<p class='logincs'><button class='logoutbtn'><a href='index.php?operate=logout'>logout</a></button></p>";
         }
         else{
             echo  "<p class='logincs'><a href='login.php'>Login</a> || <a href='registry.php'>Registry</a></p> ";}?>
@@ -47,7 +48,7 @@
                 <a href="https://www.teamdurham.com"><img src="../images/dulogowhite.png"  /></a>
             </div>
             <p class="title">
-                <a href="userhome.php">Facilities</a> |||| <a href="#">Calendar</a> |||| <a href="howtouse.php">How to use</a></p>
+                <a href="userhome.php">Facilities</a> |||| <a href="calendar.php">Calendar</a> |||| <a href="contactpage.php">Contact us</a> |||| <a href="howtouse.php">How to use</a></p>
         </div>
     </section><!-- end top -->
 
@@ -62,8 +63,9 @@
             else{
                 echo  " <p class='title'>Welcome, Please <a href='login.php'>login</a> </p> ";}?>
 
+            <br>
             <center><h1> How to use our website </h1></center>
-
+            <br>
             <div class="contentblock" id="content38978">
                 <h3>Registry</h3>
 
@@ -100,7 +102,6 @@
                 <h3>Booking Page</h3>
 
                 <p>Users can check the availability of facilities before booking. Then choose the booking date, time and people number.</p>
-
 
 
             </div><!-- end content -->
