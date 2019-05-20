@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,12 +29,22 @@
        
     //Onload, it calls load.php to make a call to a database to get the info we need. 
     events: 'load.php',
+    eventRender: function eventRender( event, element, view ) {
+        return ['all', event.facility].indexOf($('#facility_selector').val()) >= 0
+    },
     selectable:true,
     selectHelper:true,
     editable:true,
 
    });
+         
+    $('#facility_selector').on('change',function(){
+        
+        $('#calendar').fullCalendar('rerenderEvents');
+    })
      });
+        
+
    
   </script>
     
@@ -56,6 +65,9 @@
         </ul>
     </nav><!-- end navigation menu -->
 </header><!-- end header -->
+    
+    
+    
 <section class="main clearfix">
     <div id="loginsection">
         <p class="logincs"><a href="../html/login.html">Login</a> || <a href="../html/registry.html">Registry</a></p>
@@ -74,6 +86,18 @@
     </section><!-- end top -->
     
     <br>
+    
+    <p> Filter (Select facility to view)</p>
+    <select id="facility_selector">
+  <option value="all">All</option>
+  <option value="Fields">Fields</option>
+  <option value="Athletics Track">Athletics Track</option>
+  <option value="Aerobics Room">Aerobics Room</option>
+  <option value="Tennis">Tennis</option>
+  <option value="Squash Courts">Squash Courts</option>
+</select>
+    
+    
   <h2 align="center"> User Calendar </h2>
   <br />
   <div class="container">
