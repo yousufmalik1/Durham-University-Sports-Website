@@ -1,9 +1,11 @@
 <?php
 session_start();
+header ("Content-Type:text/html;charset=utf-8");
 require 'database.php';
-if(isset($_SESSION['User']) && $_SESSION['User'] == null && $_SESSION ['User']['role'] == '1'){
-    echo "<script>alert('Login please！'); window.location.href='login.php'</script>";
-}
+
+if(isset($_SESSION['user']) && $_SESSION['user'] == null && $_SESSION ['User']['role'] == '0'){
+    echo "<script>alert('Login please！'); window.location.href='login.php'</script>";}
+    else{header('location:index.php');}
 
 try{
     $pdo = new PDO('mysql:host=localhost;dbname=xdurhamsports','root','');
@@ -17,7 +19,6 @@ try{
         {
         echo "Connection failed: " . $e->getMessage();
         }
-
     $facilityID = "";
     $facilityName = "";
     $price = "";
@@ -26,10 +27,8 @@ try{
     $info = "";
     $timeOpen = "";
     $timeClose = "";
-
     function getPosts(){
         $posts = array();
-
         //$posts[0] = $_POST['facilityID'];
         $posts[1] = $_POST['facilityName'];
         $posts[2] = $_POST['price'];
@@ -38,18 +37,16 @@ try{
         $posts[5] = $_POST['info'];
         $posts[6] = $_POST['timeOpen'];
         $posts[7] = $_POST['timeClose'];
-
         return $posts;
     }
-
     //Add new Facility
-    if(isset($_POST['addFacility'])){
+    if(isset($_POST['done'])){
         $data = getPosts();
         if(empty($data[1]) || empty($data[2]) || empty($data[3]) || empty($data[4]) || empty($data[5]) || empty($data[6]) || empty($data[7]))
         {echo 'Enter Facility Data';
     }else{
-        $insert = $pdo->prepare('INSERT INTO facility(facilityName,price,priceStu,capacity,info,timeOpen,timeClose) 
-        VALUES(:facilityName,:price,:priceStu,:capacity,:info,:timeOpen,:timeClose)');
+        $insert = $pdo->prepare("INSERT INTO facility(facilityName,price,priceStu,capacity,info,timeOpen,timeClose) 
+        VALUES(:facilityName,:price,:priceStu,:capacity,:info,:timeOpen,:timeClose)");
         $insert->execute(array(
         ':facilityName'=>$data[1],
         ':price'=>$data[2],
@@ -59,12 +56,10 @@ try{
         ':timeOpen'=>$data[6],
         ':timeClose' =>$data[7],
         ));
-
     if($insert){
         echo 'Facility Added';
     }
 }}
-
 ?>
 
 
@@ -91,19 +86,16 @@ try{
         margin-right: 1em;
         object-fit: none;
         }
-
         #object-position-1 {
         width:200px;
         height:200px;
         margin-left: 65px;
         }
-
         table{
             border-spacing: 15px;
             text-align: center;
             padding: 5px;
         }
-
     </style>
 
 </head>
@@ -152,7 +144,7 @@ try{
 
     <section class="wrapper">
         <div class="content">
-            <p class="title">Welcome, admin <?php echo $_SESSION['User']['username']; ?> </p>
+            <p class="title">Welcome, <?php //echo $_SESSION['User']['username']; ?> </p>
             <div align="right">
                 <h4>Search the facility</h4>
                 <form name="search" method="post" action="userhome.php">
@@ -175,7 +167,6 @@ try{
             <?php $select = $pdo->query("select * from facility ");
             $select->setFetchMode(PDO::FETCH_ASSOC);
             $select->execute();
-
             while($row = $select->fetch()){
                 
                 echo '<div class="cell">';
@@ -195,20 +186,19 @@ try{
                <form action="adminFacilityManagement.php" method = "post">
                     <input class="form-control" type="text" name="facilityName" placeholder="Facility Name" value="<?php echo $facilityName;?>" /><br><br>
                     <input class="form-control" type="number" step= "0.01" name="price" placeholder="Price" value="<?php echo $price;?>" /><br><br>
-                    <input class="form-control" type="number" step= "0.01" name="priceStu" placeholder="Student Price" value="<?php echo $priceSTU;?>" /><br><br>
+                    <input class="form-control" type="number" step= "0.01" name="priceStu" placeholder="Student Price" value="<?php echo $priceStu;?>" /><br><br>
                     <input class="form-control" type="number" step= "0.01" name="capacity" placeholder="Capacity" value="<?php echo $capacity;?>" /><br><br>
                     <input class="form-control"type="text" name="info" placeholder="Info" value="<?php echo $info;?>" /><br><br>
                     <input class="form-control" type="time" name="timeOpen" placeholder="Start Time" value="<?php echo $timeOpen;?>" /><br><br>
                     <input class="form-control" type="time" name="timeClose" placeholder="Finish Time" value="<?php echo $timeClose;?>" /><br><br>
                     
                     <div class="form-group mb-0 text-center">
-                    <button class="btn btn-primary" id="submit" name="addFacility" value="Add">Add Facility</button>
+                    <button class="btn btn-primary" id="submit" name="done" value="Add">Add Facility</button>
                     </div>
                 </form>
 
             <!--<?php $uploaddir = '../images/';
                 $uploadfile = $uploaddir . basename($_FILES['file']);
-
                 echo '<pre>';
                 if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
                     echo "File is valid, and was successfully uploaded.\n";
@@ -233,11 +223,9 @@ try{
                 </tr>
                 
             <?php 
-
-                $select = $pdo->prepare("SELECT * FROM facility");
+                $select = $pdo->prepare("SELECT * FROM facility ");
                 $select->setFetchMode(PDO::FETCH_ASSOC);
                 $select->execute();
-
                 while ($row = $select->fetch())
                 {
                     echo "<tr>";
