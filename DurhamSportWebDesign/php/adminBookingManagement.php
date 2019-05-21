@@ -1,10 +1,17 @@
 <?php
 session_start();
-require_once('database.php');//链接数据库
-if(isset($_SESSION['User']) && $_SESSION['User'] != null){
+header ("Content-Type:text/html;charset=utf-8");
+require ('database.php');
+$pdo = new PDO('mysql:host=localhost;dbname=xdurhamsports','root','');
 
+//if(isset($_SESSION['user']) && $_SESSION['user'] == null && $_SESSION ['User']['role'] == '0'){
+    //echo "<script>alert('Login please！'); window.location.href='login.php'</script>";}
+    //else{header('location:index.php');}
+
+
+
+        
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,6 +38,7 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
             <li><a href="adminFacilityManagement.php">Facility Management</a></li>
             <li><a href="adminEditFacility.php">Facility Edit</a></li>
             <li><a href="adminBookingManagement.php">Booking Management</a></li>
+            <li><a href="admineditbooking.php">Booking Edit</a></li>
         </ul>
     </nav><!-- end navigation menu -->
 </header><!-- end header -->
@@ -38,8 +46,8 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
 <section class="main clearfix">
     <div id="loginsection">
         <p class="logincs"><button class="logoutbtn"><a href="index.php?operate=logout">logout</a></button></p>
-        <?php }else{
-            header('location:index.php');} ?>
+        <?php //}else{
+            //header('location:index.php');} ?>
     </div>
     <section class="top">
         <div class="wrapper content_header clearfix">
@@ -62,7 +70,7 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
     <section class="wrapper">
         <div class="content">
 
-            <p class="title">Welcome, admin</p>
+            <p class="title">Welcome, <?php //echo $_SESSION['User']['username']; ?> </p>
             <div align="right">
                 <h4>Search the facility</h4>
                 <form name="search" method="post" action="userhome.php">
@@ -87,9 +95,8 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
                     <th>Booking Date</th>
                     <th>Start Time</th>
                     <th>End Time</th>
-                    <th>People</th>
                     <th>Booking Title</th>
-                    <th>Notes</th>
+                    
                     <th colspan="2">Action</th>
                 </tr>
         </body>
@@ -108,10 +115,11 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
                     echo "<td>" . $row['bookingDate'] ."</td>";
                     echo "<td>" . $row['startTime'] ."</td>";
                     echo "<td>" . $row['endTime'] ."</td>";
-                    echo "<td>" . $row['people'] ."</td>";
+                   
                     echo "<td>" . $row['bookingTitle'] ."</td>";
-                    echo "<td>" . $row['notes'] ."</td>";
+                    
                     ?>
+                    <td><a href="admineditbooking.php?edit_id=<?php echo $row['facilityID']; ?>">Edit</a></td>
                     <td><a href="admindeletebooking.php?del_id=<?php echo $row['bookingID']; ?>" onclick="return confirm('Are you sure you want to delete the Facility?')">Delete</a></td>
                     
                      <?php echo "</tr>"; 
