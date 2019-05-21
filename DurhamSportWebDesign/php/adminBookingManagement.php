@@ -1,17 +1,23 @@
 <?php
 session_start();
+<<<<<<< HEAD
+require_once('database.php');//链接数据库
+if(isset($_SESSION['User']) && $_SESSION['User'] != null){
+=======
 header ("Content-Type:text/html;charset=utf-8");
 require ('database.php');
-$pdo = new PDO('mysql:host=localhost;dbname=xdurhamsports','root','');
+
+
+//$pdo = new PDO('mysql:host=localhost;dbname=xdurhamsports','root','');
 
 //if(isset($_SESSION['user']) && $_SESSION['user'] == null && $_SESSION ['User']['role'] == '0'){
     //echo "<script>alert('Login please！'); window.location.href='login.php'</script>";}
     //else{header('location:index.php');}
+>>>>>>> d41dbb9194dbc14fa1d44608726a8c7bb8a389da
 
-
-
-        
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -46,8 +52,8 @@ $pdo = new PDO('mysql:host=localhost;dbname=xdurhamsports','root','');
 <section class="main clearfix">
     <div id="loginsection">
         <p class="logincs"><button class="logoutbtn"><a href="index.php?operate=logout">logout</a></button></p>
-        <?php //}else{
-            //header('location:index.php');} ?>
+        <?php }else{
+            header('location:index.php');} ?>
     </div>
     <section class="top">
         <div class="wrapper content_header clearfix">
@@ -70,7 +76,7 @@ $pdo = new PDO('mysql:host=localhost;dbname=xdurhamsports','root','');
     <section class="wrapper">
         <div class="content">
 
-            <p class="title">Welcome, <?php //echo $_SESSION['User']['username']; ?> </p>
+            <p class="title">Welcome, user <?php echo $_SESSION['User']['username']; ?> </p>
             <div align="right">
                 <h4>Search the facility</h4>
                 <form name="search" method="post" action="userhome.php">
@@ -103,6 +109,7 @@ $pdo = new PDO('mysql:host=localhost;dbname=xdurhamsports','root','');
     </html>
         <?php
                 try{
+                $pdo = make_database_connection();
                 $select = $pdo->prepare("SELECT * FROM booking ");
                 $select->setFetchMode(PDO::FETCH_ASSOC);
                 $select->execute();
