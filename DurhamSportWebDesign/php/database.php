@@ -13,7 +13,7 @@ function make_database_connection()
     $db_host = 'mysql:host=localhost';
     $db_name = 'dbname=dus_team1';
     $db_user = 'root';
-    $db_pass = '';
+    $db_pass = 'root';
     $pdo = new PDO($db_host . ';' . $db_name, $db_user, $db_pass, array(PDO::ATTR_PERSISTENT => true));
     return $pdo;
 }
@@ -108,7 +108,7 @@ function showfacilities()
     $facility = $pdo->query($sql);
     while ($row = $facility->fetch(PDO::FETCH_ASSOC)) {
         echo '<div class="cell">';
-        echo '<div class="image"><img src="../images/' . $row['facilityName'] . '.jpg"></a></div>';
+        echo '<div class="image"><a href="pages-booking.php"><img src="../images/' . $row['facilityName'] . '.jpg"></a></div>';
         echo '<div align="center"><table style="width: 220px;text-align: center"><tr>
                     <th style="font-size: 1.8em">' . $row['facilityName'] . '</th>
                     </tr>

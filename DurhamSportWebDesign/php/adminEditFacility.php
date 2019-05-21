@@ -1,25 +1,27 @@
 <?php
 session_start();
 require 'database.php';
-if(isset($_SESSION['User']) && $_SESSION['User'] == null && $_SESSION ['User']['role'] == '1'){
-    echo "<script>alert('Login please！'); window.location.href='login.php'</script>";
-}
-try{
-    $pdo = new PDO("mysql:host=localhost;dbname=xdurhamsports","root","");
+$pdo = make_database_connection();
+if(isset($_SESSION['User']) && $_SESSION['User'] != null &&  $_SESSION ['User']['role'] == '1'){
+
     
-    // set the PDO error mode to exception
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-    //echo "Connected successfully";
-}   
-        catch(PDOException $e)
-        {
-        echo "Connection failed: " . $e->getMessage();
-        }
+    
+    } else{
+        echo "<script>alert('Login please！'); window.location.href='login.php'</script>";
+    }  
+
 //Edit Facility
-if(isset($_POST['done']))
-{
     $edit_id = $_GET['edit_id'];
+    
+    $select = $pdo->prepare("SELECT * FROM facility where facilityID='$edit_id'");
+    $select->setFetchMode(PDO::FETCH_ASSOC);
+    $select->execute();
+    $row=$select->fetch();
+
+    if(isset($_POST['done']))
+    {
+    
     
     $facilityName = $_POST['facilityName'];
     $price = $_POST['price'];
@@ -118,24 +120,37 @@ if($update){
                 <h2 class="text-dark-50 text-center mt-0 font-weight-bold">Edit Facility Information</h2>
                 <p class="text-muted mb-4">Enter the Facility information to update </p>
 
-                <form action="adminFacilityManagement.php" method="post" >
+                <form method="post" >
                     Edit the Facility Name<br><br>
-                <input class="form-control"  type="text" name="facilityName" placeholder="Facility Name"><br><br>
-                    Edit the Facility Price<br><br>
-                <input class="form-control"  type="number" step= "0.01" name="price" placeholder="Price"><br><br>
-                    Edit the Student Price<br><br>
-                <input class="form-control"  type="number" step= "0.01" name="priceStu" placeholder="Student Price"><br><br>
-                    Edit the Facility Capacity<br><br>
-                <input class="form-control" type="number" step= "0.01" name="capacity" placeholder="Capacity"><br><br>
-                    Edit the Facility Info<br><br>
-                <input class="form-control" type="text" name="info" placeholder="Info"><br><br>
-                    Edit the Start Time of the Facility<br><br>
-                <input class="form-control" type="time" name="timeOpen" placeholder="Start Time"><br><br>
-                    Edit the Finish Time of the Facility<br><br>
-                <input class="form-control" type="time" name="timeClose" placeholder="Finish Time"><br><br>
+                <input class="form-control"  type="text" name="facilityName" placeholder="Facility Name"
+                value="<?php echo $row['facilityName']?> "><br><br>
 
-                <input class="form-control" type="file" name="file"><br><br>
-                <button class="btn btn-primary" id="submit" name="uploading">Upload Image</button><br><br>
+                    Edit the Facility Price<br><br>
+                <input class="form-control"  type="number" step= "0.01" name="price" placeholder="Price"
+                value="<?php echo $row['price']?>"><br><br>
+
+                    Edit the Student Price<br><br>
+                <input class= "form-control"  type="number" step= "0.01" name="priceStu" placeholder="Student Price"
+                value="<?php echo $row['priceStu']?>"><br><br>
+
+                    Edit the Facility Capacity<br><br>
+                <input class="form-control" type="number" step= "0.01" name="capacity" placeholder="Capacity"
+                value="<?php echo $row['capacity']?>"><br><br>
+                   
+                    Edit the Facility Info<br><br>
+                <input class="form-control" type="text" name="info" placeholder="Info"
+                value="<?php echo $row['info']?>"><br><br>
+                   
+                    Edit the Start Time of the Facility<br><br>
+                <input class="form-control" type="time" name="timeOpen" placeholder="Start Time"
+                value="<?php echo $row['timeOpen']?>"><br><br>
+                    
+                    Edit the Finish Time of the Facility<br><br>
+                <input class="form-control" type="time" name="timeClose" placeholder="Finish Time"
+                value="<?php echo $row['timeClose'] ?>"><br><br>
+
+                <!--<input class="form-control" type="file" name="file"><br><br>
+                <button class="btn btn-primary" id="submit" name="uploading">Upload Image</button><br><br>-->
 
                 <button class="btn btn-primary" id="submit" name="done"> Edit Facility</button>
                 </form>
