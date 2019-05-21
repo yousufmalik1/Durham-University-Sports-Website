@@ -1,24 +1,15 @@
 <?php
 session_start();
 require 'database.php';
+$pdo = make_database_connection();
 if(isset($_SESSION['User']) && $_SESSION['User'] == null && $_SESSION ['User']['role'] == '1'){
     echo "<script>alert('Login please！'); window.location.href='login.php'</script>";
 }
-try{
-    $pdo = new PDO("mysql:host=localhost;dbname=xdurhamsports","root","");
-    
-    // set the PDO error mode to exception
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
-    //echo "Connected successfully";
-}   
-        catch(PDOException $e)
-        {
-        echo "Connection failed: " . $e->getMessage();
-        }
+
 //Edit Facility
 if(isset($_POST['done']))
 {
+
     $edit_id = $_GET['edit_id'];
     
     $facilityName = $_POST['facilityName'];

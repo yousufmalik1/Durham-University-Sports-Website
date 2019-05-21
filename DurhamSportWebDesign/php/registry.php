@@ -7,6 +7,7 @@
  */
 //header('Content-type:text/html;charset=utf-8');
 require_once('database.php');
+$pdo = make_database_connection();
 if (isset($_POST["submit"]) && $_POST["submit"] == "registry") {
     $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
     $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);

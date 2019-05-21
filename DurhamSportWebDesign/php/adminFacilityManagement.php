@@ -3,22 +3,9 @@ session_start();
 header ("Content-Type:text/html;charset=utf-8");
 require 'database.php';
 
-if(isset($_SESSION['user']) && $_SESSION['user'] == null && $_SESSION ['User']['role'] == '0'){
-    echo "<script>alert('Login please！'); window.location.href='login.php'</script>";}
-    else{header('location:index.php');}
+if(isset($_SESSION['User']) && $_SESSION['User'] != null &&  $_SESSION ['User']['role'] == '1'){
 
-try{
-    $pdo = new PDO('mysql:host=localhost;dbname=xdurhamsports','root','');
-    
-    // set the PDO error mode to exception
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
-    //echo "Connected successfully";
-}   
-        catch(PDOException $e)
-        {
-        echo "Connection failed: " . $e->getMessage();
-        }
+
     $facilityID = "";
     $facilityName = "";
     $price = "";
@@ -59,7 +46,9 @@ try{
     if($insert){
         echo 'Facility Added';
     }
-}}
+}}}else{
+        echo "<script>alert('Login please！'); window.location.href='login.php'</script>";
+    }
 ?>
 
 
@@ -164,7 +153,10 @@ try{
 
             <!--showfacilities()-->
 
-            <?php $select = $pdo->query("select * from facility ");
+
+            <?php
+            $pdo = make_database_connection();
+            $select = $pdo->query("select * from facility ");
             $select->setFetchMode(PDO::FETCH_ASSOC);
             $select->execute();
             while($row = $select->fetch()){
