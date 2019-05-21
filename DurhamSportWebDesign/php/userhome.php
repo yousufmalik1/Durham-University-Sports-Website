@@ -86,7 +86,7 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
                         if ($row) {
                             foreach ($row as $r) {
                                 echo '<div class="cell">';
-                                echo '<div class="image"><a href="pages-booking.php"><a href="pages-booking.php"><img src="../images/' . $r['facilityName'] . '.jpg"></a></div>';
+                                echo '<div class="image"><a href="pages-booking.php"><img src="../images/' . $r['facilityName'] . '.jpg"></a></div>';
                                 echo '<div align="center"><table style="width: 220px;text-align: center"><tr>
                     <th style="font-size: 1.8em">' . $r['facilityName'] . '</th>
                     </tr>

@@ -108,7 +108,7 @@ function showfacilities()
     $facility = $pdo->query($sql);
     while ($row = $facility->fetch(PDO::FETCH_ASSOC)) {
         echo '<div class="cell">';
-        echo '<div class="image"><img src="../images/' . $row['facilityName'] . '.jpg"></a></div>';
+        echo '<div class="image"><a href="pages-booking.php"><img src="../images/' . $row['facilityName'] . '.jpg"></a></div>';
         echo '<div align="center"><table style="width: 220px;text-align: center"><tr>
                     <th style="font-size: 1.8em">' . $row['facilityName'] . '</th>
                     </tr>
