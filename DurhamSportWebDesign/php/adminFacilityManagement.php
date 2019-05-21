@@ -1,10 +1,14 @@
 <?php
 session_start();
-require 'database.php';
+header ("Content-Type:text/html;charset=utf-8");
+require ('database.php');
 $pdo = make_database_connection();
-if(isset($_SESSION['User']) && $_SESSION['User'] == null || $_SESSION ['User']['role'] == '0'){
+if(isset($_SESSION['User']) && $_SESSION['User'] != null &&  $_SESSION ['User']['role'] == '1'){
+
+
+} else{
     echo "<script>alert('Login please！'); window.location.href='login.php'</script>";
-}else{
+}  
 
     $facilityID = "";
     $facilityName = "";
@@ -46,7 +50,7 @@ if(isset($_SESSION['User']) && $_SESSION['User'] == null || $_SESSION ['User']['
     if($insert){
         echo 'Facility Added';
     }
-}}}
+}}
 ?>
 
 
@@ -132,7 +136,7 @@ if(isset($_SESSION['User']) && $_SESSION['User'] == null || $_SESSION ['User']['
 
     <section class="wrapper">
         <div class="content">
-            <p class="title">Welcome, admin <?php echo $_SESSION['User']['username']; ?> </p>
+            <p class="title">Welcome, <?php //echo $_SESSION['User']['username']; ?> </p>
             <div align="right">
                 <h4>Search the facility</h4>
                 <form name="search" method="post" action="userhome.php">
