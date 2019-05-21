@@ -10,10 +10,10 @@
 //make database connect
 function make_database_connection()
 {
-    $db_host = 'mysql:host=localhost:8889';
-    $db_name = 'dbname=xdurhamsports';
+    $db_host = 'mysql:host=localhost';
+    $db_name = 'dbname=dus_team1';
     $db_user = 'root';
-    $db_pass = 'root';
+    $db_pass = '';
     $pdo = new PDO($db_host . ';' . $db_name, $db_user, $db_pass, array(PDO::ATTR_PERSISTENT => true));
     return $pdo;
 }
@@ -90,6 +90,15 @@ function select_user_alldetail($username)
     return $row;
 }
 
+//select all facility information from database
+function select_facility_alldetail()
+{
+    $pdo = make_database_connection();
+    $sql = "select * from facility";
+    $result = $pdo->query($sql);
+    $row = $result->fetch(PDO::FETCH_ASSOC);
+    return $row;
+}
 
 //show userhome game list
 function showfacilities()
@@ -99,7 +108,7 @@ function showfacilities()
     $facility = $pdo->query($sql);
     while ($row = $facility->fetch(PDO::FETCH_ASSOC)) {
         echo '<div class="cell">';
-        echo '<div class="image"><a href="pages-booking.php"><img src="../images/' . $row['facilityName'] . '.jpg"></a></div>';
+        echo '<div class="image"><img src="../images/' . $row['facilityName'] . '.jpg"></a></div>';
         echo '<div align="center"><table style="width: 220px;text-align: center"><tr>
                     <th style="font-size: 1.8em">' . $row['facilityName'] . '</th>
                     </tr>
