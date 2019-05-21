@@ -145,7 +145,6 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
                 <tr>
                     <th>Booking ID</th>
                     <th>Facility ID</th>
-                    <th>BookingDate</th>
                     <th>Start Time</th>
                     <th>End Time</th>
                     <th>Booking Title</th>
@@ -162,7 +161,6 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
                         echo "<td>{$row['bookingID']}</td>";
                         $ID= $row['bookingID'];
                         echo "<td>{$row['facilityID']}</td>";
-                        echo "<td>{$row['bookingDate']}</td>";
                         echo "<td>{$row['startTime']}</td>";
                         echo "<td>{$row['endTime']}</td>";
                         echo "<td>{$row['bookingTitle']}</td>";

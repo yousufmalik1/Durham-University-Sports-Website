@@ -1,23 +1,10 @@
 <?php
 session_start();
+header ("Content-Type:text/html;charset=utf-8");
 require 'database.php';
-if(isset($_SESSION['User']) && $_SESSION['User'] == null && $_SESSION ['User']['role'] == '1'){
-    echo "<script>alert('Login please！'); window.location.href='login.php'</script>";
-}
+$pdo = make_database_connection();
+if(isset($_SESSION['User']) && $_SESSION['User'] != null &&  $_SESSION ['User']['role'] == '1'){
 
-try{
-    $pdo = new PDO('mysql:host=localhost;dbname=xdurhamsports','root','');
-    
-    // set the PDO error mode to exception
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
-    //echo "Connected successfully";
-}   
-        catch(PDOException $e)
-        {
-        echo "Connection failed: " . $e->getMessage();
-        }
-    
 
     $facilityID = "";
     $facilityName = "";
@@ -27,10 +14,8 @@ try{
     $info = "";
     $timeOpen = "";
     $timeClose = "";
-
     function getPosts(){
         $posts = array();
-
         //$posts[0] = $_POST['facilityID'];
         $posts[1] = $_POST['facilityName'];
         $posts[2] = $_POST['price'];
@@ -39,18 +24,16 @@ try{
         $posts[5] = $_POST['info'];
         $posts[6] = $_POST['timeOpen'];
         $posts[7] = $_POST['timeClose'];
-
         return $posts;
     }
-
     //Add new Facility
-    if(isset($_POST['addFacility'])){
+    if(isset($_POST['done'])){
         $data = getPosts();
         if(empty($data[1]) || empty($data[2]) || empty($data[3]) || empty($data[4]) || empty($data[5]) || empty($data[6]) || empty($data[7]))
         {echo 'Enter Facility Data';
     }else{
-        $insert = $pdo->prepare('INSERT INTO facility(facilityName,price,priceStu,capacity,info,timeOpen,timeClose) 
-        VALUES(:facilityName,:price,:priceStu,:capacity,:info,:timeOpen,:timeClose)');
+        $insert = $pdo->prepare("INSERT INTO facility(facilityName,price,priceStu,capacity,info,timeOpen,timeClose) 
+        VALUES(:facilityName,:price,:priceStu,:capacity,:info,:timeOpen,:timeClose)");
         $insert->execute(array(
         ':facilityName'=>$data[1],
         ':price'=>$data[2],
@@ -60,23 +43,19 @@ try{
         ':timeOpen'=>$data[6],
         ':timeClose' =>$data[7],
         ));
-
     if($insert){
         echo 'Facility Added';
     }
-}}
-
+}}}else{
+        echo "<script>alert('Login please！'); window.location.href='login.php'</script>";
+    }
 ?>
-
-
-
-
 
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Admin Facility Management</title>
+    <title>AdminFacilityManagement</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css/manager.css">
@@ -96,20 +75,16 @@ try{
         margin-right: 1em;
         object-fit: none;
         }
-
         #object-position-1 {
         width:200px;
         height:200px;
         margin-left: 65px;
         }
-
         table{
             border-spacing: 15px;
             text-align: center;
             padding: 5px;
         }
-
-        
     </style>
 
 </head>
@@ -120,21 +95,24 @@ try{
     </div><!-- end logo -->
     <div id="menu_icon"></div>
     <nav>
-
-    <ul>
-            <li><a href="admin.php">Admin Dashboard</a></li>
-            <li><a href="#.php">Personal Profile</a></li>
+        <ul>
+            <li><a href="adminBookingManagement.php">Admin Dashboard</a></li>
+            <li><a href="user.php">Personal Profile</a></li>
             <li><a href="adminFacilityManagement.php">Facility Management</a></li>
+            <li><a href="adminEditFacility.php">Facility Edit</a></li>
             <li><a href="adminBookingManagement.php">Booking Management</a></li>
         </ul>
-
-
     </nav><!-- end navigation menu -->
 </header><!-- end header -->
 
 <section class="main clearfix">
     <div id="loginsection">
-        <p class="logincs"><a href="../html/login.html">Login</a> || <a href="../html/registry.html">Registry</a></p>
+        <?php
+        if(isset($_SESSION['User']) && $_SESSION['User'] != null){
+            echo  "<p class='logincs'><button class='logoutbtn'><a href='index.php?operate=logout'>logout</a></button></p>";
+        }
+        else{
+            echo  "<p class='logincs'><a href='login.php'>Login</a> || <a href='registry.php'>Registry</a></p> ";}?>
     </div>
     <section class="top">
         <div class="wrapper content_header clearfix">
@@ -145,11 +123,9 @@ try{
                 <a href="https://www.teamdurham.com"><img src="../images/dulogowhite.png"  /></a>
             </div>
             <p class="title">
-                <a href="#">Facilities</a> |||| <a href="#">Calendar</a> |||| <a href="#">How to use</a></p>
+                <a href="userhome.php">Facilities</a> |||| <a href="calendar.php">Calendar</a> |||| <a href="contactpage.php">Contact us</a> |||| <a href="howtouse.php">How to use</a></p>
         </div>
     </section><!-- end top -->
-
-
 
 
     <!-- ----------------------Start your content from here-------------------------------------------------- -->
@@ -157,20 +133,16 @@ try{
 
     <section class="wrapper">
         <div class="content">
-
-            
-
+            <p class="title">Welcome, <?php //echo $_SESSION['User']['username']; ?> </p>
             <div align="right">
                 <h4>Search the facility</h4>
-                <form name="search" method="post" action="">
+                <form name="search" method="post" action="userhome.php">
                     <button type="button">
-                        <input type="text" name="facilityName" placeholder="input facility name"/>
+                        <input type="text" name="searchname" placeholder="input facility name"/>
                         <input type="submit" name="searchbtn" VALUE="Search">
                     </button>
                 </form>
             </div>
-        
-             
 
             <div class="card-body p-4">
             <div class="text-center w-75 m-auto">
@@ -181,10 +153,12 @@ try{
 
             <!--showfacilities()-->
 
-            <?php $select = $pdo->query("select * from facility ");
+
+            <?php
+            $pdo = make_database_connection();
+            $select = $pdo->query("select * from facility ");
             $select->setFetchMode(PDO::FETCH_ASSOC);
             $select->execute();
-
             while($row = $select->fetch()){
                 
                 echo '<div class="cell">';
@@ -201,27 +175,22 @@ try{
             }?>
 
 
-            
-
-                
-
                <form action="adminFacilityManagement.php" method = "post">
                     <input class="form-control" type="text" name="facilityName" placeholder="Facility Name" value="<?php echo $facilityName;?>" /><br><br>
                     <input class="form-control" type="number" step= "0.01" name="price" placeholder="Price" value="<?php echo $price;?>" /><br><br>
-                    <input class="form-control" type="number" step= "0.01" name="priceStu" placeholder="Student Price" value="<?php echo $priceSTU;?>" /><br><br>
+                    <input class="form-control" type="number" step= "0.01" name="priceStu" placeholder="Student Price" value="<?php echo $priceStu;?>" /><br><br>
                     <input class="form-control" type="number" step= "0.01" name="capacity" placeholder="Capacity" value="<?php echo $capacity;?>" /><br><br>
                     <input class="form-control"type="text" name="info" placeholder="Info" value="<?php echo $info;?>" /><br><br>
                     <input class="form-control" type="time" name="timeOpen" placeholder="Start Time" value="<?php echo $timeOpen;?>" /><br><br>
                     <input class="form-control" type="time" name="timeClose" placeholder="Finish Time" value="<?php echo $timeClose;?>" /><br><br>
                     
                     <div class="form-group mb-0 text-center">
-                    <button class="btn btn-primary" id="submit" name="addFacility" value="Add">Add Facility</button>
+                    <button class="btn btn-primary" id="submit" name="done" value="Add">Add Facility</button>
                     </div>
                 </form>
 
             <!--<?php $uploaddir = '../images/';
                 $uploadfile = $uploaddir . basename($_FILES['file']);
-
                 echo '<pre>';
                 if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
                     echo "File is valid, and was successfully uploaded.\n";
@@ -246,11 +215,9 @@ try{
                 </tr>
                 
             <?php 
-
-                $select = $pdo->prepare("SELECT * FROM facility");
+                $select = $pdo->prepare("SELECT * FROM facility ");
                 $select->setFetchMode(PDO::FETCH_ASSOC);
                 $select->execute();
-
                 while ($row = $select->fetch())
                 {
                     echo "<tr>";
