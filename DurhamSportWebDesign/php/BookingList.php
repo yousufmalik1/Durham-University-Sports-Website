@@ -12,7 +12,6 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
 
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -117,7 +116,7 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
                 <a href="https://www.teamdurham.com"><img src="../images/dulogowhite.png"  /></a>
             </div>
             <p class="title">
-                <a href="userhome.php">Facilities</a> |||| <a href="calendar.php">Calendar</a> |||| <a href="contactpage.php">Contact us</a> |||| <a href="#">How to use</a></p>
+                <a href="userhome.php">Facilities</a> |||| <a href="calendar.php">Calendar</a> |||| <a href="contactpage.php">Contact us</a> |||| <a href="howtouse.php">How to use</a></p>
         </div>
     </section><!-- end top -->
 
@@ -130,7 +129,7 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
             <p class="title">Welcome, user <?php echo $_SESSION['User']['username']; ?> </p>
             <div align="right">
                 <h4>Search the facility</h4>
-                <form name="search" method="post" action="BookingList.php">
+                <form name="search" method="post" action="userhome.php">
                     <button type="button">
                         <input type="text" name="searchname" placeholder="input facility name"/>
                         <input type="submit" name="searchbtn" VALUE="Search">
@@ -146,7 +145,7 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
                 <tr>
                     <th>Booking ID</th>
                     <th>Facility ID</th>
-                    <th>Event Name</th>
+                    <th>BookingDate</th>
                     <th>Start Time</th>
                     <th>End Time</th>
                     <th>Booking Title</th>
@@ -157,15 +156,15 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
 
                     $pdo = make_database_connection();
                     $userID=$_SESSION['User']['userID'];
-                    $sql = "select * from booking,event WHERE userID= '$userID' and booking.eventID=event.eventID";
+                    $sql = "select * from booking WHERE userID= '$userID'";
                     foreach ($pdo->query($sql) as $row) {
                         echo "<tr>";
                         echo "<td>{$row['bookingID']}</td>";
                         $ID= $row['bookingID'];
                         echo "<td>{$row['facilityID']}</td>";
-                        echo "<td>{$row['eventName']}</td>";
-                        echo "<td>{$row['start']}</td>";
-                        echo "<td>{$row['end']}</td>";
+                        echo "<td>{$row['bookingDate']}</td>";
+                        echo "<td>{$row['startTime']}</td>";
+                        echo "<td>{$row['endTime']}</td>";
                         echo "<td>{$row['bookingTitle']}</td>";
                         echo "<td><input type='submit' id='Cancel' class='login-button' value='Cancel' name='submit' >
                         </td>";
@@ -198,8 +197,8 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
 
             </table>
             </form>
-            <div align="center" style="position:relative;top:10px">
-                <button class="button">Booking Now</button>
+            <div align="center" style="position:relative;top:20px">
+                <button class="button"><a href="pages-booking.php">Booking Now</button>
             </div>
 
         </div><!-- end content -->
