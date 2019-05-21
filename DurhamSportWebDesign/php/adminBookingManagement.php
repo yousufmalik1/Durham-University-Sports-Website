@@ -1,17 +1,10 @@
 <?php
 session_start();
-header ("Content-Type:text/html;charset=utf-8");
-require ('database.php');
-$pdo = new PDO('mysql:host=localhost;dbname=xdurhamsports','root','');
+require_once('database.php');//链接数据库
+if(isset($_SESSION['User']) && $_SESSION['User'] != null){
 
-if(isset($_SESSION['user']) && $_SESSION['user'] == null && $_SESSION ['User']['role'] == '0'){
-    echo "<script>alert('Login please！'); window.location.href='login.php'</script>";}
-    else{header('location:index.php');}
-
-
-
-        
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,8 +38,8 @@ if(isset($_SESSION['user']) && $_SESSION['user'] == null && $_SESSION ['User']['
 <section class="main clearfix">
     <div id="loginsection">
         <p class="logincs"><button class="logoutbtn"><a href="index.php?operate=logout">logout</a></button></p>
-        <?php //}else{
-            //header('location:index.php');} ?>
+        <?php }else{
+            header('location:index.php');} ?>
     </div>
     <section class="top">
         <div class="wrapper content_header clearfix">
