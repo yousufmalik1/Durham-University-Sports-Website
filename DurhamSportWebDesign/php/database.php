@@ -6,7 +6,6 @@
  * Time: 17:20
  */
 
-
 //make database connect
 function make_database_connection()
 {
@@ -61,7 +60,7 @@ function insert_user($username, $password, $Email, $firstname, $lastname)
 {
     $pdo = make_database_connection();
     $sql = "INSERT INTO `user`(`username`, `password`, `email`, `firstname`, `lastname`, `role`) VALUES ('$username','$password','$Email','$firstname','$lastname','0')";
-    $result = $pdo->query($sql);
+    $insert = $pdo->query($sql);
    if($pdo->lastInsertId()!=null){
        return true;
    }else{
