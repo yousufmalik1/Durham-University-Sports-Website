@@ -13,7 +13,7 @@ function make_database_connection()
     $db_host = 'mysql:host=localhost';
     $db_name = 'dbname=dus_team1';
     $db_user = 'root';
-    $db_pass = 'root';
+    $db_pass = '';
     $pdo = new PDO($db_host . ';' . $db_name, $db_user, $db_pass, array(PDO::ATTR_PERSISTENT => true));
     return $pdo;
 }
