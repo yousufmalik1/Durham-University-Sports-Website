@@ -4,42 +4,53 @@
  * Date: 2019-05-12
  * Time: 17: 20
  */
+$(document).ready(function(){
 
-document.getElementById("submit1").onclick=function(){
-    $.ajax({
-        type: "POST",
-        url: "../php/get-time.php" ,
-        data: $('#form1').serialize(),
-        success: function (data) {
-         var result=document.getElementById('txtHint').innerHTML=data.msg;
-        },
-        error : function(data) {
-         var result=document.getElementById('txtHint').innerHTML="error:"+data.msg;
-        }
-       });
+    function refresh() {
+        var facilityId = $('#facilityId').val();
+        var date = $('#date').val();
 
-/*  var request=new XMLHttpRequest();    
-    request.open("POST","get-time.php");
-
-    var data="facilityName="+document.getElementById("facilityName").value
-     +"&date="+document.getElementById("date").value;
-
-    request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-    request.send(data);
-
-    request.onreadystatechange=function(){
-        if(request.readyState===4){
-            if(request.status===200){
-                var data=JSON.parse(request.responseText);
-                if(data.success){
-                    document.getElementById('txtHint').innerHTML=data.msg;
-                }else{
-                    document.getElementById('txtHint').innerHTML="error:"+data.msg;
-                }
-            }else{
-                alert("error:"+request.status);
+        $.ajax({
+            url: "get-time.php",
+            type: 'POST',
+            dataType: 'TEXT',
+            data:{facilityId:facilityId,date:date},
+            success: function (data) {
+                $('#txtHint').html(data);
             }
-        }
+        });
     }
-*/
-}
+
+    refresh();
+
+    $("#facilityId").change(function(){
+        refresh();
+       
+    });
+
+    $("#date").change(function(){
+        refresh();
+    });
+
+    $("#submit1").click(function(){
+
+        var bookingtitle = $('#bookingtitle').val();
+        var facilityId = $('#facilityId').val();
+        var date = $('#date').val();
+        var time = $('#time').val();
+    
+        $.ajax({
+            url: "booking-confirm.php",
+            type: 'POST',
+            dataType: 'TEXT',
+            data:{bookingtitle:bookingtitle,facilityId:facilityId,date:date,time:time},
+            success: function (data) {
+                if(data){
+                    window.location.href= '../html/pages-confirm-mail.html';
+                }else{
+                    alert("Send email failure!");
+                }
+            }
+        });
+    });
+});
