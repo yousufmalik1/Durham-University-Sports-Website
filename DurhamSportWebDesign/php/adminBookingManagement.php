@@ -2,7 +2,9 @@
 session_start();
 header ("Content-Type:text/html;charset=utf-8");
 require ('database.php');
-$pdo = new PDO('mysql:host=localhost;dbname=xdurhamsports','root','');
+
+
+//$pdo = new PDO('mysql:host=localhost;dbname=xdurhamsports','root','');
 
 //if(isset($_SESSION['user']) && $_SESSION['user'] == null && $_SESSION ['User']['role'] == '0'){
     //echo "<script>alert('Login please！'); window.location.href='login.php'</script>";}
@@ -103,6 +105,7 @@ $pdo = new PDO('mysql:host=localhost;dbname=xdurhamsports','root','');
     </html>
         <?php
                 try{
+                $pdo = make_database_connection();
                 $select = $pdo->prepare("SELECT * FROM booking ");
                 $select->setFetchMode(PDO::FETCH_ASSOC);
                 $select->execute();
