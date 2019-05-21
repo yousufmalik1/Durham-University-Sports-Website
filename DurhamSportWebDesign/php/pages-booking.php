@@ -11,6 +11,12 @@ session_start();
 if(! $_SESSION['User']){
     echo "<script>alert('Login please！'); window.location.href='login.php'</script>";
 }
+
+$pdo = make_database_connection();
+$sql = "select * from facility";
+$result = $pdo->query($sql);
+$rows = $result->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <!DOCTYPE html>
@@ -25,15 +31,15 @@ if(! $_SESSION['User']){
         <!-- App css -->        
         <link href="../css/icons.min.css" rel="stylesheet" type="text/css" />
         <link href="../css/app.min.css" rel="stylesheet" type="text/css" />
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
         <script src="../js/check-time.js"></script>
+        
 
         <script type="text/javascript">
-        function formReset(){
-            document.getElementById("form2").reset()
-        }
+            function formReset(){
+                document.getElementById("form").reset()
+            }
         </script>
-
     </head>
 
     <body class="authentication-bg">
@@ -55,85 +61,37 @@ if(! $_SESSION['User']){
                                     <h4 class="text-dark-50 text-center mt-0 font-weight-bold">New Booking</h4>
                                     <p class="text-muted mb-4">Create your booking, it takes less than a minute </p>
                                 </div>
-                                <!-- Form1 -->
-                                <form id="form1" onsubmit="return false" action="#" method="post">
-                                    <div class="form-group">
-                                        <label for="select">Facility</label>
-                                        <select class="form-control" id="facilityName">
-                                            <option value="Squash Courts">Squash Courts</option>
-                                            <option value="Aerobics Room">Aerobics Room</option>
-                                            <option value="Tennis">Tennis</option>
-                                            <option value="Athletics Track sole use">Athletics Track sole use</option>
-                                            <option value="Athletics Track">Athletics Track</option>
-                                        </select>
-                                    </div>
-                            
-                                    <div class="form-group">
-                                        <label for="date">Date</label>
-                                        <input class="form-control" id="date" type="date" name="date" value="2019-05-12">
-                                    </div>
-                            
-                                    <button class="btn btn-outline-secondary" id="submit1" >Check avaliable</button>
-                                        <p><div id="txtHint"><b>Available time.</b></div></p>
-                                </form>
-                                <!-- end form1 -->
-                            
-                                <!-- Form2 -->
-                                <form form id="form2" action="booking-confirm.php" method="post">
+                                <!-- Form -->
+                                <form id="form">
                                     <div class="form-group">
                                         <label for="bookingtitle">Booking Title</label>
                                         <input class="form-control" type="text" name="bookingtitle" id="bookingtitle" placeholder="Enter your title" required>
                                     </div>
-                                
                                     <div class="form-group">
                                         <label for="select">Facility</label>
-                                        <select class="form-control" name="facilityName" id="facilityName">
-                                            <option value="Squash Courts">Squash Courts</option>
-                                            <option value="Aerobics Room">Aerobics Room</option>
-                                            <option value="Tennis">Tennis</option>
-                                            <option value="Athletics Track sole use">Athletics Track sole use</option>
-                                            <option value="Athletics Track">Athletics Track</option>
+                                        <select class="form-control" id="facilityId">
+                                            <?php 
+                                            foreach($rows as $row) 
+                                            {
+                                                $facilityName = $row['facilityName'];
+                                                $facilityId = $row['facilityID'];
+                                                echo "<option value= '$facilityId'>$facilityName</option>";
+                                            }
+                                            ?>
                                         </select>
                                     </div>
-                                
                                     <div class="form-group">
                                         <label for="date">Date</label>
-                                        <input class="form-control" id="date" type="date" name="date" value="2019-05-12">
+                                        <input class="form-control" id="date" type="date" name="date" value="<?php echo date('Y-m-d')?>">
                                     </div>
-                                
-                                    <div class="form-group mb-3">
-                                        <label for="time">From</label>
-                                        <input class="form-control" id="timefrom" type="time" name="timefrom" value="17-00">
-                                        <label for="time">To</label>
-                                        <input class="form-control" id="timeto" type="time" name="timeto" value="18-00">
-                                    </div>
-                                
-                                    <div class="form-group mb-3">
-                                        <label>People</label>
-                                        <input data-toggle="touchspin" data-bts-max="20" name="people" id="people" value="1" data-btn-vertical="true" type="text">
-                                    </div>
+                                    <div id="txtHint" class="form-group"></div>
 
-                                    <div class="form-group">
-                                        <label for="select">Event</label>
-                                        <select class="form-control" name="eventName" id="eventName">
-                                            <option value="Exercise class">Exercise class</option>
-                                            <option value="Exams">Exams</option>
-                                            <option value="Others">Others</option>
-                                        </select>
-                                    </div>
-                                
-                                    <div class="form-group">
-                                        <label>Notes</label>
-                                        <textarea data-toggle="maxlength" class="form-control" name="notes" id="notes" maxlength="225" rows="3"
-                                        placeholder="Any further information."></textarea>
-                                    </div>
-                                
                                     <div class="form-group mb-0 text-center">
-                                        <button class="btn btn-primary" id="submit2">Confirm booking</button>
+                                        <button class="btn btn-primary" id="submit1">Confirm booking</button>
                                         <input class="btn btn-outline-secondary" type="button" onclick="formReset()" value="Clear formInfo">
                                     </div>
                                 </form>
-                                <!-- end form2 -->
+                                <!-- end form1 -->
                             </div>
                             <!-- end card body-->
                         </div>
