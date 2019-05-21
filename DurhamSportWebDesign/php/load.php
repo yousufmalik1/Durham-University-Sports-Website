@@ -2,11 +2,12 @@
 
 //load.php
 
+session_start();
+require 'database.php';
+$pdo = make_database_connection();
 
 $data = array();
 
-//$pdo = new PDO('mysql:host=mysql.dur.ac.uk;dbname=Iqjhq34_mock-facilities', 'qjhq34', 'memory84');
-$pdo = new PDO('mysql:host=localhost;dbname=dus_team1', 'root', '');
 $statement = $pdo->query("SELECT booking.bookingID, booking.eventID, booking.bookingTitle, booking.bookingDate, booking.startTime, booking.endTime, facility.facilityName
 FROM booking
 INNER JOIN facility ON booking.facilityID = facility.facilityID");
@@ -54,6 +55,7 @@ foreach($result as $row)
     
 if ($row["eventID"] == 3000){
      $color = '#42f4e2';
+     //$color = '#42f4e2';
  }
     
 //If its a examination

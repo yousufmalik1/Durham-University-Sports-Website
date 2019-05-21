@@ -1,3 +1,12 @@
+<?php
+
+header("Content-Type:text/html;charset=utf-8");
+require('database.php');
+session_start();
+if(isset($_SESSION['User']) && $_SESSION['User'] != null){
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,8 +60,17 @@
     <div id="menu_icon"></div>
     <nav>
         <ul>
-            <li><a href="user.php">Personal Profile</a></li>
-            <li><a href="BookingList.php">Booking List</a></li>
+            <?php  if($_SESSION ['User']['role'] == '0'){
+                echo" <li><a href='user.php'>Personal Profile</a></li>";
+                echo"  <li><a href='BookingList.php'>Booking List</a></li>";
+            }else{
+                echo"  <li><a href='adminBookingManagement.php'>Admin Dashboard</a></li>";
+                echo"     <li><a href='user.php'>Personal Profile</a></li>";
+                echo"  <li><a href='adminFacilityManagement.php'>Facility Management</a></li>";
+                echo"   <li><a href='adminEditFacility.php'>Facility Edit</a></li>";
+                echo"   <li><a href='adminBookingManagement.php'>Booking Management</a></li>";
+                echo"  <li><a href='admineditbooking.php'>Booking Edit</a></li>";
+            }?>
         </ul>
     </nav><!-- end navigation menu -->
 </header><!-- end header -->
@@ -60,14 +78,9 @@
     
 <section class="main clearfix">
     <div id="loginsection">
-        <?php
-        require('database.php');
-        session_start();
-        if(isset($_SESSION['User']) && $_SESSION['User'] != null){
-            echo  "<p class='logincs'><button class='logoutbtn'><a href='index.php?operate=logout'>logout</a></button></p>";
-        }
-        else{
-        echo  "<p class='logincs'><a href='login.php'>Login</a> || <a href='registry.php'>Registry</a></p> ";}?>
+        <p class="logincs"><button class="logoutbtn"><a href="index.php?operate=logout">logout</a></button></p>
+        <?php }else{
+            echo "<script>alert('Login please！'); window.location.href='login.php'</script>";} ?>
     </div>
     <section class="top">
         <div class="wrapper content_header clearfix">
@@ -81,22 +94,28 @@
                 <a href="userhome.php">Facilities</a> |||| <a href="calendar.php">Calendar</a> |||| <a href="contactpage.php">Contact us</a> |||| <a href="howtouse.php">How to use</a></p>
         </div>
     </section><!-- end top -->
-    
-    <br>
-    <p> Filter (Select facility to view)</p>
-    <select id="facility_selector">
-        <option value="all">All</option>
-        <option value="Athletics Track">Athletics Track</option>
-        <option value="Aerobics Room">Aerobics Room</option>
-        <option value="Tennis">Tennis</option>
-        <option value="Squash Courts">Squash Courts</option>
-    </select>
-    
-    <h2 align="center"> User Calendar </h2>
-    <br />
-    <div class="container">
-        <div id="calendar"></div>
-    </div>
+
+
+    <section class="wrapper">
+        <div class="content">
+            <p class="title">Welcome, user <?php echo $_SESSION['User']['username']; ?> </p>
+            <br>
+            <p> Filter (Select facility to view)</p>
+            <select id="facility_selector">
+                <option value="all">All</option>
+                <option value="Athletics Track">Athletics Track</option>
+                <option value="Aerobics Room">Aerobics Room</option>
+                <option value="Tennis">Tennis</option>
+                <option value="Squash Courts">Squash Courts</option>
+            </select>
+
+            <h2 align="center"> User Calendar </h2>
+            <br />
+            <div class="container">
+                <div id="calendar"></div>
+            </div>
+
+        </div>
 
 </section><!-- end main -->
 <script type="text/javascript">
