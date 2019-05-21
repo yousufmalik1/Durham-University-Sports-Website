@@ -2,7 +2,7 @@
 session_start();
 require 'database.php';
 $pdo = make_database_connection();
-if(isset($_SESSION['User']) && $_SESSION['User'] == null && $_SESSION ['User']['role'] == '1'){
+if(isset($_SESSION['User']) && $_SESSION['User'] == null || $_SESSION ['User']['role'] == '0'){
     echo "<script>alert('Login please！'); window.location.href='login.php'</script>";
 }
 
@@ -77,7 +77,7 @@ if($update){
             echo  "<p class='logincs'><button class='logoutbtn'><a href='index.php?operate=logout'>logout</a></button></p>";
         }
         else{
-            echo  "<p class='logincs'><a href='login.php'>Login</a> || <a href='registry.php'>Registry</a></p> ";}?>
+            echo "<script>alert('Login please！'); window.location.href='login.php'</script>";}?>
     </div>
     <section class="top">
         <div class="wrapper content_header clearfix">
