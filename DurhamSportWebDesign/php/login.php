@@ -48,7 +48,7 @@ if (isset($_POST["submit"]) && $_POST["submit"] == "btn_login") {
                     {
                         $_SESSION['username'] = $row[0];
                         $_SESSION["User"] =$user;
-                        echo "<script>alert('login success！');window.location.href='admin.php'</script>";
+                        echo "<script>alert('login success！');window.location.href='adminBookingManagement.php'</script>";
                     }
                 }
             }

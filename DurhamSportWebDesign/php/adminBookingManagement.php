@@ -72,7 +72,7 @@ require ('database.php');
     <section class="wrapper">
         <div class="content">
 
-            <p class="title">Welcome, <?php //echo $_SESSION['User']['username']; ?> </p>
+            <p class="title">Welcome, admin <?php echo $_SESSION['User']['username']; ?> </p>
             <div align="right">
                 <h4>Search the facility</h4>
                 <form name="search" method="post" action="userhome.php">
