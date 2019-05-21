@@ -5,8 +5,6 @@
  * Date: 2019-05-10
  * Time: 19:27
  */
-
-
 header("Content-Type:text/html;charset=utf-8");
 require('database.php');
 session_start();
@@ -33,8 +31,17 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
     <div id="menu_icon"></div>
     <nav>
         <ul>
-            <li><a href="user.php">Personal Profile</a></li>
-            <li><a href="BookingList.php">Booking List</a></li>
+          <?php  if($_SESSION ['User']['role'] == '0'){
+           echo" <li><a href='user.php'>Personal Profile</a></li>";
+            echo"  <li><a href='BookingList.php'>Booking List</a></li>";
+          }else{
+              echo"  <li><a href='adminBookingManagement.php'>Admin Dashboard</a></li>";
+         echo"     <li><a href='user.php'>Personal Profile</a></li>";
+            echo"  <li><a href='adminFacilityManagement.php'>Facility Management</a></li>";
+            echo"   <li><a href='adminEditFacility.php'>Facility Edit</a></li>";
+           echo"   <li><a href='adminBookingManagement.php'>Booking Management</a></li>";
+            echo"  <li><a href='admineditbooking.php'>Booking Edit</a></li>";
+          }?>
         </ul>
     </nav><!-- end navigation menu -->
 </header><!-- end header -->
@@ -53,7 +60,7 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
                 <a href="https://www.teamdurham.com"><img src="../images/dulogowhite.png"  /></a>
             </div>
             <p class="title">
-                <a href="userhome.php">Facilities</a> |||| <a href="calendar.php">Calendar</a> |||| <a href="contactpage.php">Contact us</a> |||| <a href="#">How to use</a></p>
+                <a href="userhome.php">Facilities</a> |||| <a href="calendar.php">Calendar</a> |||| <a href="contactpage.php">Contact us</a> |||| <a href="howtouse.php">How to use</a></p>
         </div>
     </section><!-- end top -->
 
@@ -86,7 +93,7 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
                         if ($row) {
                             foreach ($row as $r) {
                                 echo '<div class="cell">';
-                                echo '<div class="image"><img src="../images/' . $r['facilityName'] . '.jpg"></a></div>';
+                                echo '<div class="image"><a href="pages-booking.php"><a href="pages-booking.php"><img src="../images/' . $r['facilityName'] . '.jpg"></a></div>';
                                 echo '<div align="center"><table style="width: 220px;text-align: center"><tr>
                     <th style="font-size: 1.8em">' . $r['facilityName'] . '</th>
                     </tr>
@@ -103,7 +110,7 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
                         <div class="show">
                             <p> <?php showfacilities() ?></p>
                             <div class="cell">
-                                <div class="image"><img src="../images/other facility.jpg" width="200" height="200"></a></div>
+                                <div class="image"><img src="../images/other facility.jpg" width="200" height="200"></div>
                                 <div align="center">
                                     <table style="width: 220px;text-align: center"><tr>
                                             <th style="font-size: 1.8em">Other facility</th>

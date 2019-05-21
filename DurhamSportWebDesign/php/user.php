@@ -66,8 +66,17 @@ if (isset($_POST["submit"]) && $_POST["submit"] == "update") {
     <div id="menu_icon"></div>
     <nav>
         <ul>
-            <li><a href="user.php">Personal Profile</a></li>
-            <li><a href="BookingList.php">Booking List</a></li>
+            <?php  if($_SESSION ['User']['role'] == '0'){
+                echo" <li><a href='user.php'>Personal Profile</a></li>";
+                echo"  <li><a href='BookingList.php'>Booking List</a></li>";
+            }else{
+                echo"  <li><a href='adminBookingManagement.php'>Admin Dashboard</a></li>";
+                echo"     <li><a href='user.php'>Personal Profile</a></li>";
+                echo"  <li><a href='adminFacilityManagement.php'>Facility Management</a></li>";
+                echo"   <li><a href='adminEditFacility.php'>Facility Edit</a></li>";
+                echo"   <li><a href='adminBookingManagement.php'>Booking Management</a></li>";
+                echo"  <li><a href='admineditbooking.php'>Booking Edit</a></li>";
+            }?>
         </ul>
     </nav><!-- end navigation menu -->
 </header><!-- end header -->
@@ -86,7 +95,7 @@ if (isset($_POST["submit"]) && $_POST["submit"] == "update") {
                 <a href="https://www.teamdurham.com"><img src="../images/dulogowhite.png"  /></a>
             </div>
             <p class="title">
-                <a href="userhome.php">Facilities</a> |||| <a href="calendar.php">Calendar</a> |||| <a href="contactpage.php">Contact us</a> |||| <a href="#">How to use</a></p>
+                <a href="userhome.php">Facilities</a> |||| <a href="calendar.php">Calendar</a> |||| <a href="contactpage.php">Contact us</a> |||| <a href="howtouse.php">How to use</a></p>
         </div>
     </section><!-- end top -->
 

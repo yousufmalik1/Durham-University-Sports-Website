@@ -1,3 +1,5 @@
+<?php
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -40,10 +42,11 @@
         <?php
         require('database.php');
         session_start();
-if(isset($_SESSION['User']) && $_SESSION['User'] != null){
-}
-else{
-    echo  "<p class='logincs'><a href='login.php'>Login</a> || <a href='registry.php'>Registry</a></p> ";}?>
+        if(isset($_SESSION['User']) && $_SESSION['User'] != null){
+            echo  "<p class='logincs'><button class='logoutbtn'><a href='index.php?operate=logout'>logout</a></button></p>";
+        }
+        else{
+            echo  "<p class='logincs'><a href='login.php'>Login</a> || <a href='registry.php'>Registry</a></p> ";}?>
     </div>
     <section class="top">
         <div class="wrapper content_header clearfix">
@@ -63,30 +66,54 @@ else{
 
     <section class="wrapper">
         <div class="content">
-
             <?php
             if(isset($_SESSION['User']) && $_SESSION['User'] != null){
             }
             else{
                 echo  " <p class='title'>Welcome, Please <a href='login.php'>login</a> </p> ";}?>
 
-            <center><h1> Contact Us </h1></center>
-
+            <br>
+            <center><h1> How to use our website </h1></center>
+            <br>
             <div class="contentblock" id="content38978">
-                <p>For prices, bookings, membership enquiries or general enquiries, please contact us:</p>
-                <p><strong>Tel:</strong> 0191 334 2178
-                <br><span>For multi-bookings or events please contact:</span>
-                <br><strong>Tel:</strong><span> 0191 334 7216</span>
-                <br><strong>Email:</strong> teamdurham.bookings@durham.ac.uk</p>
-                <p><strong>Durham University Sport</strong> <br>The Graham Sports Centre,<br>Durham University<br>Stockton Road<br>DH1 3SE</p>
-            </div>
+                <h3>Registry</h3>
 
-            <div class="contentblock" id="content72345">
-                <h3>Parking</h3>
-                <p>Parking is available onsite at the main car park.</p>
-            </div>
+                <p>Visitors need to register first, including firstname|lastname|email|usename|password.</p>
 
-        </div><!-- end content -->
+                <h3>Reset password</h3>
+
+                <p>If you forget the password, users can change the password thorough the email link.</p>
+
+                <h3>Login</h3>
+
+                <p>After registry, users can login by username and password.</p>
+
+                <h3>Facility page</h3>
+
+                <p>Both users and visitors can see the facilities, but having the booking can only after the user logs in.</p>
+
+                <p>Click the booking button to enter the booking page.</p>
+
+                <h3>Calendar page</h3>
+
+                <p>The calendar shows all existing bookings and classes on each day，according to the day,the week,the month.</p>
+
+                <p>The calendar shows the time which is blocked by exams, which means they are not bookable by anyone.</p>
+
+                <h3>Personal Profile</h3>
+
+                <p>Users can modify their own information,including fisrtname|lastname|email|password</p>
+
+                <h3>Booking List</h3>
+
+                <p>Allow user to view and cancel their all bookings ,and there is a booking button to enter the booking page.</p>
+
+                <h3>Booking Page</h3>
+
+                <p>Users can check the availability of facilities before booking. Then choose the booking date, time and people number.</p>
+
+
+            </div><!-- end content -->
     </section>
 
 
