@@ -64,6 +64,7 @@ if($update){
         <li><a href="adminFacilityManagement.php">Facility Management</a></li>
         <li><a href="adminEditFacility.php">Facility Edit</a></li>
         <li><a href="adminBookingManagement.php">Booking Management</a></li>
+        <li><a href="admineditbooking.php">Booking Edit</a></li>
     </ul>
 
     </nav><!-- end navigation menu -->
