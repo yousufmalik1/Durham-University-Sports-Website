@@ -145,7 +145,7 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
                 <tr>
                     <th>Booking ID</th>
                     <th>Facility ID</th>
-                    <th>Event Name</th>
+                    <th>BookingDate</th>
                     <th>Start Time</th>
                     <th>End Time</th>
                     <th>Booking Title</th>
@@ -156,15 +156,15 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
 
                     $pdo = make_database_connection();
                     $userID=$_SESSION['User']['userID'];
-                    $sql = "select * from booking,event WHERE userID= '$userID' and booking.eventID=event.eventID";
+                    $sql = "select * from booking WHERE userID= '$userID'";
                     foreach ($pdo->query($sql) as $row) {
                         echo "<tr>";
                         echo "<td>{$row['bookingID']}</td>";
                         $ID= $row['bookingID'];
                         echo "<td>{$row['facilityID']}</td>";
-                        echo "<td>{$row['eventName']}</td>";
-                        echo "<td>{$row['start']}</td>";
-                        echo "<td>{$row['end']}</td>";
+                        echo "<td>{$row['bookingDate']}</td>";
+                        echo "<td>{$row['startTime']}</td>";
+                        echo "<td>{$row['endTime']}</td>";
                         echo "<td>{$row['bookingTitle']}</td>";
                         echo "<td><input type='submit' id='Cancel' class='login-button' value='Cancel' name='submit' >
                         </td>";
