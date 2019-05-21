@@ -33,8 +33,14 @@ if($pdo->lastInsertId()!=null){
 }else{
     echo "false";
 }
+
+$sqlprice="select price from facility where facilityID = '$facilityId'";
+$price= $pdo->query($sqlprice);
+$sqlpricestu="select priceStu from facility where facilityID = '$facilityId'";
+$pricestu= $pdo->query($sqlpricestu);
 $pdo = null;
 //Send email
-sendMail($email,'Booking Confirmation for DUS-Team 1','Dear, Your booking has been confirmed.');
+sendMail($email,'Booking Confirmation for DUS-Team 1','Dear, Your booking has been confirmed.The price is'. $price . 'The price for student is'. $pricestu);
+
 
 ?>
