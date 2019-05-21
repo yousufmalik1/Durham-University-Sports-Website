@@ -94,8 +94,17 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null){
     <div id="menu_icon"></div>
     <nav>
         <ul>
-            <li><a href="user.php">Personal Profile</a></li>
-            <li><a href="BookingList.php">Booking List</a></li>
+            <?php  if($_SESSION ['User']['role'] == '0'){
+                echo" <li><a href='user.php'>Personal Profile</a></li>";
+                echo"  <li><a href='BookingList.php'>Booking List</a></li>";
+            }else{
+                echo"  <li><a href='adminBookingManagement.php'>Admin Dashboard</a></li>";
+                echo"     <li><a href='user.php'>Personal Profile</a></li>";
+                echo"  <li><a href='adminFacilityManagement.php'>Facility Management</a></li>";
+                echo"   <li><a href='adminEditFacility.php'>Facility Edit</a></li>";
+                echo"   <li><a href='adminBookingManagement.php'>Booking Management</a></li>";
+                echo"  <li><a href='admineditbooking.php'>Booking Edit</a></li>";
+            }?>
         </ul>
     </nav><!-- end navigation menu -->
 </header><!-- end header -->
