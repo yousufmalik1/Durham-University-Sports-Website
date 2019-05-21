@@ -19,8 +19,7 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null &&  $_SESSION ['User'][
 
     if(isset($_POST['done']))
     {
-    
-    
+
     $facilityName = $_POST['facilityName'];
     $price = $_POST['price'];
     $priceStu = $_POST['priceStu'];
@@ -73,6 +72,7 @@ if($update){
         <li><a href="adminFacilityManagement.php">Facility Management</a></li>
         <li><a href="adminEditFacility.php">Facility Edit</a></li>
         <li><a href="adminBookingManagement.php">Booking Management</a></li>
+        <li><a href="admineditbooking.php">Booking Edit</a></li>
     </ul>
 
     </nav><!-- end navigation menu -->
@@ -102,7 +102,7 @@ if($update){
 
     <section class="wrapper">
         <div class="content">
-            <p class="title">Welcome, admin <?php //echo $_SESSION['User']['username']; ?> </p>
+            <p class="title">Welcome, admin <?php echo $_SESSION['User']['username']; ?> </p>
 
             <div align="right">
                 <h4>Search the facility</h4>

@@ -138,7 +138,6 @@ if(isset($_SESSION['User']) && $_SESSION['User'] == null || $_SESSION ['User']['
                 <input class="form-control" type="time" name="startTime" placeholder="Start Time"><br><br>
                     Edit the Finish Time
                 <input class="form-control" type="time" name="endTime" placeholder="Finish Time"><br><br>
-                   
 
                 <button class="btn btn-primary" id="submit" name="done"> Edit Facility</button>
                 </form>
