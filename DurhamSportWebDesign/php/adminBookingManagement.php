@@ -2,17 +2,13 @@
 session_start();
 header ("Content-Type:text/html;charset=utf-8");
 require ('database.php');
+$pdo = make_database_connection();
+if(isset($_SESSION['User']) && $_SESSION['User'] != null &&  $_SESSION ['User']['role'] == '1'){
 
 
-//$pdo = new PDO('mysql:host=localhost;dbname=xdurhamsports','root','');
-
-//if(isset($_SESSION['user']) && $_SESSION['user'] == null && $_SESSION ['User']['role'] == '0'){
-    //echo "<script>alert('Login please！'); window.location.href='login.php'</script>";}
-    //else{header('location:index.php');}
-
-
-
-        
+} else{
+    echo "<script>alert('Login please！'); window.location.href='login.php'</script>";
+}    
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +23,7 @@ require ('database.php');
     <script type="text/javascript" src="../js/jquery.js"></script>
     <script type="text/javascript" src="../js/main.js"></script>
 </head>
-<body>
+<body class="authentication-bg">
 <header>
     <div class="logo">
         <a href="https://www.teamdurham.com/"><img src="../images/teamdurham.png" height="77" width="78" /></a>
@@ -47,9 +43,12 @@ require ('database.php');
 
 <section class="main clearfix">
     <div id="loginsection">
-        <p class="logincs"><button class="logoutbtn"><a href="index.php?operate=logout">logout</a></button></p>
-        <?php //}else{
-            //header('location:index.php');} ?>
+        <?php
+        if(isset($_SESSION['User']) && $_SESSION['User'] != null){
+            echo  "<p class='logincs'><button class='logoutbtn'><a href='index.php?operate=logout'>logout</a></button></p>";
+        }
+        else{
+            echo  "<p class='logincs'><a href='login.php'>Login</a> || <a href='registry.php'>Registry</a></p> ";}?>
     </div>
     <section class="top">
         <div class="wrapper content_header clearfix">
