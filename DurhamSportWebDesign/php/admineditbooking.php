@@ -2,11 +2,9 @@
 session_start();
 require 'database.php';
 $pdo = make_database_connection();
-if(isset($_SESSION['User']) && $_SESSION['User'] != null &&  $_SESSION ['User']['role'] == '1'){
-    
-    } else{
-        echo "<script>alert('Login please！'); window.location.href='login.php'</script>";
-    }  
+if(isset($_SESSION['User']) && $_SESSION['User'] == null || $_SESSION ['User']['role'] == '0'){
+    echo "<script>alert('Login please！'); window.location.href='login.php'</script>";
+}
 //Edit Facility
     $edit_id = $_GET['edit_id'];
 

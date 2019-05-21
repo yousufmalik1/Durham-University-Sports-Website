@@ -1,18 +1,10 @@
 <?php
 session_start();
-header ("Content-Type:text/html;charset=utf-8");
-require ('database.php');
-
-
-//$pdo = new PDO('mysql:host=localhost;dbname=xdurhamsports','root','');
-
-//if(isset($_SESSION['user']) && $_SESSION['user'] == null && $_SESSION ['User']['role'] == '0'){
-    //echo "<script>alert('Login please！'); window.location.href='login.php'</script>";}
-    //else{header('location:index.php');}
-
-
-
-        
+require 'database.php';
+$pdo = make_database_connection();
+if(isset($_SESSION['User']) && $_SESSION['User'] == null || $_SESSION ['User']['role'] == '0'){
+    echo "<script>alert('Login please！'); window.location.href='login.php'</script>";
+}
 ?>
 
 <!DOCTYPE html>
