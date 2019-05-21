@@ -2,7 +2,7 @@
 session_start();
 header ("Content-Type:text/html;charset=utf-8");
 require 'database.php';
-
+$pdo = make_database_connection();
 if(isset($_SESSION['User']) && $_SESSION['User'] != null &&  $_SESSION ['User']['role'] == '1'){
 
 
