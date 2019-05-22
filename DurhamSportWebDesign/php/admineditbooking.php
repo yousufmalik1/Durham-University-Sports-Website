@@ -165,13 +165,6 @@ if(isset($_POST['done']))
                     <input class="form-control" type="text" name="bookingTitle" placeholder="Booking Title"
                            value="<?php echo $data['bookingTitle'] ?>"><br><br>
 
-                Edit the Finish Time of the Booking<br><br>
-                <input class="form-control" type="time" name="endTime" placeholder="Finish Time"
-                value="<?php echo $data['endTime'] ?>"><br><br>
-
-                Edit the Booking Title
-                <input class="form-control" type="text" name="bookingTitle" placeholder="Booking Title"
-                value="<?php echo $data['bookingTitle'] ?>"><br><br>
 
                     <button class="btn btn-primary" id="submit" name="done"> Edit Booking</button>
                 </form>
