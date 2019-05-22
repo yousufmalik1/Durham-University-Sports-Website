@@ -38,6 +38,7 @@ $(document).ready(function(){
             success: function (data) {
                 if(data){
                     alert("Add block_booking data successful!");
+                    window.location.href='../php/adminBookingManagement.php'
                 }else{
                     alert("Add block_booking data failure!");
                 }

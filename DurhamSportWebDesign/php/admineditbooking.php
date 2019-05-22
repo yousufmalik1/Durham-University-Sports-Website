@@ -8,19 +8,19 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null &&  $_SESSION ['User'][
 
 } else{
     echo "<script>alert('Login please！'); window.location.href='login.php'</script>";
-} 
+}
 //Edit Booking
-    $edit_id = $_GET['edit_id'];
-    
-    $select = $pdo->prepare("SELECT * FROM booking where bookingID='$edit_id' ");
-    $select->setFetchMode(PDO::FETCH_ASSOC);
-    $select->execute();
-    $data=$select->fetch();
+$edit_id = $_GET['edit_id'];
 
-    if(isset($_POST['done']))
-    {
-    
-        
+$select = $pdo->prepare("SELECT * FROM booking where bookingID='$edit_id' ");
+$select->setFetchMode(PDO::FETCH_ASSOC);
+$select->execute();
+$data=$select->fetch();
+
+if(isset($_POST['done']))
+{
+
+
     $userID = $_POST['userID'];
     $facilityID = $_POST['facilityID'];
     $eventID = $_POST['eventID'];
@@ -28,12 +28,12 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null &&  $_SESSION ['User'][
     $startTime = $_POST['startTime'];
     $endTime = $_POST['endTime'];
     $bookingTitle = $_POST['bookingTitle'];
-    
-    
+
+
 
     $update = $pdo->prepare("UPDATE booking SET userID=:userID ,facilityID=:facilityID ,eventID=:eventID, 
-    bookingDate=:bookingDate, startTime=:startTime, endTime=:endTime,  bookingTitle=:bookingTitle WHERE bookingID='$edit_id'"); 
-  
+    bookingDate=:bookingDate, startTime=:startTime, endTime=:endTime,  bookingTitle=:bookingTitle WHERE bookingID='$edit_id'");
+
     $update->bindParam(':userID', $userID);
     $update->bindParam(':facilityID', $facilityID);
     $update->bindParam(':eventID', $eventID);
@@ -44,8 +44,8 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null &&  $_SESSION ['User'][
     $update->execute();
     header("location:adminBookingManagement.php");
     if($update){
-    echo 'Booking Updated';
-}
+        echo 'Booking Updated';
+    }
 }
 ?>
 
@@ -66,13 +66,13 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null &&  $_SESSION ['User'][
     <link href="../css/app.min.css" rel="stylesheet" type="text/css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="../js/check-time.js"></script>
-        
 
-        <script type="text/javascript">
-            function formReset(){
-                document.getElementById("form").reset()
-            }
-        </script>
+
+    <script type="text/javascript">
+        function formReset(){
+            document.getElementById("form").reset()
+        }
+    </script>
 </head>
 <body class="authentication-bg">
 <header>
@@ -83,14 +83,14 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null &&  $_SESSION ['User'][
     <div id="menu_icon"></div>
     <nav>
 
-    <ul>
+        <ul>
             <li><a href="adminBookingManagement.php">Admin Dashboard</a></li>
             <li><a href="user.php">Personal Profile</a></li>
             <li><a href="adminFacilityManagement.php">Facility Management</a></li>
             <li><a href="adminEditFacility.php">Facility Edit</a></li>
             <li><a href="adminBookingManagement.php">Booking Management</a></li>
             <li><a href="admineditbooking.php">Booking Edit</a></li>
-    </ul>
+        </ul>
 
     </nav><!-- end navigation menu -->
 </header><!-- end header -->
@@ -119,7 +119,7 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null &&  $_SESSION ['User'][
 
     <section class="wrapper">
         <div class="content">
-            <p class="title">Welcome, admin <?php //echo $_SESSION['User']['username']; ?> </p>
+            <p class="title">Welcome, admin <?php echo $_SESSION['User']['username']; ?> </p>
 
             <div align="right">
                 <h4>Search the facility</h4>
@@ -136,49 +136,49 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null &&  $_SESSION ['User'][
                 <p class="text-muted mb-4">Enter the Booking information to update </p>
 
                 <form method="post" >
-                Edit the User ID<br><br>
-                <input class="form-control" type="int" name="userID" placeholder="User ID"
-                value="<?php echo $data['userID'] ?>"><br><br>  
+                    Edit the User ID<br><br>
+                    <input class="form-control" type="int" name="userID" placeholder="User ID"
+                           value="<?php echo $data['userID'] ?>"><br><br>
 
-                Edit the Facility ID<br><br>
-                <input class="form-control" type="int" name="facilityID" placeholder="Facility ID"
-                value="<?php echo $data['facilityID'] ?>"><br><br>                       
+                    Edit the Facility ID<br><br>
+                    <input class="form-control" type="int" name="facilityID" placeholder="Facility ID"
+                           value="<?php echo $data['facilityID'] ?>"><br><br>
 
-                Edit the Event ID<br><br>    
-                <input class="form-control"  type="int" name="eventID" placeholder="Event ID"
-                value="<?php echo $data['eventID'] ?>"><br><br>  
+                    Edit the Event ID<br><br>
+                    <input class="form-control"  type="int" name="eventID" placeholder="Event ID"
+                           value="<?php echo $data['eventID'] ?>"><br><br>
 
-                Edit the Date of the Booking<br><br> 
-                <input class="form-control" type="date" name="bookingDate" placeholder="Booking Date"
-                value="<?php echo $data['bookingDate'] ?>"><br><br>  
+                    Edit the Date of the Booking<br><br>
+                    <input class="form-control" type="date" name="bookingDate" placeholder="Booking Date"
+                           value="<?php echo $data['bookingDate'] ?>"><br><br>
 
-                Edit the Start Time of the Booking<br><br>
-                <input class="form-control" type="time" name="startTime" placeholder="Start Time"
-                value="<?php echo $data['startTime'] ?>"><br><br>
+                    Edit the Start Time of the Booking<br><br>
+                    <input class="form-control" type="time" name="startTime" placeholder="Start Time"
+                           value="<?php echo $data['startTime'] ?>"><br><br>
 
                     Edit the Finish Time of the Booking<br><br>
-                <input class="form-control" type="time" name="endTime" placeholder="Finish Time"
-                value="<?php echo $data['endTime'] ?>"><br><br>
+                    <input class="form-control" type="time" name="endTime" placeholder="Finish Time"
+                           value="<?php echo $data['endTime'] ?>"><br><br>
 
                     Edit the Booking Title
-                <input class="form-control" type="text" name="bookingTitle" placeholder="Booking Title"
-                value="<?php echo $data['bookingTitle'] ?>"><br><br>
-                   
+                    <input class="form-control" type="text" name="bookingTitle" placeholder="Booking Title"
+                           value="<?php echo $data['bookingTitle'] ?>"><br><br>
 
-                <button class="btn btn-primary" id="submit" name="done"> Edit Booking</button>
+
+                    <button class="btn btn-primary" id="submit" name="done"> Edit Booking</button>
                 </form>
 
             </div>
         </div>
     </section>
 
-    
+
     <script type="text/javascript">
         $(function() {
-        $('#leftNavigation').ssdVerticalNavigation();
+            $('#leftNavigation').ssdVerticalNavigation();
         });
     </script>
     <script src="../js/app.min.js"></script>
-    </body>
+</body>
 
 </html>

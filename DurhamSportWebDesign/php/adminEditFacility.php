@@ -8,17 +8,18 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null &&  $_SESSION ['User'][
 
 } else{
     echo "<script>alert('Login please！'); window.location.href='login.php'</script>";
-} 
+}
 //Edit Facility
-    $edit_id = $_GET['edit_id'];
-    
-    $select = $pdo->prepare("SELECT * FROM facility where facilityID='$edit_id'");
-    $select->setFetchMode(PDO::FETCH_ASSOC);
-    $select->execute();
-    $row=$select->fetch();
+$edit_id = $_GET['edit_id'];
 
-    if(isset($_POST['done']))
-    {
+$select = $pdo->prepare("SELECT * FROM facility where facilityID='$edit_id'");
+$select->setFetchMode(PDO::FETCH_ASSOC);
+$select->execute();
+$row=$select->fetch();
+
+if(isset($_POST['done']))
+{
+
 
     $facilityName = $_POST['facilityName'];
     $price = $_POST['price'];
@@ -29,7 +30,7 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null &&  $_SESSION ['User'][
     $timeClose = $_POST['timeClose'];
 
     $update = $pdo->prepare("UPDATE facility SET facilityName=:facilityName ,price=:price ,priceStu=:priceStu, 
-    capacity=:capacity ,info=:info ,timeOpen=:timeOpen ,timeClose=:timeClose WHERE facilityID='$edit_id'"); 
+    capacity=:capacity ,info=:info ,timeOpen=:timeOpen ,timeClose=:timeClose WHERE facilityID='$edit_id'");
     $update->bindParam(':facilityName', $facilityName);
     $update->bindParam(':price', $price);
     $update->bindParam(':priceStu', $priceStu);
@@ -39,9 +40,9 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null &&  $_SESSION ['User'][
     $update->bindParam(':timeClose', $timeClose);
     $update->execute();
     header("location:adminFacilityManagement.php");
-if($update){
-    echo 'Facility Updated';
-}
+    if($update){
+        echo 'Facility Updated';
+    }
 }
 ?>
 
@@ -66,14 +67,14 @@ if($update){
     <div id="menu_icon"></div>
     <nav>
 
-    <ul>
-        <li><a href="adminBookingManagement.php">Admin Dashboard</a></li>
-        <li><a href="user.php">Personal Profile</a></li>
-        <li><a href="adminFacilityManagement.php">Facility Management</a></li>
-        <li><a href="adminEditFacility.php">Facility Edit</a></li>
-        <li><a href="adminBookingManagement.php">Booking Management</a></li>
-        <li><a href="admineditbooking.php">Booking Edit</a></li>
-    </ul>
+        <ul>
+            <li><a href="adminBookingManagement.php">Admin Dashboard</a></li>
+            <li><a href="user.php">Personal Profile</a></li>
+            <li><a href="adminFacilityManagement.php">Facility Management</a></li>
+            <li><a href="adminEditFacility.php">Facility Edit</a></li>
+            <li><a href="adminBookingManagement.php">Booking Management</a></li>
+            <li><a href="admineditbooking.php">Booking Edit</a></li>
+        </ul>
 
     </nav><!-- end navigation menu -->
 </header><!-- end header -->
@@ -120,49 +121,49 @@ if($update){
 
                 <form method="post" >
                     Edit the Facility Name<br><br>
-                <input class="form-control"  type="text" name="facilityName" placeholder="Facility Name"
-                value="<?php echo $row['facilityName']?> "><br><br>
+                    <input class="form-control"  type="text" name="facilityName" placeholder="Facility Name"
+                           value="<?php echo $row['facilityName']?> "><br><br>
 
                     Edit the Facility Price<br><br>
-                <input class="form-control"  type="number" step= "0.01" name="price" placeholder="Price"
-                value="<?php echo $row['price']?>"><br><br>
+                    <input class="form-control"  type="number" step= "0.01" name="price" placeholder="Price"
+                           value="<?php echo $row['price']?>"><br><br>
 
                     Edit the Student Price<br><br>
-                <input class= "form-control"  type="number" step= "0.01" name="priceStu" placeholder="Student Price"
-                value="<?php echo $row['priceStu']?>"><br><br>
+                    <input class= "form-control"  type="number" step= "0.01" name="priceStu" placeholder="Student Price"
+                           value="<?php echo $row['priceStu']?>"><br><br>
 
                     Edit the Facility Capacity<br><br>
-                <input class="form-control" type="number" step= "0.01" name="capacity" placeholder="Capacity"
-                value="<?php echo $row['capacity']?>"><br><br>
-                   
+                    <input class="form-control" type="number" step= "0.01" name="capacity" placeholder="Capacity"
+                           value="<?php echo $row['capacity']?>"><br><br>
+
                     Edit the Facility Info<br><br>
-                <input class="form-control" type="text" name="info" placeholder="Info"
-                value="<?php echo $row['info']?>"><br><br>
-                   
+                    <input class="form-control" type="text" name="info" placeholder="Info"
+                           value="<?php echo $row['info']?>"><br><br>
+
                     Edit the Start Time of the Facility<br><br>
-                <input class="form-control" type="time" name="timeOpen" placeholder="Start Time"
-                value="<?php echo $row['timeOpen']?>"><br><br>
-                    
+                    <input class="form-control" type="time" name="timeOpen" placeholder="Start Time"
+                           value="<?php echo $row['timeOpen']?>"><br><br>
+
                     Edit the Finish Time of the Facility<br><br>
-                <input class="form-control" type="time" name="timeClose" placeholder="Finish Time"
-                value="<?php echo $row['timeClose'] ?>"><br><br>
+                    <input class="form-control" type="time" name="timeClose" placeholder="Finish Time"
+                           value="<?php echo $row['timeClose'] ?>"><br><br>
 
-                <!--<input class="form-control" type="file" name="file"><br><br>
-                <button class="btn btn-primary" id="submit" name="uploading">Upload Image</button><br><br>-->
+                    <!--<input class="form-control" type="file" name="file"><br><br>
+                    <button class="btn btn-primary" id="submit" name="uploading">Upload Image</button><br><br>-->
 
-                <button class="btn btn-primary" id="submit" name="done"> Edit Facility</button>
+                    <button class="btn btn-primary" id="submit" name="done"> Edit Facility</button>
                 </form>
 
             </div>
         </div>
     </section>
 
-    
+
     <script type="text/javascript">
         $(function() {
-        $('#leftNavigation').ssdVerticalNavigation();
+            $('#leftNavigation').ssdVerticalNavigation();
         });
     </script>
-    </body>
+</body>
 
 </html>
