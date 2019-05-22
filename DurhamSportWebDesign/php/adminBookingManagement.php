@@ -1,10 +1,14 @@
 <?php
 session_start();
-require 'database.php';
+header ("Content-Type:text/html;charset=utf-8");
+require ('database.php');
 $pdo = make_database_connection();
-if(isset($_SESSION['User']) && $_SESSION['User'] == null || $_SESSION ['User']['role'] == '0'){
+if(isset($_SESSION['User']) && $_SESSION['User'] != null &&  $_SESSION ['User']['role'] == '1'){
+
+
+} else{
     echo "<script>alert('Login please！'); window.location.href='login.php'</script>";
-}
+}    
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +23,7 @@ if(isset($_SESSION['User']) && $_SESSION['User'] == null || $_SESSION ['User']['
     <script type="text/javascript" src="../js/jquery.js"></script>
     <script type="text/javascript" src="../js/main.js"></script>
 </head>
-<body>
+<body class="authentication-bg">
 <header>
     <div class="logo">
         <a href="https://www.teamdurham.com/"><img src="../images/teamdurham.png" height="77" width="78" /></a>
@@ -39,9 +43,12 @@ if(isset($_SESSION['User']) && $_SESSION['User'] == null || $_SESSION ['User']['
 
 <section class="main clearfix">
     <div id="loginsection">
-        <p class="logincs"><button class="logoutbtn"><a href="index.php?operate=logout">logout</a></button></p>
-        <?php //}else{
-            //header('location:index.php');} ?>
+        <?php
+        if(isset($_SESSION['User']) && $_SESSION['User'] != null){
+            echo  "<p class='logincs'><button class='logoutbtn'><a href='index.php?operate=logout'>logout</a></button></p>";
+        }
+        else{
+            echo  "<p class='logincs'><a href='login.php'>Login</a> || <a href='registry.php'>Registry</a></p> ";}?>
     </div>
     <section class="top">
         <div class="wrapper content_header clearfix">
@@ -64,7 +71,7 @@ if(isset($_SESSION['User']) && $_SESSION['User'] == null || $_SESSION ['User']['
     <section class="wrapper">
         <div class="content">
 
-            <p class="title">Welcome, admin <?php echo $_SESSION['User']['username']; ?> </p>
+            <p class="title">Welcome, <?php //echo $_SESSION['User']['username']; ?> </p>
             <div align="right">
                 <h4>Search the facility</h4>
                 <form name="search" method="post" action="userhome.php">
@@ -110,12 +117,11 @@ if(isset($_SESSION['User']) && $_SESSION['User'] == null || $_SESSION ['User']['
                     echo "<td>" . $row['bookingDate'] ."</td>";
                     echo "<td>" . $row['startTime'] ."</td>";
                     echo "<td>" . $row['endTime'] ."</td>";
-                   
                     echo "<td>" . $row['bookingTitle'] ."</td>";
                     
                     ?>
-                    <td><a href="admineditbooking.php?edit_id=<?php echo $row['facilityID']; ?>">Edit</a></td>
-                    <td><a href="admindeletebooking.php?del_id=<?php echo $row['bookingID']; ?>" onclick="return confirm('Are you sure you want to delete the Facility?')">Delete</a></td>
+                    <td><a href="admineditbooking.php?edit_id=<?php echo $row['bookingID']; ?>">Edit</a></td>
+                    <td><a href="admindeletebooking.php?del_id=<?php echo $row['bookingID']; ?>" onclick="return confirm('Are you sure you want to delete the Booking?')">Delete</a></td>
                     
                      <?php echo "</tr>"; 
                     }?>
