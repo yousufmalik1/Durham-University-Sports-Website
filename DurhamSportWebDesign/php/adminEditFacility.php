@@ -73,7 +73,8 @@ if(isset($_POST['done']))
             <li><a href="adminFacilityManagement.php">Facility Management</a></li>
             <li><a href="adminEditFacility.php">Facility Edit</a></li>
             <li><a href="adminBookingManagement.php">Booking Management</a></li>
-            <li><a href="admineditbooking.php">Booking Edit</a></li>
+            <li><a href="pages-booking.php">Add Booking</a></li>
+            <li><a href="block_booking.php">Block Booking</a></li>
         </ul>
 
     </nav><!-- end navigation menu -->

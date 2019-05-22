@@ -437,14 +437,55 @@ a:active {
     margin-top: 40px;
 }
 
+#showinfonew{
+    margin: 0 auto;
+    text-align: center;
+}
+
 #showinfo{
     margin: 0 auto;
     text-align: center;
 }
 
+#showinfo table {
+    width: 90%;
+    background: #ccc;
+    margin: 10px auto;
+    border-collapse: collapse;
+}
+#showinfo th,td {
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+#showinfo th {
+    background: #eee;
+    font-weight: normal;
+}
+#showinfo tr {
+    background: #fff;
+}
+#showinfo tr:hover {
+    background: #dcd4ff;
+}
+#showinfo td a {
+    color: #06f;
+    text-decoration: none;
+}
+#showinfo td a:hover {
+    color: #06f;
+    text-decoration: underline;
+}
+
+
+
+
 #showbutton{
     margin-top: 40px;
 }
+
+
 
 /*  Responsive code  */
 @media (max-width:1099px){

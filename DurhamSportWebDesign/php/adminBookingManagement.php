@@ -36,7 +36,8 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null &&  $_SESSION ['User'][
             <li><a href="adminFacilityManagement.php">Facility Management</a></li>
             <li><a href="adminEditFacility.php">Facility Edit</a></li>
             <li><a href="adminBookingManagement.php">Booking Management</a></li>
-            <li><a href="admineditbooking.php">Booking Edit</a></li>
+            <li><a href="pages-booking.php">Add Booking</a></li>
+            <li><a href="block_booking.php">Block Booking</a></li>
         </ul>
     </nav><!-- end navigation menu -->
 </header><!-- end header -->
@@ -83,10 +84,7 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null &&  $_SESSION ['User'][
             </div>
 
             <center><h1> Booking Management </h1></center>
-            <div id="showinfo">
-                <p><a href="pages-booking.php"> Add a Booking</a></p>
-                <p><a href="block_booking.php"> Block Booking</a></p>
-            </div>
+            <br><br>
 
             <table id="showinfo" border="1">
                 <tr bgcolor="#dddddd">
@@ -101,42 +99,69 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null &&  $_SESSION ['User'][
 
                     <th colspan="2">Action</th>
                 </tr>
-</body>
-</html>
-<?php
-try{
-    $pdo = make_database_connection();
-    $select = $pdo->prepare("SELECT * FROM booking ");
-    $select->setFetchMode(PDO::FETCH_ASSOC);
-    $select->execute();
-    while ($row = $select->fetch()) {
-        echo "<tr>";
-        echo "<td>" . $row['bookingID'] ."</td>";
-        echo "<td>" . $row['userID'] ."</td>";
-        echo "<td>" . $row['facilityID'] ."</td>";
-        echo "<td>" . $row['eventID'] ."</td>";
-        echo "<td>" . $row['bookingDate'] ."</td>";
-        echo "<td>" . $row['startTime'] ."</td>";
-        echo "<td>" . $row['endTime'] ."</td>";
-        echo "<td>" . $row['bookingTitle'] ."</td>";
 
-        ?>
-        <td><a href="admineditbooking.php?edit_id=<?php echo $row['bookingID']; ?>">Edit</a></td>
-        <td><a href="admindeletebooking.php?del_id=<?php echo $row['bookingID']; ?>" onclick="return confirm('Are you sure you want to delete the Facility?')">Delete</a></td>
+                <?php
+                try{
+                    $pdo = make_database_connection();
+                    $select = $pdo->prepare("SELECT * FROM booking ");
+                    $select->setFetchMode(PDO::FETCH_ASSOC);
+                    $select->execute();
+                    while ($row = $select->fetch()) {
+                        echo "<tr>";
+                        echo "<td>" . $row['bookingID'] ."</td>";
+                        echo "<td>" . $row['userID'] ."</td>";
+                        echo "<td>" . $row['facilityID'] ."</td>";
+                        echo "<td>" . $row['eventID'] ."</td>";
+                        echo "<td>" . $row['bookingDate'] ."</td>";
+                        echo "<td>" . $row['startTime'] ."</td>";
+                        echo "<td>" . $row['endTime'] ."</td>";
+                        echo "<td>" . $row['bookingTitle'] ."</td>";
 
-        <?php echo "</tr>";
-    }?>
+                        ?>
+                        <td><a href="admineditbooking.php?edit_id=<?php echo $row['bookingID']; ?>">Edit</a></td>
+                        <td><a href="admindeletebooking.php?del_id=<?php echo $row['bookingID']; ?>" onclick="return confirm('Are you sure you want to delete the Facility?')">Delete</a></td>
 
-    </table>
-    <?php
+                        <?php echo "</tr>";
+                    }?>
+            </table>
+            <?php
+                }
+                catch (PDOException $e)
+                {
+                    echo "error: " . $e->getMessage();
+                }
+                ?>
 
-}
-catch (PDOException $e)
-{
-    echo "error: " . $e->getMessage();
-}
-?>
+            <style type="text/css">
+                .button {
+                    display: inline-block;
+                    padding: 10px 20px;
+                    margin: 15px;
+                    font-size: 15px;
+                    cursor: pointer;
+                    text-align: center;
+                    text-decoration: none;
+                    outline: none;
+                    color: #fff;
+                    background-color: #b22fc6;
+                    border: none;
+                    border-radius: 15px;
+                    box-shadow: 0 8px #999;
+                }
+                .button:hover {background-color: #ce70ff
+                }
+                .button:active {
+                    background-color: #b22fc6;
+                    box-shadow: 0 5px #666;
+                    transform: translateY(4px);
+                }
+            </style>
 
+            <div align="center" style="position:relative;top:20px">
+                <button class="button"><a href="pages-booking.php">Add a Booking</a></button>
+                <button class="button"><a href="block_booking.php">Block Booking</a></button>
+                <br><br><br><br>
+            </div>
 
 </div><!-- end content -->
 </section>
@@ -151,5 +176,5 @@ catch (PDOException $e)
     });
 </script>
 
-
+</body>
 </html>

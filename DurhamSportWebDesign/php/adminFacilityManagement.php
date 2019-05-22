@@ -103,7 +103,8 @@ if(isset($_POST['done'])){
             <li><a href="adminFacilityManagement.php">Facility Management</a></li>
             <li><a href="adminEditFacility.php">Facility Edit</a></li>
             <li><a href="adminBookingManagement.php">Booking Management</a></li>
-            <li><a href="admineditbooking.php">Booking Edit</a></li>
+            <li><a href="pages-booking.php">Add Booking</a></li>
+            <li><a href="block_booking.php">Block Booking</a></li>
         </ul>
     </nav><!-- end navigation menu -->
 </header><!-- end header -->
@@ -152,10 +153,9 @@ if(isset($_POST['done'])){
                     <h1 class="text-dark-50 text-center mt-0 font-weight-bold">Facility Management</h1>
                     <p class="text-muted mb-4">Create, Edit or Delete a Facility </p>
 
-                    <div id="showinfo">
+                    <div id="showinfonew">
 
                         <!--showfacilities()-->
-
 
                         <?php
                         $pdo = make_database_connection();
@@ -166,15 +166,13 @@ if(isset($_POST['done'])){
 
                             echo '<div class="cell">';
                             echo '<div class="image"><img src="../images/' . $row['facilityName'] . '.jpg" width="200" height="200" ></a></div>';
-                            echo '<div align="center"><table><tr>
-                        <th style="font-size: 1.8em">' . $row['facilityName'] . '</th>
-                        </tr>
-                        <tr>
-                        <td style="font-size: 1.2em">' . $row['info'] . '</td>
-                        </tr></table></div>';
-
+                            echo '<div align="center"><table frame=void><tr>
+                                    <th style="font-size: 1.8em">' . $row['facilityName'] . '</th>
+                                    </tr>
+                                    <tr>
+                                    <td style="font-size: 1.2em">' . $row['info'] . '</td>
+                                    </tr></table></div>';
                             echo '</div>';
-
                         }?>
 
 
@@ -204,7 +202,7 @@ if(isset($_POST['done'])){
                     </div>
 
                     <H2><center>Facilities Available</center></H2>
-                    <table id="showinfo" width="800" border="1">
+                    <table id="showinfo" border="1">
                         <tr bgcolor="#dddddd">
                             <th>Facility ID</th>
                             <th>Facility Name</th>

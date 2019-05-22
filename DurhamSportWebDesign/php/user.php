@@ -75,7 +75,8 @@ if (isset($_POST["submit"]) && $_POST["submit"] == "update") {
                 echo"  <li><a href='adminFacilityManagement.php'>Facility Management</a></li>";
                 echo"   <li><a href='adminEditFacility.php'>Facility Edit</a></li>";
                 echo"   <li><a href='adminBookingManagement.php'>Booking Management</a></li>";
-                echo"  <li><a href='admineditbooking.php'>Booking Edit</a></li>";
+                echo"  <li><a href='pages-booking.php'>Add Booking</a></li>";
+                echo"  <li><a href='block_booking.php'>Block Booking</a></li>";
             }?>
         </ul>
     </nav><!-- end navigation menu -->
