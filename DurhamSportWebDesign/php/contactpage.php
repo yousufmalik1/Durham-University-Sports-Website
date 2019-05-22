@@ -20,7 +20,9 @@
     <div id="menu_icon"></div>
     <nav>
         <ul>
-            <?php  if($_SESSION ['User']['role'] == '0'){
+            <?php    require('database.php');
+            session_start();
+            if($_SESSION ['User']['role'] == '0'){
                 echo" <li><a href='user.php'>Personal Profile</a></li>";
                 echo"  <li><a href='BookingList.php'>Booking List</a></li>";
             }else{
@@ -39,8 +41,6 @@
 <section class="main clearfix">
     <div id="loginsection">
         <?php
-        require('database.php');
-        session_start();
 if(isset($_SESSION['User']) && $_SESSION['User'] != null){
 }
 else{

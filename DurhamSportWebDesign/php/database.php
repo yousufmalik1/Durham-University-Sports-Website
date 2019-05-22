@@ -59,7 +59,7 @@ function update_email($userID,$Email)
 function insert_user($username, $password, $Email, $firstname, $lastname)
 {
     $pdo = make_database_connection();
-    $sql = "INSERT INTO `user`(`username`, `password`, `email`, `firstname`, `lastname`, `role`) VALUES ('$username','$password','$Email','$firstname','$lastname','0')";
+    $sql = "INSERT INTO `user`(`username`, `password`, `email`, `firstname`, `lastname`, `role`, `resetpasswordtime`) VALUES ('$username','$password','$Email','$firstname','$lastname','0','0')";
     $insert = $pdo->query($sql);
    if($pdo->lastInsertId()!=null){
        return true;
