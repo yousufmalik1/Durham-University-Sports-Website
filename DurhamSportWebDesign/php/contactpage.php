@@ -20,9 +20,10 @@
     <div id="menu_icon"></div>
     <nav>
         <ul>
-            <?php    require('database.php');
+            <?php require('database.php');
             session_start();
-            if($_SESSION ['User']['role'] == '0'){
+            if(isset($_SESSION['User']) && $_SESSION['User'] != null){
+                if($_SESSION ['User']['role'] == '0'){
                 echo" <li><a href='user.php'>Personal Profile</a></li>";
                 echo"  <li><a href='BookingList.php'>Booking List</a></li>";
             }else{
@@ -33,6 +34,10 @@
                 echo"   <li><a href='adminBookingManagement.php'>Booking Management</a></li>";
                 echo"  <li><a href='pages-booking.php'>Add Booking</a></li>";
                 echo"  <li><a href='block_booking.php'>Block Booking</a></li>";
+                }}else{
+                    echo"   <li> <p><a href='login.php'>Login</a></p></li>";
+                echo"  <li><p><a href='registry.php'>Registry</a></p></li>";
+
             }?>
         </ul>
     </nav><!-- end navigation menu -->
@@ -42,6 +47,7 @@
     <div id="loginsection">
         <?php
 if(isset($_SESSION['User']) && $_SESSION['User'] != null){
+    echo  "<p class='logincs'><button class='logoutbtn'><a href='index.php?operate=logout'>logout</a></button></p>";
 }
 else{
     echo  "<p class='logincs'><a href='login.php'>Login</a> || <a href='registry.php'>Registry</a></p> ";}?>
