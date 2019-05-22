@@ -11,11 +11,23 @@ DATABASE：
 dus_team1.sql
 
 
-USER INSTRUCTIONS:- To Login as Players:  Login Username : Iris
+USER INSTRUCTIONS:
+- To Login as Players:
+  Login Username : Iris
   Login Password:12345
-- To Login as Managers:  Login username : zheng  Password: 123Github:username: guoxuantong1223@gmail.com
+
+- To Login as Managers:
+  Login username : zheng
+  Password: 123
+
+Github:
+url: https://github.com/guoxuantong/team1
+username: guoxuantong1223@gmail.com
 password: guoxuantongpassword
--------------------------------------------------------------------------------------HOW TO USE OUR WEB SITE: 
+
+-------------------------------------------------------------------------------------
+
+HOW TO USE OUR WEB SITE: 
 
 ///////FOR USER: //////////
 
@@ -45,7 +57,10 @@ Allow user to view and cancel their all bookings ,and there is a booking button 
 
 - Booking Page
 Users can check the availability of facilities before booking. Then choose the booking date, time and people number.
-Then a email of booking confirmation will be sent to the user's email address.//////FOR ADMIN:////////
+Then a email of booking confirmation will be sent to the user's email address.
+
+
+//////FOR ADMIN:////////
 
 - Facility management
 Admin could create/add, Edit or Delete a Facility. Ability for editing the capacity for each facility.
@@ -61,4 +76,4 @@ Admin could also be able to block out a period of time and facilities as they ar
 An individual sports trainer can block book a facility if the trainer contact the admin directly to book into that class and not through the booking system.
 
 
-
+
