@@ -13,9 +13,9 @@ dus_team1.sql
 
 USER INSTRUCTIONS:- To Login as Players:  Login Username : Iris
   Login Password:12345
-- To Login as Managers:  Login username : zheng  Password: 123Github:
-username: guoxuantong1223@gmail.com
-password: password13579-------------------------------------------------------------------------------------HOW TO USE OUR WEB SITE: 
+- To Login as Managers:  Login username : zheng  Password: 123Github:username: guoxuantong1223@gmail.com
+password: guoxuantongpassword
+-------------------------------------------------------------------------------------HOW TO USE OUR WEB SITE: 
 
 ///////FOR USER: //////////
 
