@@ -17,7 +17,7 @@ $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 foreach($result as $row)
 {
  //Default color is blue
- $color = 'blue';
+ $color = '#47e5f7';
     
  //If its a exercise class
  if ($row["eventID"] == 3000){
@@ -48,20 +48,24 @@ INNER JOIN facility ON block_booking.facilityID = facility.facilityID");
 
 $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-$color = 'blue';
+$color = '#47e5f7';
 
 foreach($result as $row)
 {
     
-if ($row["eventID"] == 3000){
-     $color = '#42f4e2';
-     //$color = '#42f4e2';
+if ($row["eventName"] == "Exams"){
+     $color = '#f46b6b';
+     
  }
     
 //If its a examination
-if ($row["eventID"] == 3001){
-     $color = '#f46b6b';
+if ($row["eventName"] == "Exercise Class"){
+     $color = '#63f9b1';
  }
+    
+if ($row["eventName"] == "Non-Exercise Class"){
+    $color = '#f5ff72';
+}
  
  $data[] = array(
   'id'   => $row["eventID"],
