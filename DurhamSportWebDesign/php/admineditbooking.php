@@ -156,7 +156,6 @@ if(isset($_POST['done']))
                     <input class="form-control" type="time" name="startTime" placeholder="Start Time"
                            value="<?php echo $data['startTime'] ?>"><br><br>
 
-<<<<<<< HEAD
                     Edit the Finish Time of the Booking<br><br>
                     <input class="form-control" type="time" name="endTime" placeholder="Finish Time"
                            value="<?php echo $data['endTime'] ?>"><br><br>
@@ -165,7 +164,6 @@ if(isset($_POST['done']))
                     <input class="form-control" type="text" name="bookingTitle" placeholder="Booking Title"
                            value="<?php echo $data['bookingTitle'] ?>"><br><br>
 
-=======
                 Edit the Finish Time of the Booking<br><br>
                 <input class="form-control" type="time" name="endTime" placeholder="Finish Time"
                 value="<?php echo $data['endTime'] ?>"><br><br>
@@ -173,8 +171,6 @@ if(isset($_POST['done']))
                 Edit the Booking Title
                 <input class="form-control" type="text" name="bookingTitle" placeholder="Booking Title"
                 value="<?php echo $data['bookingTitle'] ?>"><br><br>
-                   
->>>>>>> 19ee9783fb95e87565fa7f50eed21be3b747b231
 
                     <button class="btn btn-primary" id="submit" name="done"> Edit Booking</button>
                 </form>

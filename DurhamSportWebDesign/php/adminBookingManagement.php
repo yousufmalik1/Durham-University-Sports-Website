@@ -8,7 +8,7 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null &&  $_SESSION ['User'][
 
 } else{
     echo "<script>alert('Login please！'); window.location.href='login.php'</script>";
-}    
+}
 ?>
 
 <!DOCTYPE html>
@@ -71,11 +71,7 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null &&  $_SESSION ['User'][
     <section class="wrapper">
         <div class="content">
 
-<<<<<<< HEAD
             <p class="title">Welcome, <?php echo $_SESSION['User']['username']; ?> </p>
-=======
-            <p class="title">Welcome, <?php //echo $_SESSION['User']['username']; ?> </p>
->>>>>>> 19ee9783fb95e87565fa7f50eed21be3b747b231
             <div align="right">
                 <h4>Search the facility</h4>
                 <form name="search" method="post" action="userhome.php">
@@ -89,7 +85,7 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null &&  $_SESSION ['User'][
             <center><h1> Booking Management </h1></center>
             <div id="showinfo">
                 <p><a href="pages-booking.php"> Add a Booking</a></p>
-                <P><a href="block_booking.php"> Block Booking</a></p>
+                <p><a href="block_booking.php"> Block Booking</a></p>
             </div>
 
             <table id="showinfo" border="1">
@@ -105,7 +101,6 @@ if(isset($_SESSION['User']) && $_SESSION['User'] != null &&  $_SESSION ['User'][
 
                     <th colspan="2">Action</th>
                 </tr>
-<<<<<<< HEAD
 </body>
 </html>
 <?php
@@ -147,49 +142,6 @@ catch (PDOException $e)
 </section>
 
 <!-- ----------------------End your content to here-------------------------------------------------- -->
-=======
-        </body>
-    </html>
-        <?php
-                try{
-                $pdo = make_database_connection();
-                $select = $pdo->prepare("SELECT * FROM booking ");
-                $select->setFetchMode(PDO::FETCH_ASSOC);
-                $select->execute();
-                while ($row = $select->fetch()) {
-                    echo "<tr>";
-                    echo "<td>" . $row['bookingID'] ."</td>";
-                    echo "<td>" . $row['userID'] ."</td>";
-                    echo "<td>" . $row['facilityID'] ."</td>";
-                    echo "<td>" . $row['eventID'] ."</td>";
-                    echo "<td>" . $row['bookingDate'] ."</td>";
-                    echo "<td>" . $row['startTime'] ."</td>";
-                    echo "<td>" . $row['endTime'] ."</td>";
-                    echo "<td>" . $row['bookingTitle'] ."</td>";
-                    
-                    ?>
-                    <td><a href="admineditbooking.php?edit_id=<?php echo $row['bookingID']; ?>">Edit</a></td>
-                    <td><a href="admindeletebooking.php?del_id=<?php echo $row['bookingID']; ?>" onclick="return confirm('Are you sure you want to delete the Booking?')">Delete</a></td>
-                    
-                     <?php echo "</tr>"; 
-                    }?>
-
-            </table>
-            <?php
-
-                }
-            catch (PDOException $e)
-            {
-                    echo "error: " . $e->getMessage();
-                }
-            ?>
-        
-
-        </div><!-- end content -->
-    </section>
-
-    <!-- ----------------------End your content to here-------------------------------------------------- -->
->>>>>>> 19ee9783fb95e87565fa7f50eed21be3b747b231
 
 
 </section><!-- end main -->
