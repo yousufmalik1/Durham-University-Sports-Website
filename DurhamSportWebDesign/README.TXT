@@ -37,6 +37,11 @@ Visitors need to register first, including firstname|lastname|email|usename|pass
 - Reset password
 If you forget the password, users can change the password thorough the email link.
 
+-Email Functionality
+For receiving emails from the system, you need to update the url in forgot.php so that it resembes your own file system. ie
+Change the folder path as necessary
+$url = "http://" . $localhost . "/team1-master/DurhamSportWebDesign/php/reset.php?token=" . $token . "&email=" . $email;
+
 - Login
 After registry, users can login by username and password.
 
