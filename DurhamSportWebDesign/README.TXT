@@ -10,6 +10,11 @@ Login.php or Registry.php
 DATABASE：
 dus_team1.sql
 
+database.php
+To run on your localhost, you may need to change db user and db password to suit your own system. Additionally you may need to change the port on which the system runs. 
+$db_user = 'root';
+$db_pass = '';
+
 
 USER INSTRUCTIONS:
 - To Login as Players:
