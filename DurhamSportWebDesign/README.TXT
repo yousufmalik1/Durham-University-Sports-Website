@@ -10,6 +10,11 @@ Login.php or Registry.php
 DATABASE：
 dus_team1.sql
 
+database.php
+To run on your localhost, you may need to change db user and db password to suit your own system. Additionally you may need to change the port on which the system runs. 
+$db_user = 'root';
+$db_pass = '';
+
 
 USER INSTRUCTIONS:
 - To Login as Players:
@@ -35,6 +40,11 @@ Visitors need to register first, including firstname|lastname|email|usename|pass
 
 - Reset password
 If you forget the password, users can change the password thorough the email link.
+
+-Email Functionality
+For receiving emails from the system, you need to update the url in forgot.php so that it resembes your own file system. ie
+Change the folder path as necessary
+$url = "http://" . $localhost . "/team1-master/DurhamSportWebDesign/php/reset.php?token=" . $token . "&email=" . $email;
 
 - Login
 After registry, users can login by username and password.
