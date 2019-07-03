@@ -22,8 +22,7 @@ USER INSTRUCTIONS:
 
 Github:
 url: https://github.com/guoxuantong/team1
-username: guoxuantong1223@gmail.com
-password: guoxuantongpassword
+
 
 -------------------------------------------------------------------------------------
 
